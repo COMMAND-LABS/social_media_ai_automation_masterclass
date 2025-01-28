@@ -28,10 +28,10 @@ If "approved" then `Blueprint 2` gets trigged and if "rejected" then nothing hap
 
 Make sure to set up a form in gotoHuman that contains the following fields (check out ref_1.png)
 
-- 1 - id: `images` - "Images" field type
-- 2 - id: `x_dot_com_text` - "Text (Long)" field type
-- 3 - id: `linkedin_text` - "Text (Long)" field type
-- 4 - id: `approval` - "Button Group" field type
+1 - id: `images` - "Images" field type
+2 - id: `x_dot_com_text` - "Text (Long)" field type
+3 - id: `linkedin_text` - "Text (Long)" field type
+4 - id: `approval` - "Button Group" field type
 
 Add the gotoHuman API key found at the bottom of the Form builder into Make.com to integrate the
 "Create a Review Request" node (check out ref_2.png)
