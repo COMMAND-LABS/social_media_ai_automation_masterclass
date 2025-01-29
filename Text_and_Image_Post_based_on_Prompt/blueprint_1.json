@@ -9,12 +9,12 @@
             "mapper": {
                 "name": "Prompt for text",
                 "scope": "roundtrip",
-                "value": "# Task\n\nMake posts about how pricing is almost ready to be increased for an in-person workshop sharing cutting-edge techniques for leveraging A.I. in social media automation. The price of admission to the workshop will be increasing from $49 to $99. The call to action should point people to sign up for the in-person workshop taking place in Edgewater, Miami, FL. The link to the workshop is here: https://lu.ma/7zpii5gi.\n\nMake sure the content is simple, nicely formatted (multiple lines & clean spacing), and easy to read for the respective platforms: LinkedIn & X.com (formerly Twitter)\n\nAlso generate a prompt for generating an image to accompany these posts. The prompt should generate a very simple abstract image of the Egdewater neighborhood in Downtown Miami. No people or text in the image. The aesthetic should be astract, simple, and relaxing.\n\nYour output should be JSON that adheres to the Pydantic schema below\n\n## Event Details\n\nName: Automate your Social Media Marketing with A.I.\nDate: 1-30-2025\nTime: 6pm-9pm EST\nLocation: Office Logic in Miami, FL\nLink: https://lu.ma/7zpii5gi\n\n## Requirements\n\n- Ensure the final output does not exceed the character limits for each platform\n\n## Pydantic Schema for Output\n\nclass LinkedIn(BaseModel):\n  text: str\n\nclass XDotCom(BaseModel):\n  text: str\n\nclass GeneratedContent(BaseModel):\n  linkedin: LinkedIn\n  x_dot_com: XDotCom\n  aped_image_prompt: str"
+                "value": "# Task\n\nMake posts about how there are only 2 days until an in-person workshop sharing cutting-edge techniques for leveraging A.I. in social media automation takes place. The price of admission to the workshop will be $99. The call to action should point people to sign up for the in-person workshop taking place in Edgewater, Miami, FL. The link to the workshop is here: https://lu.ma/7zpii5gi.\n\nMake sure the content is simple, nicely formatted (multiple lines & clean spacing), and easy to read for the respective platforms: LinkedIn & X.com (formerly Twitter)\n\nAlso generate a prompt for generating an image to accompany these posts. The prompt should generate a very simple abstract image of the Egdewater neighborhood in Downtown Miami. No people or text in the image. The aesthetic should be astract, simple, and relaxing.\n\nYour output should be JSON that adheres to the Pydantic schema below\n\n## Event Details\n\nName: Automate your Social Media Marketing with A.I.\nDate: 1-30-2025\nTime: 6pm-9pm EST\nLocation: Office Logic in Miami, FL\nLink: https://lu.ma/7zpii5gi\n\n## Requirements\n\n- Ensure the final output does not exceed the character limits for each platform\n\n## Pydantic Schema for Output\n\nclass LinkedIn(BaseModel):\n  text: str\n\nclass XDotCom(BaseModel):\n  text: str\n\nclass GeneratedContent(BaseModel):\n  linkedin: LinkedIn\n  x_dot_com: XDotCom\n  aped_image_prompt: str"
             },
             "metadata": {
                 "designer": {
-                    "x": 223,
-                    "y": -154,
+                    "x": 0,
+                    "y": 0,
                     "name": "Prompt for text"
                 },
                 "restore": {
@@ -85,8 +85,8 @@
             },
             "metadata": {
                 "designer": {
-                    "x": 628,
-                    "y": -152
+                    "x": 300,
+                    "y": 0
                 },
                 "restore": {
                     "expect": {
@@ -674,8 +674,8 @@
             },
             "metadata": {
                 "designer": {
-                    "x": 1025,
-                    "y": -127
+                    "x": 600,
+                    "y": 0
                 },
                 "restore": {
                     "parameters": {
@@ -718,8 +718,8 @@
             },
             "metadata": {
                 "designer": {
-                    "x": 1401,
-                    "y": -129
+                    "x": 900,
+                    "y": 0
                 },
                 "restore": {
                     "expect": {
@@ -896,8 +896,8 @@
             },
             "metadata": {
                 "designer": {
-                    "x": 1799,
-                    "y": -112
+                    "x": 1200,
+                    "y": 0
                 },
                 "restore": {
                     "expect": {
@@ -1013,8 +1013,8 @@
             },
             "metadata": {
                 "designer": {
-                    "x": 2177,
-                    "y": -107
+                    "x": 1500,
+                    "y": 0
                 },
                 "restore": {
                     "parameters": {
@@ -1131,8 +1131,8 @@
             },
             "metadata": {
                 "designer": {
-                    "x": 2527,
-                    "y": -97
+                    "x": 1800,
+                    "y": 0
                 },
                 "restore": {
                     "expect": {
@@ -1220,6 +1220,7 @@
         "designer": {
             "orphans": []
         },
-        "zone": "us2.make.com"
+        "zone": "us2.make.com",
+        "notes": []
     }
 }

@@ -122,21 +122,30 @@
                                 "__IMTCONN__": 980694
                             },
                             "mapper": {
+                                "fileName": "{{4.fileName}}",
                                 "data": "{{4.data}}",
                                 "title": "A.I. Generated Image",
                                 "altText": "This is an A.I. Generated Image",
                                 "content": "{{7.responseValues.linkedin_text.value}}",
-                                "fileName": "{{4.fileName}}",
                                 "visibility": "PUBLIC",
                                 "feedDistribution": "MAIN_FEED",
                                 "isReshareDisabledByAuthor": false
                             },
                             "metadata": {
                                 "designer": {
-                                    "x": 1267,
-                                    "y": -123
+                                    "x": 1072,
+                                    "y": -128
                                 },
                                 "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "label": "My LinkedIn connection (🌈 Tad Duval 🌈)",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "linkedin2"
+                                            }
+                                        }
+                                    },
                                     "expect": {
                                         "visibility": {
                                             "mode": "chose",
@@ -148,15 +157,6 @@
                                         },
                                         "isReshareDisabledByAuthor": {
                                             "mode": "chose"
-                                        }
-                                    },
-                                    "parameters": {
-                                        "__IMTCONN__": {
-                                            "data": {
-                                                "scoped": "true",
-                                                "connection": "linkedin2"
-                                            },
-                                            "label": "My LinkedIn connection (🌈 Tad Duval 🌈)"
                                         }
                                     }
                                 },
@@ -309,31 +309,36 @@
                             }
                         },
                         {
-                            "id": 8,
+                            "id": 14,
                             "module": "twitter:uploadAMedia",
                             "version": 5,
                             "parameters": {
-                                "__IMTCONN__": 1403497
-                            },
-                            "filter": {
-                                "name": "Image Post",
-                                "conditions": []
+                                "__IMTCONN__": 1497097
                             },
                             "mapper": {
                                 "select": "image",
                                 "attachments": [
                                     {
-                                        "data": "{{9.data}}",
-                                        "filename": "{{9.fileName}}"
+                                        "filename": "{{9.fileName}}",
+                                        "data": "{{9.data}}"
                                     }
                                 ]
                             },
                             "metadata": {
                                 "designer": {
-                                    "x": 1092,
-                                    "y": 302
+                                    "x": 1093,
+                                    "y": 262
                                 },
                                 "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "label": "My X (formerly Twitter) connection (COMMAND)",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "twitter"
+                                            }
+                                        }
+                                    },
                                     "expect": {
                                         "select": {
                                             "label": "Image or GIF (Size less than 5MB)"
@@ -343,15 +348,6 @@
                                             "items": [
                                                 null
                                             ]
-                                        }
-                                    },
-                                    "parameters": {
-                                        "__IMTCONN__": {
-                                            "data": {
-                                                "scoped": "true",
-                                                "connection": "twitter"
-                                            },
-                                            "label": "My \"Upload a Media\" X (formerly Twitter) connection (COMMAND)"
                                         }
                                     }
                                 },
@@ -378,6 +374,12 @@
                                     },
                                     {
                                         "name": "attachments",
+                                        "type": "array",
+                                        "label": "Attachments",
+                                        "validate": {
+                                            "maxItems": 4
+                                        },
+                                        "required": true,
                                         "spec": [
                                             {
                                                 "name": "filename",
@@ -393,49 +395,43 @@
                                                 "required": true,
                                                 "semantic": "file:data"
                                             }
-                                        ],
-                                        "type": "array",
-                                        "label": "Attachments",
-                                        "required": true,
-                                        "validate": {
-                                            "maxItems": 4
-                                        }
+                                        ]
                                     }
                                 ]
                             }
                         },
                         {
-                            "id": 10,
+                            "id": 16,
                             "module": "twitter:createATweet",
                             "version": 6,
                             "parameters": {
-                                "__IMTCONN__": 1402480
+                                "__IMTCONN__": 1497894
                             },
                             "mapper": {
                                 "text": "{{7.responseValues.x_dot_com_text.value}}",
-                                "media_ids": "{{8.media_ids}}"
+                                "media_ids": "{{14.media_ids}}"
                             },
                             "metadata": {
                                 "designer": {
-                                    "x": 1530,
-                                    "y": 272
+                                    "x": 1481,
+                                    "y": 263
                                 },
                                 "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "label": "My X (formerly Twitter) OAuth 2.0 connection",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "twitter2"
+                                            }
+                                        }
+                                    },
                                     "expect": {
                                         "media_ids": {
                                             "mode": "edit"
                                         },
                                         "for_super_followers_only": {
                                             "mode": "chose"
-                                        }
-                                    },
-                                    "parameters": {
-                                        "__IMTCONN__": {
-                                            "data": {
-                                                "scoped": "true",
-                                                "connection": "twitter2"
-                                            },
-                                            "label": "My X (formerly Twitter) OAuth 2.0 connection (CMD_LABS)"
                                         }
                                     }
                                 },
@@ -455,14 +451,14 @@
                                         "required": true
                                     },
                                     {
-                                        "mode": "edit",
                                         "name": "media_ids",
-                                        "spec": {
-                                            "name": "value",
-                                            "type": "text"
-                                        },
                                         "type": "array",
-                                        "label": "Media IDs"
+                                        "label": "Media IDs",
+                                        "mode": "edit",
+                                        "spec": {
+                                            "type": "text",
+                                            "name": "value"
+                                        }
                                     },
                                     {
                                         "name": "place_id",
@@ -511,6 +507,7 @@
         "designer": {
             "orphans": []
         },
-        "zone": "us2.make.com"
+        "zone": "us2.make.com",
+        "notes": []
     }
 }

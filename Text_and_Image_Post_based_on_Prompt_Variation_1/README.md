@@ -1,7 +1,8 @@
 # TLDR
 
 This folder holds the Make.com automation blueprints for automating the creation and distribution
-of Text + Image posts by leveraging Make.com and OpenAI's GPT and DALLE APIs.
+of Text + Image posts by leveraging Make.com and OpenAI's GPT and DALLE APIs. The content will be distributed to 
+an `X.com account` and a `LinkedIn Organization`
 
 ## Requirements
 
