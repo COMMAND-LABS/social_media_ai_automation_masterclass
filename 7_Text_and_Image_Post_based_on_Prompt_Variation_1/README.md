@@ -2,7 +2,7 @@
 
 This folder holds the Make.com automation blueprints for automating the creation and distribution
 of Text + Image posts by leveraging Make.com and OpenAI's GPT and DALLE APIs. The content will be distributed to 
-an `X.com account` and a `LinkedIn Organization`
+an `X.com account` and a `LinkedIn Organization`.
 
 ## Requirements
 
@@ -35,7 +35,7 @@ Make sure to set up a form in gotoHuman that contains the following fields (chec
 4 - id: `approval` - "Button Group" field type
 
 Add the gotoHuman API key found at the bottom of the Form builder into Make.com to integrate the
-"Create a Review Request" node (check out ref_2.png)
+"Create a Review Request" node (check out ref_4.png)
 
 ## `Blueprint 2` - Distribute the approved content to LinkedIn & X
 

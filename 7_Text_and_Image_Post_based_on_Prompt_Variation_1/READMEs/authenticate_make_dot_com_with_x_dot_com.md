@@ -33,3 +33,4 @@ Supports uploading images AND videos
 
 For the v6 Make.com integration with X.com you'll need to authenticate using the `OAuth 2.0 Client ID and Client Secret`
 keys found in the `Keys and tokens` tab of your App in the X.com Developer Portal
+
