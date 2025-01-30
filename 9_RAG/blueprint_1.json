@@ -1,0 +1,721 @@
+{
+    "name": "9a_RAG",
+    "flow": [
+        {
+            "id": 1,
+            "module": "google-sheets:getSheetContent",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 1512727
+            },
+            "mapper": {
+                "select": "map",
+                "range": "A2:C11",
+                "includesHeaders": true,
+                "valueRenderOption": "FORMATTED_VALUE",
+                "dateTimeRenderOption": "FORMATTED_STRING",
+                "spreadsheetId": "1rvdUA5lUKbCCN2IWM0nrEj90J6jRSR4AdoUzPkzwFPA",
+                "sheetId": "Knowledge",
+                "tableFirstRow": "A1:C1"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "9_RAG connection (tad@cmdlabs.io)",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "select": {
+                            "label": "Enter manually"
+                        },
+                        "includesHeaders": {
+                            "mode": "chose"
+                        },
+                        "valueRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted value"
+                        },
+                        "dateTimeRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted string"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Search Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "list",
+                                "fromAll",
+                                "map"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "range",
+                        "type": "text",
+                        "label": "Range",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "boolean",
+                        "label": "Table contains headers",
+                        "required": true
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "text",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "text",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "tableFirstRow",
+                        "type": "text",
+                        "label": "Row with headers"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "label": "Total number of bundles",
+                        "type": "uinteger"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "label": "Bundle order position",
+                        "type": "uinteger"
+                    },
+                    {
+                        "name": "__ROW_NUMBER__",
+                        "label": "Row number",
+                        "type": "number"
+                    },
+                    {
+                        "name": "__SPREADSHEET_ID__",
+                        "label": "Spreadsheet ID",
+                        "type": "text"
+                    },
+                    {
+                        "name": "__SHEET__",
+                        "label": "Sheet",
+                        "type": "text"
+                    },
+                    {
+                        "name": "0",
+                        "label": "Post (A)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "1",
+                        "label": "Platform (B)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "2",
+                        "label": "Link to post (C)",
+                        "type": "text"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "fullRecord",
+                "scope": "roundtrip",
+                "value": "Post: {{1.`0`}}\nPlatform: {{1.`1`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "fullRecord",
+                        "type": "any",
+                        "label": "fullRecord"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "json_safe_string",
+                "scope": "roundtrip",
+                "value": "{{replace(replace(replace(replace(replace(replace(replace(4.fullRecord; \"/\\n/g\"; space); \"/\\r/g\"; space); \"/\\t/g\"; space); \"/\\f/g\"; space); \"/\\//g\"; \"/\"); \"/\\\\/g\"; \"\\\\\"); \"/\"\"/g\"; \"\\\"\"\")}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "json_safe_string",
+                        "type": "any",
+                        "label": "json_safe_string"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "openai-gpt-3:makeApiCall",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 977869
+            },
+            "mapper": {
+                "url": "/v1/embeddings",
+                "body": "{\"input\": \"{{3.json_safe_string}}\",\"model\": \"text-embedding-ada-002\",\"encoding_format\": \"float\"}",
+                "method": "POST",
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ]
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "qs": {
+                            "mode": "chose"
+                        },
+                        "method": {
+                            "mode": "chose",
+                            "label": "POST"
+                        },
+                        "headers": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "openai-gpt-3"
+                            },
+                            "label": "My OpenAI connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:openai-gpt-3",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "type": "text",
+                        "label": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "select",
+                        "label": "Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "GET",
+                                "POST",
+                                "PUT",
+                                "PATCH",
+                                "DELETE"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "key",
+                                    "type": "text",
+                                    "label": "Key"
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "text",
+                                    "label": "Value"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Header"
+                        },
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "qs",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "key",
+                                    "type": "text",
+                                    "label": "Key"
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "text",
+                                    "label": "Value"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Query String"
+                        },
+                        "type": "array",
+                        "label": "Query String"
+                    },
+                    {
+                        "name": "body",
+                        "type": "any",
+                        "label": "Body"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "module": "pinecone:fetchVectors",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 1514330
+            },
+            "mapper": {
+                "ids": "{{1.`2`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1200,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "pinecone"
+                            },
+                            "label": "My Pinecone connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:pinecone",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "ids",
+                        "type": "text",
+                        "label": "Vector ID",
+                        "required": true
+                    },
+                    {
+                        "name": "namespace",
+                        "type": "text",
+                        "label": "Namespace"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "pinecone:upsertVector",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 1514330
+            },
+            "filter": {
+                "name": "If doesn't exist or page has changed",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{6.id}}",
+                            "o": "notexist"
+                        }
+                    ],
+                    [
+                        {
+                            "a": "{{6.metadata.unique_hash}}",
+                            "b": "{{sha256(4.fullRecord)}}",
+                            "o": "text:notequal"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {
+                "id": "{{1.`2`}}",
+                "values": "{{2.body.data[].embedding}}",
+                "metadata": [
+                    {
+                        "fieldName": "content",
+                        "fieldType": "string",
+                        "fieldValue": "{{4.fullRecord}}"
+                    },
+                    {
+                        "fieldName": "platform",
+                        "fieldType": "string",
+                        "fieldValue": "{{1.`1`}}"
+                    },
+                    {
+                        "fieldName": "unique_hash",
+                        "fieldType": "string",
+                        "fieldValue": "{{sha256(4.fullRecord)}}"
+                    }
+                ],
+                "sparseVector": {}
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1500,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "values": {
+                            "mode": "edit"
+                        },
+                        "metadata": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "fieldType": {
+                                        "mode": "chose",
+                                        "label": "String"
+                                    }
+                                },
+                                {
+                                    "fieldType": {
+                                        "mode": "chose",
+                                        "label": "String"
+                                    }
+                                },
+                                {
+                                    "fieldType": {
+                                        "mode": "chose",
+                                        "label": "String"
+                                    }
+                                }
+                            ]
+                        },
+                        "sparseVector": {
+                            "nested": {
+                                "values": {
+                                    "mode": "chose"
+                                },
+                                "indices": {
+                                    "mode": "chose"
+                                }
+                            }
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "pinecone"
+                            },
+                            "label": "My Pinecone connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:pinecone",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "Vector ID",
+                        "required": true
+                    },
+                    {
+                        "name": "values",
+                        "spec": {
+                            "name": "value",
+                            "type": "number",
+                            "label": "Value"
+                        },
+                        "type": "array",
+                        "label": "Values",
+                        "required": true
+                    },
+                    {
+                        "name": "sparseVector",
+                        "spec": [
+                            {
+                                "name": "indices",
+                                "spec": {
+                                    "name": "value",
+                                    "type": "integer",
+                                    "label": "Index"
+                                },
+                                "type": "array",
+                                "label": "Indices"
+                            },
+                            {
+                                "name": "values",
+                                "spec": {
+                                    "name": "value",
+                                    "type": "number",
+                                    "label": "Value"
+                                },
+                                "type": "array",
+                                "label": "Values"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Sparse Vector"
+                    },
+                    {
+                        "name": "metadata",
+                        "spec": [
+                            {
+                                "name": "fieldName",
+                                "type": "text",
+                                "label": "Key",
+                                "required": true
+                            },
+                            {
+                                "name": "fieldType",
+                                "type": "select",
+                                "label": "Type",
+                                "options": [
+                                    {
+                                        "label": "String",
+                                        "value": "string",
+                                        "nested": [
+                                            {
+                                                "name": "fieldValue",
+                                                "type": "text",
+                                                "label": "Value",
+                                                "required": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Number",
+                                        "value": "number",
+                                        "nested": [
+                                            {
+                                                "name": "fieldValue",
+                                                "type": "number",
+                                                "label": "Value",
+                                                "required": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Boolean",
+                                        "value": "boolean",
+                                        "nested": [
+                                            {
+                                                "name": "fieldValue",
+                                                "type": "boolean",
+                                                "label": "Value",
+                                                "required": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "List",
+                                        "value": "list",
+                                        "nested": [
+                                            {
+                                                "name": "fieldValue",
+                                                "spec": {
+                                                    "type": "text",
+                                                    "label": "Value"
+                                                },
+                                                "type": "array",
+                                                "label": "Value",
+                                                "required": true
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "required": true
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Metadata"
+                    },
+                    {
+                        "name": "namespace",
+                        "type": "text",
+                        "label": "Namespace"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}

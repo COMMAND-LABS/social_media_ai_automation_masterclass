@@ -6,6 +6,7 @@ This is a blueprint for performing retrieval augmented generation for producing 
 
 - Pinecone - https://www.pinecone.io/
 - Google Sheets - https://workspace.google.com/products/sheets/
+  - Create a spreadsheet with 2 sheets (`Knowledge` & `Query`)
 - OpenAI - https://platform.openai.com/docs/overview
 
 ## References
@@ -13,9 +14,9 @@ This is a blueprint for performing retrieval augmented generation for producing 
 - https://www.youtube.com/watch?v=DNDI4c3z-6A&t=456s
 - https://www.youtube.com/watch?v=epz94WIvIYk
 
-## Steps for creating knowledge base blueprint
+## Steps for creating knowledge base aka `blueprint_1.json`
 
-- Create a Google Sheet with the following headers:
+- Create a Google Sheet (called `Knowledge`) with the following headers:
   - Post
   - Platform
   - Link to post
@@ -64,5 +65,9 @@ This is a blueprint for performing retrieval augmented generation for producing 
 
 SIDENOTE: Peep ref_1.png
 
-## Steps for creating query blueprint
+## Steps for running RAG `blueprint_2.json`
 
+- Create a Google Sheet (called `RAG`) with the following headers:
+  - Post
+  - Platform
+  - Link to post
