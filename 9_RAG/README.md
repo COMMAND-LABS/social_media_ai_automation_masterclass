@@ -129,3 +129,7 @@ The relevant knowledge holds a list of the most related past posts of Tad Duval 
   - Sheet Name: `RAG`
   - Cell: B + (the number of the same row being processed)
   - Value: {{2.result}} (aka the output of the RAG response)
+
+## Closing Remarks
+
+And that should do it!
