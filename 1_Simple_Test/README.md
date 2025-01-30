@@ -1,6 +1,6 @@
 # TLDR
 
-This a simple blueprint for those who are brand new to Make.com and node editors
+This a simple blueprint for those who are brand new to Make.com and node editors in general
 
 ## Requirements
 
@@ -9,3 +9,4 @@ This a simple blueprint for those who are brand new to Make.com and node editors
   - Google Restricted
   - Microsoft SMTP/IMAP OAuth
   - SMTP
+- Make.com Account - https://make.com/
