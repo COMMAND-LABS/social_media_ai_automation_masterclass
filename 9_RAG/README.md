@@ -13,8 +13,9 @@ This is a blueprint for performing retrieval augmented generation for producing 
 
 - https://www.youtube.com/watch?v=DNDI4c3z-6A&t=456s
 - https://www.youtube.com/watch?v=epz94WIvIYk
+- https://docs.google.com/spreadsheets/d/1rvdUA5lUKbCCN2IWM0nrEj90J6jRSR4AdoUzPkzwFPA/edit?gid=0#gid=0
 
-## Steps for creating knowledge base aka `blueprint_1.json`
+## PART 1: Steps for creating knowledge base aka `blueprint_1.json`
 
 - Create a Google Sheet (called `Knowledge`) with the following headers:
   - Post
@@ -65,9 +66,66 @@ This is a blueprint for performing retrieval augmented generation for producing 
 
 SIDENOTE: Peep ref_1.png
 
-## Steps for running RAG `blueprint_2.json`
+## PART 2: Steps for running RAG `blueprint_2.json`
 
-- Create a Google Sheet (called `RAG`) with the following headers:
-  - Post
-  - Platform
-  - Link to post
+- Create a Google Sheet (called `RAG`) in the same spreadsheet used for `PART 1` with the following headers:
+  - Prompt
+  - RAG
+
+- Add "Google Sheets - Get Range Values" node
+  - And specify range (ie: A2:B2)
+
+- Add an "OpenAI - Create a Completion (Prompt)" node
+  - This step was just to test that completion calls are working
+
+- Add another "OpenAI - Create a Completion (Prompt)" node
+  - add it right after the "Google Sheets - Get Range Values" node
+  - Configure the node with 2 messages
+    - System: `You are a helpful assistant. I have a Pinecone knowledge base holding some of my past high-performing posts across various social media platforms. I'd like you generate a search term that I can use to retrieve the most similar past posts based on my objective so I can thereafter generate new marketing copy in the style of my posts. Respond in JSON like so: { "search_term": string }`
+    - Toggle on Show advanced settings
+      - Response Format: `JSON Object`
+      - Parse JSON Response: `Yes`
+    - User: `1. Prompt (A)`
+
+- Add "OpenAI - Make an API Call" node
+  - https://platform.openai.com/docs/api-reference/embeddings/create
+  - URL: `/v1/embeddings`
+  - Method: `POST`
+  - Body: `{"input": "{{3.result.search_term}}","model": "text-embedding-ada-002","encoding_format": "float"}`
+  - Make the "input" key's value dynamic based on ONE of the rows in the spreadsheet
+
+- Add "Pinecone - Query Vectors" node after the "OpenAI - Make an API Call" node
+  - Toggle on Vector Map feature
+  - Vector: {{5.body.data[].embedding}}
+  - Include Metadata: Yes
+  - Limit: 3 (aka how many search results you want back)
+
+- Add "Array aggregator" node
+  - Source Module: Pinecone - Query Vectors [6]
+  - Aggregated fields: VectorID, Metadata
+
+- Add "JSON - Transform to JSON" node
+  - Object: {{7.array}}
+
+- Update the "OpenAI - Create a Completion (Prompt)" node from the 3rd step of Part 2
+  - Configure the node with 1 message
+    - User: (awkward but breaking to a new line)
+
+```md - User prompt for reference
+# PROMPT
+{{1.`0`}}
+
+## Requirements
+
+The relevant knowledge holds a list of the most related past posts of Tad Duval so you can generate new marketing material in an authentic and original style. Only include the provided information as the source of tone, voice, and style for generated content
+
+## RELEVANT KNOWLEDGE
+
+{{8.json}}
+```
+
+- Add a "Google Sheets - Update a Cell" node
+  - Use the same spreadsheet id as used in previous steps
+  - Sheet Name: `RAG`
+  - Cell: B + (the number of the same row being processed)
+  - Value: {{2.result}} (aka the output of the RAG response)
