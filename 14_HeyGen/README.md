@@ -10,7 +10,7 @@ HeyGen baby!
 
 ## How to use this project
 
-1st sign up for HeyGen on the https://app.heygen.com/ site
+1st sign up for HeyGen on the https://app.heygen.com/ site and create your personalized A.I. avatar in minutes.
 
 2nd get a HeyGen API key from the https://docs.heygen.com/ site
 
