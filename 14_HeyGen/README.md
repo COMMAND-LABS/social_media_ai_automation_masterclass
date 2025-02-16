@@ -31,5 +31,5 @@ export HEYGEN_API_KEY="<YOUR_HEYGEN_API_KEY_HERE>"
 
 In the `./14_HeyGen/scripts/generate_video.sh` script replace `avatar_id` and `voice_id` with your preferred ids
 
-Example Avatar id: 148aa78267f84bdb8c88035378334c6d (ie: "Tad Duval's" v1 avatar)
-Example Voice id: e7e6ad7c235748fe9147884f26c3af94 (ie: "Tad Duval's" v1 voice)
+- Example Avatar id: 148aa78267f84bdb8c88035378334c6d (ie: "Tad Duval's" v1 avatar)
+- Example Voice id: e7e6ad7c235748fe9147884f26c3af94 (ie: "Tad Duval's" v1 voice)
