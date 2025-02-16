@@ -1932,12 +1932,12 @@
                                                                 "__IMTCONN__": 1465264
                                                             },
                                                             "mapper": {
-                                                                "data": "{{32.data}}",
-                                                                "title": "This is an AI-generated title.",
+                                                                "title": "{{30.result.youtube.title}}",
                                                                 "fileName": "{{32.name}}",
+                                                                "data": "{{32.data}}",
                                                                 "categoryId": "28",
-                                                                "description": "{{30.result.youtube_description}}",
                                                                 "privacyStatus": "public",
+                                                                "description": "{{30.result.youtube.description}}",
                                                                 "selfDeclaredMadeForKids": false
                                                             },
                                                             "metadata": {
@@ -1946,7 +1946,27 @@
                                                                     "y": 600
                                                                 },
                                                                 "restore": {
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "label": "Video_Post_Automation_Connection (Command <ceemmmdee@gmail.com>)",
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "youtube"
+                                                                            }
+                                                                        }
+                                                                    },
                                                                     "expect": {
+                                                                        "categoryId": {
+                                                                            "mode": "chose",
+                                                                            "label": "Science & Technology"
+                                                                        },
+                                                                        "privacyStatus": {
+                                                                            "mode": "chose",
+                                                                            "label": "Public"
+                                                                        },
+                                                                        "selfDeclaredMadeForKids": {
+                                                                            "mode": "chose"
+                                                                        },
                                                                         "tags": {
                                                                             "mode": "chose"
                                                                         },
@@ -1954,31 +1974,11 @@
                                                                             "mode": "chose",
                                                                             "label": "Empty"
                                                                         },
-                                                                        "categoryId": {
-                                                                            "mode": "chose",
-                                                                            "label": "Science & Technology"
-                                                                        },
                                                                         "embeddable": {
                                                                             "mode": "chose"
                                                                         },
-                                                                        "privacyStatus": {
-                                                                            "mode": "chose",
-                                                                            "label": "Public"
-                                                                        },
                                                                         "notifySubscribers": {
                                                                             "mode": "chose"
-                                                                        },
-                                                                        "selfDeclaredMadeForKids": {
-                                                                            "mode": "chose"
-                                                                        }
-                                                                    },
-                                                                    "parameters": {
-                                                                        "__IMTCONN__": {
-                                                                            "data": {
-                                                                                "scoped": "true",
-                                                                                "connection": "youtube"
-                                                                            },
-                                                                            "label": "Video_Post_Automation_Connection (Command <ceemmmdee@gmail.com>)"
                                                                         }
                                                                     }
                                                                 },
@@ -1998,10 +1998,10 @@
                                                                         "name": "title",
                                                                         "type": "text",
                                                                         "label": "Title",
-                                                                        "required": true,
                                                                         "validate": {
                                                                             "max": 100
-                                                                        }
+                                                                        },
+                                                                        "required": true
                                                                     },
                                                                     {
                                                                         "name": "fileName",
@@ -2050,17 +2050,17 @@
                                                                     },
                                                                     {
                                                                         "name": "tags",
+                                                                        "type": "array",
+                                                                        "label": "Tags",
                                                                         "spec": {
-                                                                            "name": "value",
                                                                             "type": "text",
                                                                             "label": "Tag",
                                                                             "required": true,
                                                                             "validate": {
                                                                                 "max": 500
-                                                                            }
-                                                                        },
-                                                                        "type": "array",
-                                                                        "label": "Tags"
+                                                                            },
+                                                                            "name": "value"
+                                                                        }
                                                                     },
                                                                     {
                                                                         "name": "recordingDate",
@@ -2120,10 +2120,10 @@
                                                                 "__IMTCONN__": 980694
                                                             },
                                                             "mapper": {
-                                                                "title": "This is an AI-generated title.",
-                                                                "video": "{{32.data}}",
-                                                                "content": "{{30.result.linkedin_post}}",
                                                                 "videoName": "{{32.name}}",
+                                                                "video": "{{32.data}}",
+                                                                "title": "{{30.result.linkedin.title}}",
+                                                                "content": "{{30.result.linkedin.post}}",
                                                                 "visibility": "PUBLIC",
                                                                 "feedDistribution": "MAIN_FEED",
                                                                 "isReshareDisabledByAuthor": false
@@ -2134,6 +2134,15 @@
                                                                     "y": 900
                                                                 },
                                                                 "restore": {
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "label": "My LinkedIn connection (🌈 Tad Duval 🌈)",
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "linkedin2"
+                                                                            }
+                                                                        }
+                                                                    },
                                                                     "expect": {
                                                                         "visibility": {
                                                                             "mode": "chose",
@@ -2145,15 +2154,6 @@
                                                                         },
                                                                         "isReshareDisabledByAuthor": {
                                                                             "mode": "chose"
-                                                                        }
-                                                                    },
-                                                                    "parameters": {
-                                                                        "__IMTCONN__": {
-                                                                            "data": {
-                                                                                "scoped": "true",
-                                                                                "connection": "linkedin2"
-                                                                            },
-                                                                            "label": "My LinkedIn connection (🌈 Tad Duval 🌈)"
                                                                         }
                                                                     }
                                                                 },
@@ -3080,12 +3080,12 @@
                                                 "__IMTCONN__": 1522534
                                             },
                                             "mapper": {
+                                                "file": "{{1.`4`}}",
                                                 "select": "map",
+                                                "formatDrawings": "image/jpeg",
                                                 "formatDocuments": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                                                 "formatSpreadsheets": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                                                "formatPresentations": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-                                                "formatDrawings": "image/jpeg",
-                                                "file": "{{1.`4`}}"
+                                                "formatPresentations": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
                                             },
                                             "metadata": {
                                                 "designer": {
@@ -3093,18 +3093,12 @@
                                                     "y": 1781
                                                 },
                                                 "restore": {
-                                                    "parameters": {
-                                                        "__IMTCONN__": {
-                                                            "label": "ImagePost to X and IG Connection (tad@cmdlabs.io)",
-                                                            "data": {
-                                                                "scoped": "true",
-                                                                "connection": "google-restricted"
-                                                            }
-                                                        }
-                                                    },
                                                     "expect": {
                                                         "select": {
                                                             "label": "Enter manually"
+                                                        },
+                                                        "formatDrawings": {
+                                                            "label": "JPEG"
                                                         },
                                                         "formatDocuments": {
                                                             "label": "MS Word Document"
@@ -3114,9 +3108,15 @@
                                                         },
                                                         "formatPresentations": {
                                                             "label": "MS PowerPoint"
-                                                        },
-                                                        "formatDrawings": {
-                                                            "label": "JPEG"
+                                                        }
+                                                    },
+                                                    "parameters": {
+                                                        "__IMTCONN__": {
+                                                            "data": {
+                                                                "scoped": "true",
+                                                                "connection": "google-restricted"
+                                                            },
+                                                            "label": "ImagePost to X and IG Connection (tad@cmdlabs.io)"
                                                         }
                                                     }
                                                 },
@@ -3230,11 +3230,11 @@
                                                                 "__IMTCONN__": 980694
                                                             },
                                                             "mapper": {
-                                                                "fileName": "{{48.name}}",
                                                                 "data": "{{48.data}}",
                                                                 "title": "Automate your Social Media with A.I. Workshop on 2/27/2025",
                                                                 "altText": "Automate your Social Media with A.I. Workshop on 2/27/2025 Promo Image",
                                                                 "content": "{{13.result.linkedin_post}}",
+                                                                "fileName": "{{48.name}}",
                                                                 "visibility": "PUBLIC",
                                                                 "feedDistribution": "MAIN_FEED",
                                                                 "isReshareDisabledByAuthor": false
@@ -3245,15 +3245,6 @@
                                                                     "y": 1500
                                                                 },
                                                                 "restore": {
-                                                                    "parameters": {
-                                                                        "__IMTCONN__": {
-                                                                            "label": "My LinkedIn connection (🌈 Tad Duval 🌈)",
-                                                                            "data": {
-                                                                                "scoped": "true",
-                                                                                "connection": "linkedin2"
-                                                                            }
-                                                                        }
-                                                                    },
                                                                     "expect": {
                                                                         "visibility": {
                                                                             "mode": "chose",
@@ -3265,6 +3256,15 @@
                                                                         },
                                                                         "isReshareDisabledByAuthor": {
                                                                             "mode": "chose"
+                                                                        }
+                                                                    },
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "linkedin2"
+                                                                            },
+                                                                            "label": "My LinkedIn connection (🌈 Tad Duval 🌈)"
                                                                         }
                                                                     }
                                                                 },
@@ -3351,9 +3351,9 @@
                                                                 "__IMTCONN__": 1493671
                                                             },
                                                             "mapper": {
+                                                                "caption": "{{13.result.instagram_caption}}",
                                                                 "accountId": "17841468332360742",
-                                                                "image_url": "https://drive.google.com/uc?id={{48.id}}",
-                                                                "caption": "{{13.result.instagram_caption}}"
+                                                                "image_url": "https://drive.google.com/uc?id={{48.id}}"
                                                             },
                                                             "metadata": {
                                                                 "designer": {
@@ -3361,15 +3361,6 @@
                                                                     "y": 1800
                                                                 },
                                                                 "restore": {
-                                                                    "parameters": {
-                                                                        "__IMTCONN__": {
-                                                                            "label": "IG / Facebook Meta Business Suite (Tad Duval)",
-                                                                            "data": {
-                                                                                "scoped": "true",
-                                                                                "connection": "facebook"
-                                                                            }
-                                                                        }
-                                                                    },
                                                                     "expect": {
                                                                         "accountId": {
                                                                             "mode": "chose",
@@ -3377,6 +3368,15 @@
                                                                         },
                                                                         "user_tags": {
                                                                             "mode": "chose"
+                                                                        }
+                                                                    },
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "facebook"
+                                                                            },
+                                                                            "label": "IG / Facebook Meta Business Suite (Tad Duval)"
                                                                         }
                                                                     }
                                                                 },
@@ -3408,8 +3408,6 @@
                                                                     },
                                                                     {
                                                                         "name": "user_tags",
-                                                                        "type": "array",
-                                                                        "label": "User Tags",
                                                                         "spec": [
                                                                             {
                                                                                 "name": "username",
@@ -3440,7 +3438,9 @@
                                                                                     "min": 0
                                                                                 }
                                                                             }
-                                                                        ]
+                                                                        ],
+                                                                        "type": "array",
+                                                                        "label": "User Tags"
                                                                     },
                                                                     {
                                                                         "name": "location_id",
@@ -3465,8 +3465,8 @@
                                                                 "select": "image",
                                                                 "attachments": [
                                                                     {
-                                                                        "filename": "{{48.name}}",
-                                                                        "data": "{{48.data}}"
+                                                                        "data": "{{48.data}}",
+                                                                        "filename": "{{48.name}}"
                                                                     }
                                                                 ]
                                                             },
@@ -3476,15 +3476,6 @@
                                                                     "y": 2100
                                                                 },
                                                                 "restore": {
-                                                                    "parameters": {
-                                                                        "__IMTCONN__": {
-                                                                            "label": "My X (formerly Twitter) connection (COMMAND)",
-                                                                            "data": {
-                                                                                "scoped": "true",
-                                                                                "connection": "twitter"
-                                                                            }
-                                                                        }
-                                                                    },
                                                                     "expect": {
                                                                         "select": {
                                                                             "label": "Image or GIF (Size less than 5MB)"
@@ -3494,6 +3485,15 @@
                                                                             "items": [
                                                                                 null
                                                                             ]
+                                                                        }
+                                                                    },
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "twitter"
+                                                                            },
+                                                                            "label": "My X (formerly Twitter) connection (COMMAND)"
                                                                         }
                                                                     }
                                                                 },
@@ -3520,12 +3520,6 @@
                                                                     },
                                                                     {
                                                                         "name": "attachments",
-                                                                        "type": "array",
-                                                                        "label": "Attachments",
-                                                                        "validate": {
-                                                                            "maxItems": 4
-                                                                        },
-                                                                        "required": true,
                                                                         "spec": [
                                                                             {
                                                                                 "name": "filename",
@@ -3541,7 +3535,13 @@
                                                                                 "required": true,
                                                                                 "semantic": "file:data"
                                                                             }
-                                                                        ]
+                                                                        ],
+                                                                        "type": "array",
+                                                                        "label": "Attachments",
+                                                                        "required": true,
+                                                                        "validate": {
+                                                                            "maxItems": 4
+                                                                        }
                                                                     }
                                                                 ]
                                                             }
