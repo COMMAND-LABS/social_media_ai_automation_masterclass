@@ -23,7 +23,7 @@ export HEYGEN_API_KEY="<YOUR_HEYGEN_API_KEY_HERE>"
 ```sh
 ./14_HeyGen/scripts/list_avatars.sh # for finding the avatar id you'd like to use
 ./14_HeyGen/scripts/list_voices.sh # for finding the voice you'd like to pair with your avatar
-./14_HeyGen/scripts/generate_video.sh # plug your desired avatar_id & voice_id here to generate custom Avatar videos
+./14_HeyGen/scripts/generate_video.sh # plug your desired avatar_id & voice_id here to generate custom A.I. Avatar videos
 ./14_HeyGen/scripts/check_video_generation_status.sh # for checking on the status of your video while it is being generated
 ```
 
