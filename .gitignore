@@ -1,2 +1,6 @@
 .DS_Store
 .env
+
+# For ignoring debug files related to 14_HeyGen mini project
+voices_response.json
+avatar_response.json

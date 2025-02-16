@@ -32,4 +32,3 @@ Info about connecting to ManyChat in order to build an IG DM bot
 - Settings
   - Instagram
   - Default Reply
-
