@@ -10,7 +10,7 @@ HeyGen baby!
 
 ## How to use this project
 
-1st sign up for HeyGen (https://app.heygen.com/) 
+1st sign up for HeyGen on the https://app.heygen.com/ site
 
 2nd get a HeyGen API key from the https://docs.heygen.com/ site
 
