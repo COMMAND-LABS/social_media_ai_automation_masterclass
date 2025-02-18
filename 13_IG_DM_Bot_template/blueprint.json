@@ -1,12 +1,12 @@
 {
-    "name": "13_IG_DM_bot",
+    "name": "14_IG_DM_bot_with_GCP",
     "flow": [
         {
             "id": 1,
             "module": "manychat:ManyChatWebhook",
             "version": 1,
             "parameters": {
-                "__IMTHOOK__": 407906
+                "__IMTHOOK__": 425380
             },
             "mapper": {},
             "metadata": {
@@ -20,7 +20,7 @@
                             "data": {
                                 "editable": "false"
                             },
-                            "label": "My ManyChat webhook"
+                            "label": "My ManyChat webhook for Replit Hosted Agent"
                         }
                     }
                 },
@@ -49,28 +49,26 @@
                 {
                     "flow": [
                         {
-                            "id": 4,
-                            "module": "openai-gpt-3:messageAssistantAdvanced",
+                            "id": 18,
+                            "module": "util:SetVariable2",
                             "version": 1,
-                            "parameters": {
-                                "__IMTCONN__": 1731058
-                            },
+                            "parameters": {},
                             "filter": {
                                 "name": "No Thread ID in Manychat",
                                 "conditions": [
                                     [
                                         {
                                             "a": "{{1.subscriber.custom_fields.`Assistant - Thread ID`}}",
-                                            "b": "",
-                                            "o": "text:equal"
+                                            "o": "text:equal",
+                                            "b": ""
                                         }
                                     ]
                                 ]
                             },
                             "mapper": {
-                                "role": "user",
-                                "message": "{{1.subscriber.custom_fields.`Assistant - Prompt`}}",
-                                "assistantId": "asst_0p1Lv7bZSxuuRhOUsPp9VFo1"
+                                "name": "SanitizedPrompt",
+                                "scope": "roundtrip",
+                                "value": "{{replace(1.subscriber.custom_fields.`Assistant - Prompt`; newline; \"\\\\n\")}}"
                             },
                             "metadata": {
                                 "designer": {
@@ -79,211 +77,290 @@
                                 },
                                 "restore": {
                                     "expect": {
-                                        "role": {
-                                            "label": "User"
-                                        },
-                                        "model": {
-                                            "mode": "chose"
-                                        },
-                                        "tools": {
-                                            "mode": "chose"
-                                        },
-                                        "image_urls": {
-                                            "mode": "chose"
-                                        },
-                                        "assistantId": {
-                                            "mode": "chose",
-                                            "label": "Elena's Supercharged IG DM Bot (gpt-4o)",
-                                            "nested": []
-                                        },
-                                        "image_files": {
-                                            "mode": "chose"
-                                        },
-                                        "tool_choice": {
-                                            "mode": "chose",
-                                            "label": "Empty"
-                                        },
-                                        "response_format": {
-                                            "mode": "chose",
-                                            "label": "Empty"
-                                        },
-                                        "truncation_strategy": {
-                                            "mode": "chose",
-                                            "label": "Empty"
-                                        },
-                                        "file_search_resources": {
-                                            "mode": "chose"
-                                        },
-                                        "code_interpreter_resources": {
-                                            "mode": "chose"
+                                        "scope": {
+                                            "label": "One cycle"
+                                        }
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Variable name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "scope",
+                                        "type": "select",
+                                        "label": "Variable lifetime",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "roundtrip",
+                                                "execution"
+                                            ]
                                         }
                                     },
-                                    "parameters": {
-                                        "__IMTCONN__": {
-                                            "data": {
-                                                "scoped": "true",
-                                                "connection": "openai-gpt-3"
-                                            },
-                                            "label": "IG DM Bot connection"
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "Variable value"
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "SanitizedPrompt",
+                                        "label": "SanitizedPrompt",
+                                        "type": "any"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 11,
+                            "module": "http:ActionSendData",
+                            "version": 3,
+                            "parameters": {
+                                "handleErrors": false,
+                                "useNewZLibDeCompress": true
+                            },
+                            "mapper": {
+                                "url": "https://openai-assistant-api-830723611668.us-east1.run.app/api/chat",
+                                "serializeUrl": false,
+                                "method": "post",
+                                "headers": [
+                                    {
+                                        "name": "Api-Key",
+                                        "value": "abc123"
+                                    }
+                                ],
+                                "qs": [],
+                                "bodyType": "raw",
+                                "parseResponse": true,
+                                "authUser": "",
+                                "authPass": "",
+                                "timeout": "",
+                                "shareCookies": false,
+                                "ca": "",
+                                "rejectUnauthorized": true,
+                                "followRedirect": true,
+                                "useQuerystring": false,
+                                "gzip": true,
+                                "useMtls": false,
+                                "contentType": "application/json",
+                                "data": "{\"assistant_id\":\"asst_8XaMCZ0jXistHLFdTEi2HKfo\",\"prompt\":\"{{replace(1.subscriber.custom_fields.`Assistant - Prompt`; \"\"\"\\n\"\"\"; \"\"\"\\\\n\"\"\")}}\",\"thread_id\":\"N/A\"}",
+                                "followAllRedirects": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": 0,
+                                    "name": "Hosted Agent"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "method": {
+                                            "mode": "chose",
+                                            "label": "POST"
+                                        },
+                                        "headers": {
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
+                                        },
+                                        "qs": {
+                                            "mode": "chose"
+                                        },
+                                        "bodyType": {
+                                            "label": "Raw"
+                                        },
+                                        "contentType": {
+                                            "label": "JSON (application/json)"
                                         }
                                     }
                                 },
                                 "parameters": [
                                     {
-                                        "name": "__IMTCONN__",
-                                        "type": "account:openai-gpt-3",
-                                        "label": "Connection",
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
                                         "required": true
+                                    },
+                                    {
+                                        "name": "useNewZLibDeCompress",
+                                        "type": "hidden"
                                     }
                                 ],
                                 "expect": [
                                     {
-                                        "name": "assistantId",
-                                        "type": "select",
-                                        "label": "Assistant",
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
                                         "required": true
                                     },
                                     {
-                                        "name": "role",
+                                        "name": "serializeUrl",
+                                        "type": "boolean",
+                                        "label": "Serialize URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
                                         "type": "select",
-                                        "label": "Role",
+                                        "label": "Method",
                                         "required": true,
                                         "validate": {
                                             "enum": [
-                                                "user",
-                                                "assistant"
+                                                "get",
+                                                "head",
+                                                "post",
+                                                "put",
+                                                "patch",
+                                                "delete",
+                                                "options"
                                             ]
                                         }
                                     },
                                     {
-                                        "name": "threadId",
-                                        "type": "text",
-                                        "label": "Thread ID"
+                                        "name": "headers",
+                                        "type": "array",
+                                        "label": "Headers",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "label": "Name",
+                                                "type": "text",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "label": "Value",
+                                                "type": "text"
+                                            }
+                                        ]
                                     },
                                     {
-                                        "name": "model",
-                                        "type": "select",
-                                        "label": "Model"
+                                        "name": "qs",
+                                        "type": "array",
+                                        "label": "Query String",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "label": "Name",
+                                                "type": "text",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "label": "Value",
+                                                "type": "text"
+                                            }
+                                        ]
                                     },
                                     {
-                                        "name": "tools",
+                                        "name": "bodyType",
                                         "type": "select",
-                                        "label": "Tools",
-                                        "multiple": true,
+                                        "label": "Body type",
                                         "validate": {
                                             "enum": [
-                                                "file_search",
-                                                "code_interpreter"
+                                                "raw",
+                                                "x_www_form_urlencoded",
+                                                "multipart_form_data"
                                             ]
                                         }
                                     },
                                     {
-                                        "name": "file_search_resources",
-                                        "type": "select",
-                                        "label": "File Search Resources"
-                                    },
-                                    {
-                                        "name": "code_interpreter_resources",
-                                        "type": "select",
-                                        "label": "Code Interpreter Resources",
-                                        "multiple": true,
-                                        "validate": {
-                                            "maxItems": 20
-                                        }
-                                    },
-                                    {
-                                        "name": "tool_choice",
-                                        "type": "select",
-                                        "label": "Tool Choice",
-                                        "validate": {
-                                            "enum": [
-                                                "none",
-                                                "auto",
-                                                "required",
-                                                "file_search",
-                                                "code_interpreter",
-                                                "function"
-                                            ]
-                                        }
-                                    },
-                                    {
-                                        "name": "instructions",
-                                        "type": "text",
-                                        "label": "Instructions"
-                                    },
-                                    {
-                                        "name": "max_prompt_tokens",
-                                        "type": "uinteger",
-                                        "label": "Max Prompt Tokens"
-                                    },
-                                    {
-                                        "name": "max_completion_tokens",
-                                        "type": "uinteger",
-                                        "label": "Max Completion Tokens"
-                                    },
-                                    {
-                                        "name": "temperature",
-                                        "type": "number",
-                                        "label": "Temperature",
-                                        "validate": {
-                                            "max": 2,
-                                            "min": 0
-                                        }
-                                    },
-                                    {
-                                        "name": "top_p",
-                                        "type": "number",
-                                        "label": "Top P",
-                                        "validate": {
-                                            "max": 1,
-                                            "min": 0
-                                        }
-                                    },
-                                    {
-                                        "name": "response_format",
-                                        "type": "select",
-                                        "label": "Response Format",
-                                        "validate": {
-                                            "enum": [
-                                                "auto",
-                                                "json_object",
-                                                "text"
-                                            ]
-                                        }
-                                    },
-                                    {
-                                        "name": "truncation_strategy",
-                                        "type": "select",
-                                        "label": "Truncation Strategy",
-                                        "validate": {
-                                            "enum": [
-                                                "auto",
-                                                "last_messages"
-                                            ]
-                                        }
-                                    },
-                                    {
-                                        "name": "message",
-                                        "type": "text",
-                                        "label": "Message",
+                                        "name": "parseResponse",
+                                        "type": "boolean",
+                                        "label": "Parse response",
                                         "required": true
                                     },
                                     {
-                                        "name": "image_files",
-                                        "type": "select",
-                                        "label": "Image Files",
-                                        "multiple": true
+                                        "name": "authUser",
+                                        "type": "text",
+                                        "label": "User name"
                                     },
                                     {
-                                        "name": "image_urls",
-                                        "spec": {
-                                            "name": "value",
-                                            "type": "url",
-                                            "label": "Image URL",
-                                            "required": true
-                                        },
-                                        "type": "array",
-                                        "label": "Image URLs"
+                                        "name": "authPass",
+                                        "type": "password",
+                                        "label": "Password"
+                                    },
+                                    {
+                                        "name": "timeout",
+                                        "type": "uinteger",
+                                        "label": "Timeout",
+                                        "validate": {
+                                            "max": 300,
+                                            "min": 1
+                                        }
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "ca",
+                                        "type": "cert",
+                                        "label": "Self-signed certificate"
+                                    },
+                                    {
+                                        "name": "rejectUnauthorized",
+                                        "type": "boolean",
+                                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "followRedirect",
+                                        "type": "boolean",
+                                        "label": "Follow redirect",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useQuerystring",
+                                        "type": "boolean",
+                                        "label": "Disable serialization of multiple same query string keys as arrays",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "gzip",
+                                        "type": "boolean",
+                                        "label": "Request compressed content",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useMtls",
+                                        "type": "boolean",
+                                        "label": "Use Mutual TLS",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "contentType",
+                                        "type": "select",
+                                        "label": "Content type",
+                                        "validate": {
+                                            "enum": [
+                                                "text/plain",
+                                                "application/json",
+                                                "application/xml",
+                                                "text/xml",
+                                                "text/html",
+                                                "custom"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Request content"
+                                    },
+                                    {
+                                        "name": "followAllRedirects",
+                                        "type": "boolean",
+                                        "label": "Follow all redirect",
+                                        "required": true
                                     }
                                 ]
                             }
@@ -295,14 +372,26 @@
                             "parameters": {
                                 "__IMTCONN__": 1730454
                             },
+                            "filter": {
+                                "name": "200",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{11.statusCode}}",
+                                            "b": "200",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
                             "mapper": {
                                 "cFieldId": 12505255,
-                                "cFieldValue": "{{4.thread_id}}",
+                                "cFieldValue": "{{11.data.thread_id}}",
                                 "subscriberId": "{{1.subscriber.id}}"
                             },
                             "metadata": {
                                 "designer": {
-                                    "x": 900,
+                                    "x": 1200,
                                     "y": 0
                                 },
                                 "restore": {
@@ -364,12 +453,12 @@
                             },
                             "mapper": {
                                 "cFieldId": 12505251,
-                                "cFieldValue": "{{4.result}}",
+                                "cFieldValue": "{{11.data.response}}",
                                 "subscriberId": "{{1.subscriber.id}}"
                             },
                             "metadata": {
                                 "designer": {
-                                    "x": 1200,
+                                    "x": 1500,
                                     "y": 0
                                 },
                                 "restore": {
@@ -435,7 +524,7 @@
                             },
                             "metadata": {
                                 "designer": {
-                                    "x": 1500,
+                                    "x": 1800,
                                     "y": 0
                                 },
                                 "restore": {
@@ -481,12 +570,10 @@
                 {
                     "flow": [
                         {
-                            "id": 5,
-                            "module": "openai-gpt-3:messageAssistantAdvanced",
+                            "id": 17,
+                            "module": "util:SetVariable2",
                             "version": 1,
-                            "parameters": {
-                                "__IMTCONN__": 1731058
-                            },
+                            "parameters": {},
                             "filter": {
                                 "name": "Thread ID in Manychat",
                                 "conditions": [
@@ -499,9 +586,9 @@
                                 ]
                             },
                             "mapper": {
-                                "role": "user",
-                                "message": "{{1.subscriber.custom_fields.`Assistant - Prompt`}}",
-                                "assistantId": "asst_0p1Lv7bZSxuuRhOUsPp9VFo1"
+                                "name": "SanitizedPrompt",
+                                "scope": "roundtrip",
+                                "value": "{{replace(1.subscriber.custom_fields.`Assistant - Prompt`; newline; \"\\\\n\")}}"
                             },
                             "metadata": {
                                 "designer": {
@@ -510,211 +597,290 @@
                                 },
                                 "restore": {
                                     "expect": {
-                                        "role": {
-                                            "label": "User"
-                                        },
-                                        "model": {
-                                            "mode": "chose"
-                                        },
-                                        "tools": {
-                                            "mode": "chose"
-                                        },
-                                        "image_urls": {
-                                            "mode": "chose"
-                                        },
-                                        "assistantId": {
-                                            "mode": "chose",
-                                            "label": "Elena's Supercharged IG DM Bot (gpt-4o)",
-                                            "nested": []
-                                        },
-                                        "image_files": {
-                                            "mode": "chose"
-                                        },
-                                        "tool_choice": {
-                                            "mode": "chose",
-                                            "label": "Empty"
-                                        },
-                                        "response_format": {
-                                            "mode": "chose",
-                                            "label": "Empty"
-                                        },
-                                        "truncation_strategy": {
-                                            "mode": "chose",
-                                            "label": "Empty"
-                                        },
-                                        "file_search_resources": {
-                                            "mode": "chose"
-                                        },
-                                        "code_interpreter_resources": {
-                                            "mode": "chose"
+                                        "scope": {
+                                            "label": "One cycle"
+                                        }
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Variable name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "scope",
+                                        "type": "select",
+                                        "label": "Variable lifetime",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "roundtrip",
+                                                "execution"
+                                            ]
                                         }
                                     },
-                                    "parameters": {
-                                        "__IMTCONN__": {
-                                            "data": {
-                                                "scoped": "true",
-                                                "connection": "openai-gpt-3"
-                                            },
-                                            "label": "IG DM Bot connection"
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "Variable value"
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "SanitizedPrompt",
+                                        "label": "SanitizedPrompt",
+                                        "type": "any"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 16,
+                            "module": "http:ActionSendData",
+                            "version": 3,
+                            "parameters": {
+                                "handleErrors": false,
+                                "useNewZLibDeCompress": true
+                            },
+                            "mapper": {
+                                "url": "https://openai-assistant-api-830723611668.us-east1.run.app/api/chat",
+                                "serializeUrl": false,
+                                "method": "post",
+                                "headers": [
+                                    {
+                                        "name": "Api-Key",
+                                        "value": "abc123"
+                                    }
+                                ],
+                                "qs": [],
+                                "bodyType": "raw",
+                                "parseResponse": true,
+                                "authUser": "",
+                                "authPass": "",
+                                "timeout": "",
+                                "shareCookies": false,
+                                "ca": "",
+                                "rejectUnauthorized": true,
+                                "followRedirect": true,
+                                "useQuerystring": false,
+                                "gzip": true,
+                                "useMtls": false,
+                                "contentType": "application/json",
+                                "data": "{\"assistant_id\":\"asst_8XaMCZ0jXistHLFdTEi2HKfo\",\"prompt\":\"{{17.SanitizedPrompt}}\",\"thread_id\":\"{{1.subscriber.custom_fields.`Assistant - Thread ID`}}\"}",
+                                "followAllRedirects": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": 300,
+                                    "name": "Hosted Agent"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "method": {
+                                            "mode": "chose",
+                                            "label": "POST"
+                                        },
+                                        "headers": {
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
+                                        },
+                                        "qs": {
+                                            "mode": "chose"
+                                        },
+                                        "bodyType": {
+                                            "label": "Raw"
+                                        },
+                                        "contentType": {
+                                            "label": "JSON (application/json)"
                                         }
                                     }
                                 },
                                 "parameters": [
                                     {
-                                        "name": "__IMTCONN__",
-                                        "type": "account:openai-gpt-3",
-                                        "label": "Connection",
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
                                         "required": true
+                                    },
+                                    {
+                                        "name": "useNewZLibDeCompress",
+                                        "type": "hidden"
                                     }
                                 ],
                                 "expect": [
                                     {
-                                        "name": "assistantId",
-                                        "type": "select",
-                                        "label": "Assistant",
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
                                         "required": true
                                     },
                                     {
-                                        "name": "role",
+                                        "name": "serializeUrl",
+                                        "type": "boolean",
+                                        "label": "Serialize URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
                                         "type": "select",
-                                        "label": "Role",
+                                        "label": "Method",
                                         "required": true,
                                         "validate": {
                                             "enum": [
-                                                "user",
-                                                "assistant"
+                                                "get",
+                                                "head",
+                                                "post",
+                                                "put",
+                                                "patch",
+                                                "delete",
+                                                "options"
                                             ]
                                         }
                                     },
                                     {
-                                        "name": "threadId",
-                                        "type": "text",
-                                        "label": "Thread ID"
+                                        "name": "headers",
+                                        "type": "array",
+                                        "label": "Headers",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "label": "Name",
+                                                "type": "text",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "label": "Value",
+                                                "type": "text"
+                                            }
+                                        ]
                                     },
                                     {
-                                        "name": "model",
-                                        "type": "select",
-                                        "label": "Model"
+                                        "name": "qs",
+                                        "type": "array",
+                                        "label": "Query String",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "label": "Name",
+                                                "type": "text",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "label": "Value",
+                                                "type": "text"
+                                            }
+                                        ]
                                     },
                                     {
-                                        "name": "tools",
+                                        "name": "bodyType",
                                         "type": "select",
-                                        "label": "Tools",
-                                        "multiple": true,
+                                        "label": "Body type",
                                         "validate": {
                                             "enum": [
-                                                "file_search",
-                                                "code_interpreter"
+                                                "raw",
+                                                "x_www_form_urlencoded",
+                                                "multipart_form_data"
                                             ]
                                         }
                                     },
                                     {
-                                        "name": "file_search_resources",
-                                        "type": "select",
-                                        "label": "File Search Resources"
-                                    },
-                                    {
-                                        "name": "code_interpreter_resources",
-                                        "type": "select",
-                                        "label": "Code Interpreter Resources",
-                                        "multiple": true,
-                                        "validate": {
-                                            "maxItems": 20
-                                        }
-                                    },
-                                    {
-                                        "name": "tool_choice",
-                                        "type": "select",
-                                        "label": "Tool Choice",
-                                        "validate": {
-                                            "enum": [
-                                                "none",
-                                                "auto",
-                                                "required",
-                                                "file_search",
-                                                "code_interpreter",
-                                                "function"
-                                            ]
-                                        }
-                                    },
-                                    {
-                                        "name": "instructions",
-                                        "type": "text",
-                                        "label": "Instructions"
-                                    },
-                                    {
-                                        "name": "max_prompt_tokens",
-                                        "type": "uinteger",
-                                        "label": "Max Prompt Tokens"
-                                    },
-                                    {
-                                        "name": "max_completion_tokens",
-                                        "type": "uinteger",
-                                        "label": "Max Completion Tokens"
-                                    },
-                                    {
-                                        "name": "temperature",
-                                        "type": "number",
-                                        "label": "Temperature",
-                                        "validate": {
-                                            "max": 2,
-                                            "min": 0
-                                        }
-                                    },
-                                    {
-                                        "name": "top_p",
-                                        "type": "number",
-                                        "label": "Top P",
-                                        "validate": {
-                                            "max": 1,
-                                            "min": 0
-                                        }
-                                    },
-                                    {
-                                        "name": "response_format",
-                                        "type": "select",
-                                        "label": "Response Format",
-                                        "validate": {
-                                            "enum": [
-                                                "auto",
-                                                "json_object",
-                                                "text"
-                                            ]
-                                        }
-                                    },
-                                    {
-                                        "name": "truncation_strategy",
-                                        "type": "select",
-                                        "label": "Truncation Strategy",
-                                        "validate": {
-                                            "enum": [
-                                                "auto",
-                                                "last_messages"
-                                            ]
-                                        }
-                                    },
-                                    {
-                                        "name": "message",
-                                        "type": "text",
-                                        "label": "Message",
+                                        "name": "parseResponse",
+                                        "type": "boolean",
+                                        "label": "Parse response",
                                         "required": true
                                     },
                                     {
-                                        "name": "image_files",
-                                        "type": "select",
-                                        "label": "Image Files",
-                                        "multiple": true
+                                        "name": "authUser",
+                                        "type": "text",
+                                        "label": "User name"
                                     },
                                     {
-                                        "name": "image_urls",
-                                        "spec": {
-                                            "name": "value",
-                                            "type": "url",
-                                            "label": "Image URL",
-                                            "required": true
-                                        },
-                                        "type": "array",
-                                        "label": "Image URLs"
+                                        "name": "authPass",
+                                        "type": "password",
+                                        "label": "Password"
+                                    },
+                                    {
+                                        "name": "timeout",
+                                        "type": "uinteger",
+                                        "label": "Timeout",
+                                        "validate": {
+                                            "max": 300,
+                                            "min": 1
+                                        }
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "ca",
+                                        "type": "cert",
+                                        "label": "Self-signed certificate"
+                                    },
+                                    {
+                                        "name": "rejectUnauthorized",
+                                        "type": "boolean",
+                                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "followRedirect",
+                                        "type": "boolean",
+                                        "label": "Follow redirect",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useQuerystring",
+                                        "type": "boolean",
+                                        "label": "Disable serialization of multiple same query string keys as arrays",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "gzip",
+                                        "type": "boolean",
+                                        "label": "Request compressed content",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useMtls",
+                                        "type": "boolean",
+                                        "label": "Use Mutual TLS",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "contentType",
+                                        "type": "select",
+                                        "label": "Content type",
+                                        "validate": {
+                                            "enum": [
+                                                "text/plain",
+                                                "application/json",
+                                                "application/xml",
+                                                "text/xml",
+                                                "text/html",
+                                                "custom"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Request content"
+                                    },
+                                    {
+                                        "name": "followAllRedirects",
+                                        "type": "boolean",
+                                        "label": "Follow all redirect",
+                                        "required": true
                                     }
                                 ]
                             }
@@ -726,30 +892,42 @@
                             "parameters": {
                                 "__IMTCONN__": 1730454
                             },
+                            "filter": {
+                                "name": "200",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{16.statusCode}}",
+                                            "o": "text:equal",
+                                            "b": "200"
+                                        }
+                                    ]
+                                ]
+                            },
                             "mapper": {
+                                "subscriberId": "{{1.subscriber.id}}",
                                 "cFieldId": 12505251,
-                                "cFieldValue": "{{5.result}}",
-                                "subscriberId": "{{1.subscriber.id}}"
+                                "cFieldValue": "{{16.data.response}}"
                             },
                             "metadata": {
                                 "designer": {
-                                    "x": 900,
+                                    "x": 1200,
                                     "y": 300
                                 },
                                 "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "label": "My ManyChat connection",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "manychat"
+                                            }
+                                        }
+                                    },
                                     "expect": {
                                         "cFieldId": {
                                             "mode": "chose",
                                             "label": "Assistant - Completion"
-                                        }
-                                    },
-                                    "parameters": {
-                                        "__IMTCONN__": {
-                                            "data": {
-                                                "scoped": "true",
-                                                "connection": "manychat"
-                                            },
-                                            "label": "My ManyChat connection"
                                         }
                                     }
                                 },
@@ -766,10 +944,10 @@
                                         "name": "subscriberId",
                                         "type": "text",
                                         "label": "Subscriber ID",
-                                        "required": true,
                                         "validate": {
                                             "pattern": "^[0-9]+$"
-                                        }
+                                        },
+                                        "required": true
                                     },
                                     {
                                         "name": "cFieldId",
@@ -799,7 +977,7 @@
                             },
                             "metadata": {
                                 "designer": {
-                                    "x": 1200,
+                                    "x": 1500,
                                     "y": 300
                                 },
                                 "restore": {
@@ -850,7 +1028,7 @@
         "version": 1,
         "scenario": {
             "roundtrips": 1,
-            "maxErrors": 3,
+            "maxErrors": 40,
             "autoCommit": true,
             "autoCommitTriggerLast": true,
             "sequential": false,
