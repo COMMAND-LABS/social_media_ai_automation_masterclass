@@ -32,3 +32,7 @@ Info about connecting to ManyChat in order to build an IG DM bot
 - Settings
   - Instagram
   - Default Reply
+
+## Adding custom tools to your OpenAI Assitants API v2 Agent
+
+Check out the info in the `custom_function_calling` folder
