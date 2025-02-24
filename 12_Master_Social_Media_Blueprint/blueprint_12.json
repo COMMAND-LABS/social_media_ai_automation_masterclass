@@ -870,7 +870,7 @@
                                                             "version": 1,
                                                             "parameters": {},
                                                             "mapper": {
-                                                                "duration": "{{floor(random * 3)}}"
+                                                                "duration": "{{floor(random * 3) + 1}}"
                                                             },
                                                             "metadata": {
                                                                 "designer": {
@@ -884,11 +884,11 @@
                                                                         "name": "duration",
                                                                         "type": "uinteger",
                                                                         "label": "Delay",
-                                                                        "required": true,
                                                                         "validate": {
-                                                                            "max": 300,
-                                                                            "min": 1
-                                                                        }
+                                                                            "min": 1,
+                                                                            "max": 300
+                                                                        },
+                                                                        "required": true
                                                                     }
                                                                 ]
                                                             }
@@ -1877,7 +1877,7 @@
                                                             "version": 1,
                                                             "parameters": {},
                                                             "mapper": {
-                                                                "duration": "{{floor(random * 3)}}"
+                                                                "duration": "{{floor(random * 3) + 1}}"
                                                             },
                                                             "metadata": {
                                                                 "designer": {
@@ -1891,11 +1891,11 @@
                                                                         "name": "duration",
                                                                         "type": "uinteger",
                                                                         "label": "Delay",
-                                                                        "required": true,
                                                                         "validate": {
-                                                                            "max": 300,
-                                                                            "min": 1
-                                                                        }
+                                                                            "min": 1,
+                                                                            "max": 300
+                                                                        },
+                                                                        "required": true
                                                                     }
                                                                 ]
                                                             }
@@ -3313,7 +3313,7 @@
                                                             "version": 1,
                                                             "parameters": {},
                                                             "mapper": {
-                                                                "duration": "{{floor(random * 3)}}"
+                                                                "duration": "{{floor(random * 3) + 1}}"
                                                             },
                                                             "metadata": {
                                                                 "designer": {
@@ -3327,11 +3327,11 @@
                                                                         "name": "duration",
                                                                         "type": "uinteger",
                                                                         "label": "Delay",
-                                                                        "required": true,
                                                                         "validate": {
-                                                                            "max": 300,
-                                                                            "min": 1
-                                                                        }
+                                                                            "min": 1,
+                                                                            "max": 300
+                                                                        },
+                                                                        "required": true
                                                                     }
                                                                 ]
                                                             }
@@ -3795,8 +3795,8 @@
                                             },
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 1574,
-                                                    "y": 3825
+                                                    "x": 900,
+                                                    "y": 3750
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -4399,8 +4399,8 @@
                                             },
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 1874,
-                                                    "y": 3825
+                                                    "x": 1200,
+                                                    "y": 3750
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -4565,8 +4565,8 @@
                                             },
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 2174,
-                                                    "y": 3825
+                                                    "x": 1500,
+                                                    "y": 3750
                                                 },
                                                 "restore": {},
                                                 "parameters": [
@@ -4611,8 +4611,8 @@
                                             "mapper": null,
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 2474,
-                                                    "y": 3825
+                                                    "x": 1800,
+                                                    "y": 3750
                                                 }
                                             },
                                             "routes": [
@@ -4624,12 +4624,12 @@
                                                             "version": 1,
                                                             "parameters": {},
                                                             "mapper": {
-                                                                "duration": "{{floor(random * 3)}}"
+                                                                "duration": "{{floor(random * 3) + 1}}"
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2774,
-                                                                    "y": 3375,
+                                                                    "x": 2100,
+                                                                    "y": 3300,
                                                                     "name": "Random Pause"
                                                                 },
                                                                 "restore": {},
@@ -4638,11 +4638,11 @@
                                                                         "name": "duration",
                                                                         "type": "uinteger",
                                                                         "label": "Delay",
-                                                                        "required": true,
                                                                         "validate": {
-                                                                            "max": 300,
-                                                                            "min": 1
-                                                                        }
+                                                                            "min": 1,
+                                                                            "max": 300
+                                                                        },
+                                                                        "required": true
                                                                     }
                                                                 ]
                                                             }
@@ -4666,8 +4666,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2774,
-                                                                    "y": 3675
+                                                                    "x": 2100,
+                                                                    "y": 3600
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -4781,8 +4781,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2774,
-                                                                    "y": 3975
+                                                                    "x": 2100,
+                                                                    "y": 3900
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -4868,8 +4868,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 3074,
-                                                                    "y": 3975
+                                                                    "x": 2400,
+                                                                    "y": 3900
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -4962,8 +4962,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2774,
-                                                                    "y": 4275
+                                                                    "x": 2100,
+                                                                    "y": 4200
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
