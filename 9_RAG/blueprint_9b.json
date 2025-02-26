@@ -10,7 +10,7 @@
             },
             "mapper": {
                 "select": "map",
-                "range": "A2:B2",
+                "range": "A2:B10",
                 "includesHeaders": true,
                 "valueRenderOption": "FORMATTED_VALUE",
                 "dateTimeRenderOption": "FORMATTED_STRING",
@@ -475,18 +475,6 @@
                                     "options": {
                                         "store": [
                                             {
-                                                "label": "Developer / System",
-                                                "value": "system",
-                                                "nested": [
-                                                    {
-                                                        "help": "Text content of the message on behalf of the selected __Role__.",
-                                                        "name": "content",
-                                                        "type": "text",
-                                                        "label": "Text Content"
-                                                    }
-                                                ]
-                                            },
-                                            {
                                                 "label": "User",
                                                 "value": "user",
                                                 "nested": [
@@ -583,6 +571,18 @@
                                                         "label": "Text Content"
                                                     }
                                                 ]
+                                            },
+                                            {
+                                                "label": "Developer / System",
+                                                "value": "system",
+                                                "nested": [
+                                                    {
+                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                        "name": "content",
+                                                        "type": "text",
+                                                        "label": "Text Content"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
@@ -605,7 +605,7 @@
                     {
                         "name": "prediction",
                         "type": "text",
-                        "label": "Predicted outputs"
+                        "label": "Predicted Outputs"
                     },
                     {
                         "name": "parseJSONResponse",
@@ -774,6 +774,11 @@
                         "label": "Usage"
                     },
                     {
+                        "name": "service_tier",
+                        "type": "text",
+                        "label": "Service Tier"
+                    },
+                    {
                         "name": "system_fingerprint",
                         "type": "text",
                         "label": "System Fingerprint"
@@ -798,7 +803,7 @@
                         "value": "application/json"
                     }
                 ],
-                "body": "{\"input\": \"{{3.result.search_term}}\",\"model\": \"text-embedding-ada-002\",\"encoding_format\": \"float\"}"
+                "body": "{\"input\": \"{{3.result.search_term}}\",\"model\": \"text-embedding-3-small\",\"encoding_format\": \"float\"}"
             },
             "metadata": {
                 "designer": {
@@ -921,10 +926,10 @@
                 "__IMTCONN__": 1514330
             },
             "mapper": {
+                "limit": "3",
                 "vector": "{{5.body.data[].embedding}}",
-                "includeMetadata": true,
                 "sparseVector": {},
-                "limit": "3"
+                "includeMetadata": true
             },
             "metadata": {
                 "designer": {
@@ -932,15 +937,6 @@
                     "y": 0
                 },
                 "restore": {
-                    "parameters": {
-                        "__IMTCONN__": {
-                            "label": "My Pinecone connection",
-                            "data": {
-                                "scoped": "true",
-                                "connection": "pinecone"
-                            }
-                        }
-                    },
                     "expect": {
                         "vector": {
                             "mode": "edit"
@@ -948,21 +944,30 @@
                         "filterType": {
                             "label": "Empty"
                         },
+                        "sparseVector": {
+                            "nested": {
+                                "values": {
+                                    "mode": "chose"
+                                },
+                                "indices": {
+                                    "mode": "chose"
+                                }
+                            }
+                        },
                         "includeValues": {
                             "mode": "chose"
                         },
                         "includeMetadata": {
                             "mode": "chose"
-                        },
-                        "sparseVector": {
-                            "nested": {
-                                "indices": {
-                                    "mode": "chose"
-                                },
-                                "values": {
-                                    "mode": "chose"
-                                }
-                            }
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "pinecone"
+                            },
+                            "label": "My Pinecone connection"
                         }
                     }
                 },
@@ -977,13 +982,13 @@
                 "expect": [
                     {
                         "name": "vector",
-                        "type": "array",
-                        "label": "Vector",
                         "spec": {
+                            "name": "value",
                             "type": "number",
-                            "label": "Value",
-                            "name": "value"
-                        }
+                            "label": "Value"
+                        },
+                        "type": "array",
+                        "label": "Vector"
                     },
                     {
                         "name": "id",
@@ -1018,30 +1023,30 @@
                     },
                     {
                         "name": "sparseVector",
-                        "type": "collection",
-                        "label": "Sparse Vector",
                         "spec": [
                             {
                                 "name": "indices",
-                                "type": "array",
-                                "label": "Indices",
                                 "spec": {
+                                    "name": "value",
                                     "type": "integer",
-                                    "label": "Index",
-                                    "name": "value"
-                                }
+                                    "label": "Index"
+                                },
+                                "type": "array",
+                                "label": "Indices"
                             },
                             {
                                 "name": "values",
-                                "type": "array",
-                                "label": "Values",
                                 "spec": {
+                                    "name": "value",
                                     "type": "number",
-                                    "label": "Value",
-                                    "name": "value"
-                                }
+                                    "label": "Value"
+                                },
+                                "type": "array",
+                                "label": "Values"
                             }
-                        ]
+                        ],
+                        "type": "collection",
+                        "label": "Sparse Vector"
                     },
                     {
                         "name": "limit",
@@ -1126,6 +1131,30 @@
             }
         },
         {
+            "id": 11,
+            "module": "util:ComposeTransformer",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "value": "{{now}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1800,
+                    "y": 0,
+                    "name": "Today's date"
+                },
+                "restore": {},
+                "expect": [
+                    {
+                        "name": "value",
+                        "type": "text",
+                        "label": "Text"
+                    }
+                ]
+            }
+        },
+        {
             "id": 2,
             "module": "openai-gpt-3:CreateCompletion",
             "version": 1,
@@ -1142,7 +1171,7 @@
                 "messages": [
                     {
                         "role": "user",
-                        "content": "# PROMPT\n\n{{1.`0`}}\n\n## Requirements\n\nThe relevant knowledge holds a list of the most related past posts of Tad Duval so you can generate new marketing material in an authentic and original style. Only include the provided information as the source of tone, voice, and style for generated content\n\n## RELEVANT KNOWLEDGE\n\n{{8.json}}",
+                        "content": "## PROMPT\n\n{{1.`0`}}\n\n## CURRENT DATE\n\n{{11.value}}\n\n## REQUIREMENTS\n\nThe relevant knowledge holds a list of the most related past posts of Tad Duval so you can generate new marketing material in an authentic and original style. Only include the provided information as the source of tone, voice, and style for generated content\n\n## ADDITIONAL REQUIREMENTS\n\n- Print links as they are ie: do NOT format them\n- Do NOT bold text like this **<TEXT>**\n- Generate plain text output \n\n## RELEVANT PAST CONTENT\n\n{{8.json}}",
                         "imageDetail": "auto"
                     }
                 ],
@@ -1150,7 +1179,7 @@
             },
             "metadata": {
                 "designer": {
-                    "x": 1800,
+                    "x": 2100,
                     "y": 0
                 },
                 "restore": {
@@ -1422,18 +1451,6 @@
                                     "options": {
                                         "store": [
                                             {
-                                                "label": "Developer / System",
-                                                "value": "system",
-                                                "nested": [
-                                                    {
-                                                        "help": "Text content of the message on behalf of the selected __Role__.",
-                                                        "name": "content",
-                                                        "type": "text",
-                                                        "label": "Text Content"
-                                                    }
-                                                ]
-                                            },
-                                            {
                                                 "label": "User",
                                                 "value": "user",
                                                 "nested": [
@@ -1530,6 +1547,18 @@
                                                         "label": "Text Content"
                                                     }
                                                 ]
+                                            },
+                                            {
+                                                "label": "Developer / System",
+                                                "value": "system",
+                                                "nested": [
+                                                    {
+                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                        "name": "content",
+                                                        "type": "text",
+                                                        "label": "Text Content"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
@@ -1552,7 +1581,7 @@
                     {
                         "name": "prediction",
                         "type": "text",
-                        "label": "Predicted outputs"
+                        "label": "Predicted Outputs"
                     }
                 ],
                 "interface": [
@@ -1715,6 +1744,11 @@
                         "label": "Usage"
                     },
                     {
+                        "name": "service_tier",
+                        "type": "text",
+                        "label": "Service Tier"
+                    },
+                    {
                         "name": "system_fingerprint",
                         "type": "text",
                         "label": "System Fingerprint"
@@ -1730,28 +1764,19 @@
                 "__IMTCONN__": 1512727
             },
             "mapper": {
-                "select": "map",
                 "cell": "B{{1.`__ROW_NUMBER__`}}",
                 "value": "{{2.result}}",
-                "valueInputOption": "USER_ENTERED",
+                "select": "map",
+                "sheetId": "RAG",
                 "spreadsheetId": "1rvdUA5lUKbCCN2IWM0nrEj90J6jRSR4AdoUzPkzwFPA",
-                "sheetId": "RAG"
+                "valueInputOption": "USER_ENTERED"
             },
             "metadata": {
                 "designer": {
-                    "x": 2100,
+                    "x": 2400,
                     "y": 0
                 },
                 "restore": {
-                    "parameters": {
-                        "__IMTCONN__": {
-                            "label": "9_RAG connection (tad@cmdlabs.io)",
-                            "data": {
-                                "scoped": "true",
-                                "connection": "google"
-                            }
-                        }
-                    },
                     "expect": {
                         "select": {
                             "label": "Enter manually"
@@ -1759,6 +1784,15 @@
                         "valueInputOption": {
                             "mode": "chose",
                             "label": "User entered"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "9_RAG connection (tad@cmdlabs.io)"
                         }
                     }
                 },

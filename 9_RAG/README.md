@@ -15,7 +15,7 @@ This is a blueprint for performing retrieval augmented generation for producing 
 - https://www.youtube.com/watch?v=epz94WIvIYk
 - https://docs.google.com/spreadsheets/d/1rvdUA5lUKbCCN2IWM0nrEj90J6jRSR4AdoUzPkzwFPA/edit?gid=0#gid=0
 
-## PART 1: Steps for creating knowledge base aka `blueprint_1.json`
+## PART 1: Steps for creating knowledge base aka `blueprint_9a.json`
 
 - Create a Google Sheet (called `Knowledge`) with the following headers:
   - Post
@@ -66,7 +66,7 @@ This is a blueprint for performing retrieval augmented generation for producing 
 
 SIDENOTE: Peep ref_1.png
 
-## PART 2: Steps for running RAG `blueprint_2.json`
+## PART 2: Steps for running RAG `blueprint_9b.json`
 
 - Create a Google Sheet (called `RAG`) in the same spreadsheet used for `PART 1` with the following headers:
   - Prompt
