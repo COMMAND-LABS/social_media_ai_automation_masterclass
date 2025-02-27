@@ -19,8 +19,8 @@
             "mapper": {},
             "metadata": {
                 "designer": {
-                    "x": 0,
-                    "y": 2250
+                    "x": -312,
+                    "y": 2245
                 },
                 "restore": {
                     "parameters": {
@@ -198,14 +198,38 @@
             }
         },
         {
+            "id": 66,
+            "module": "util:ComposeTransformer",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "value": "{{now}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 9,
+                    "y": 2245,
+                    "name": "Current Date"
+                },
+                "restore": {},
+                "expect": [
+                    {
+                        "name": "value",
+                        "type": "text",
+                        "label": "Text"
+                    }
+                ]
+            }
+        },
+        {
             "id": 18,
             "module": "builtin:BasicRouter",
             "version": 1,
             "mapper": null,
             "metadata": {
                 "designer": {
-                    "x": 300,
-                    "y": 2250
+                    "x": 315,
+                    "y": 2261
                 }
             },
             "routes": [
@@ -245,19 +269,19 @@
                                                 "__IMTCONN__": 977869
                                             },
                                             "mapper": {
-                                                "model": "gpt-4o",
-                                                "top_p": "1",
                                                 "select": "chat",
+                                                "temperature": "1",
+                                                "top_p": "1",
+                                                "n_completions": "1",
+                                                "model": "gpt-4o",
+                                                "max_tokens": "2048",
                                                 "messages": [
                                                     {
                                                         "role": "user",
-                                                        "content": "{{1.`1`}}",
+                                                        "content": "# PROMPT\n\n{{1.`1`}}\n\n## CURRENT DATE\n\n{{66.value}}",
                                                         "imageDetail": "auto"
                                                     }
                                                 ],
-                                                "max_tokens": "2048",
-                                                "temperature": "1",
-                                                "n_completions": "1",
                                                 "response_format": "json_object",
                                                 "parseJSONResponse": true
                                             },
@@ -267,16 +291,31 @@
                                                     "y": 150
                                                 },
                                                 "restore": {
+                                                    "parameters": {
+                                                        "__IMTCONN__": {
+                                                            "label": "My OpenAI connection",
+                                                            "data": {
+                                                                "scoped": "true",
+                                                                "connection": "openai-gpt-3"
+                                                            }
+                                                        }
+                                                    },
                                                     "expect": {
+                                                        "select": {
+                                                            "label": "Create a Chat Completion (GPT and o1 models)"
+                                                        },
+                                                        "logit_bias": {
+                                                            "mode": "chose"
+                                                        },
                                                         "stop": {
+                                                            "mode": "chose"
+                                                        },
+                                                        "additionalParameters": {
                                                             "mode": "chose"
                                                         },
                                                         "model": {
                                                             "mode": "chose",
                                                             "label": "gpt-4o (system)"
-                                                        },
-                                                        "select": {
-                                                            "label": "Create a Chat Completion (GPT and o1 models)"
                                                         },
                                                         "messages": {
                                                             "mode": "chose",
@@ -286,19 +325,16 @@
                                                                         "mode": "chose",
                                                                         "label": "User"
                                                                     },
-                                                                    "imageDetail": {
-                                                                        "mode": "chose",
-                                                                        "label": "Auto"
-                                                                    },
                                                                     "imageInputType": {
                                                                         "mode": "chose",
                                                                         "label": "Empty"
+                                                                    },
+                                                                    "imageDetail": {
+                                                                        "mode": "chose",
+                                                                        "label": "Auto"
                                                                     }
                                                                 }
                                                             ]
-                                                        },
-                                                        "logit_bias": {
-                                                            "mode": "chose"
                                                         },
                                                         "response_format": {
                                                             "mode": "chose",
@@ -306,18 +342,6 @@
                                                         },
                                                         "parseJSONResponse": {
                                                             "mode": "chose"
-                                                        },
-                                                        "additionalParameters": {
-                                                            "mode": "chose"
-                                                        }
-                                                    },
-                                                    "parameters": {
-                                                        "__IMTCONN__": {
-                                                            "data": {
-                                                                "scoped": "true",
-                                                                "connection": "openai-gpt-3"
-                                                            },
-                                                            "label": "My OpenAI connection"
                                                         }
                                                     }
                                                 },
@@ -385,8 +409,9 @@
                                                     },
                                                     {
                                                         "name": "logit_bias",
+                                                        "type": "array",
+                                                        "label": "Token Probability",
                                                         "spec": {
-                                                            "name": "value",
                                                             "spec": [
                                                                 {
                                                                     "name": "token",
@@ -406,10 +431,9 @@
                                                                 }
                                                             ],
                                                             "type": "collection",
-                                                            "label": "Token Probability"
-                                                        },
-                                                        "type": "array",
-                                                        "label": "Token Probability"
+                                                            "label": "Token Probability",
+                                                            "name": "value"
+                                                        }
                                                     },
                                                     {
                                                         "name": "seed",
@@ -418,21 +442,22 @@
                                                     },
                                                     {
                                                         "name": "stop",
-                                                        "spec": {
-                                                            "name": "value",
-                                                            "type": "text",
-                                                            "label": "Stop Sequence"
-                                                        },
                                                         "type": "array",
                                                         "label": "Stop Sequences",
                                                         "validate": {
                                                             "maxItems": 4
+                                                        },
+                                                        "spec": {
+                                                            "type": "text",
+                                                            "label": "Stop Sequence",
+                                                            "name": "value"
                                                         }
                                                     },
                                                     {
                                                         "name": "additionalParameters",
+                                                        "type": "array",
+                                                        "label": "Other Input Parameters",
                                                         "spec": {
-                                                            "name": "value",
                                                             "spec": [
                                                                 {
                                                                     "name": "key",
@@ -505,10 +530,9 @@
                                                                 }
                                                             ],
                                                             "type": "collection",
-                                                            "label": "Input Parameter"
-                                                        },
-                                                        "type": "array",
-                                                        "label": "Other Input Parameters"
+                                                            "label": "Input Parameter",
+                                                            "name": "value"
+                                                        }
                                                     },
                                                     {
                                                         "name": "model",
@@ -523,13 +547,18 @@
                                                     },
                                                     {
                                                         "name": "messages",
+                                                        "type": "array",
+                                                        "label": "Messages",
+                                                        "required": true,
                                                         "spec": {
-                                                            "name": "value",
+                                                            "label": "Message",
+                                                            "type": "collection",
                                                             "spec": [
                                                                 {
                                                                     "name": "role",
                                                                     "type": "select",
                                                                     "label": "Role",
+                                                                    "required": true,
                                                                     "options": {
                                                                         "store": [
                                                                             {
@@ -546,28 +575,30 @@
                                                                                         "name": "imageInputType",
                                                                                         "type": "select",
                                                                                         "label": "Image Input Type",
+                                                                                        "mappable": false,
                                                                                         "options": [
                                                                                             {
-                                                                                                "label": "URL",
                                                                                                 "value": "url",
+                                                                                                "label": "URL",
                                                                                                 "nested": [
                                                                                                     {
-                                                                                                        "help": "Make sure to use a publicly accessible URL.\nYou can test if your image is publicly accessible by opening the link in an incognito tab.",
                                                                                                         "name": "imageUrl",
+                                                                                                        "label": "Image URL",
                                                                                                         "type": "url",
-                                                                                                        "label": "Image URL"
+                                                                                                        "help": "Make sure to use a publicly accessible URL.\nYou can test if your image is publicly accessible by opening the link in an incognito tab."
                                                                                                     }
                                                                                                 ]
                                                                                             },
                                                                                             {
-                                                                                                "label": "Image File",
                                                                                                 "value": "file",
+                                                                                                "label": "Image File",
                                                                                                 "nested": [
                                                                                                     {
                                                                                                         "name": "imageFile",
+                                                                                                        "label": "Image",
+                                                                                                        "type": "collection",
                                                                                                         "spec": [
                                                                                                             {
-                                                                                                                "help": "Accepted extensions: `.jpg`, `.jpeg`, `.png`, `.webp` and `.gif`.",
                                                                                                                 "name": "imageFilename",
                                                                                                                 "type": "filename",
                                                                                                                 "label": "Image Filename",
@@ -578,7 +609,8 @@
                                                                                                                     "png",
                                                                                                                     "webp",
                                                                                                                     "gif"
-                                                                                                                ]
+                                                                                                                ],
+                                                                                                                "help": "Accepted extensions: `.jpg`, `.jpeg`, `.png`, `.webp` and `.gif`."
                                                                                                             },
                                                                                                             {
                                                                                                                 "name": "imageData",
@@ -586,35 +618,32 @@
                                                                                                                 "label": "Image Data",
                                                                                                                 "semantic": "file:data"
                                                                                                             }
-                                                                                                        ],
-                                                                                                        "type": "collection",
-                                                                                                        "label": "Image"
+                                                                                                        ]
                                                                                                     }
                                                                                                 ]
                                                                                             }
-                                                                                        ],
-                                                                                        "mappable": false
+                                                                                        ]
                                                                                     },
                                                                                     {
                                                                                         "name": "imageDetail",
                                                                                         "type": "select",
                                                                                         "label": "Image Detail",
+                                                                                        "advanced": true,
                                                                                         "options": [
                                                                                             {
-                                                                                                "label": "Auto",
                                                                                                 "value": "auto",
-                                                                                                "default": true
+                                                                                                "default": true,
+                                                                                                "label": "Auto"
                                                                                             },
                                                                                             {
-                                                                                                "label": "High",
-                                                                                                "value": "high"
+                                                                                                "value": "high",
+                                                                                                "label": "High"
                                                                                             },
                                                                                             {
-                                                                                                "label": "Low",
-                                                                                                "value": "low"
+                                                                                                "value": "low",
+                                                                                                "label": "Low"
                                                                                             }
-                                                                                        ],
-                                                                                        "advanced": true
+                                                                                        ]
                                                                                     }
                                                                                 ]
                                                                             },
@@ -643,16 +672,11 @@
                                                                                 ]
                                                                             }
                                                                         ]
-                                                                    },
-                                                                    "required": true
+                                                                    }
                                                                 }
                                                             ],
-                                                            "type": "collection",
-                                                            "label": "Message"
-                                                        },
-                                                        "type": "array",
-                                                        "label": "Messages",
-                                                        "required": true
+                                                            "name": "value"
+                                                        }
                                                     },
                                                     {
                                                         "name": "response_format",
@@ -884,11 +908,11 @@
                                                                         "name": "duration",
                                                                         "type": "uinteger",
                                                                         "label": "Delay",
+                                                                        "required": true,
                                                                         "validate": {
-                                                                            "min": 1,
-                                                                            "max": 300
-                                                                        },
-                                                                        "required": true
+                                                                            "max": 300,
+                                                                            "min": 1
+                                                                        }
                                                                     }
                                                                 ]
                                                             }
@@ -1116,19 +1140,19 @@
                                                 ]
                                             },
                                             "mapper": {
-                                                "model": "gpt-4o",
-                                                "top_p": "1",
                                                 "select": "chat",
+                                                "temperature": "1",
+                                                "top_p": "1",
+                                                "n_completions": "1",
+                                                "model": "gpt-4o",
+                                                "max_tokens": "2048",
                                                 "messages": [
                                                     {
                                                         "role": "user",
-                                                        "content": "{{1.`1`}}",
+                                                        "content": "# PROMPT\n\n{{1.`1`}}\n\n## CURRENT DATE\n\n{{66.value}}",
                                                         "imageDetail": "auto"
                                                     }
                                                 ],
-                                                "max_tokens": "2048",
-                                                "temperature": "1",
-                                                "n_completions": "1",
                                                 "response_format": "json_object",
                                                 "parseJSONResponse": true
                                             },
@@ -1138,16 +1162,31 @@
                                                     "y": 1199
                                                 },
                                                 "restore": {
+                                                    "parameters": {
+                                                        "__IMTCONN__": {
+                                                            "label": "My OpenAI connection",
+                                                            "data": {
+                                                                "scoped": "true",
+                                                                "connection": "openai-gpt-3"
+                                                            }
+                                                        }
+                                                    },
                                                     "expect": {
+                                                        "select": {
+                                                            "label": "Create a Chat Completion (GPT and o1 models)"
+                                                        },
+                                                        "logit_bias": {
+                                                            "mode": "chose"
+                                                        },
                                                         "stop": {
+                                                            "mode": "chose"
+                                                        },
+                                                        "additionalParameters": {
                                                             "mode": "chose"
                                                         },
                                                         "model": {
                                                             "mode": "chose",
                                                             "label": "gpt-4o (system)"
-                                                        },
-                                                        "select": {
-                                                            "label": "Create a Chat Completion (GPT and o1 models)"
                                                         },
                                                         "messages": {
                                                             "mode": "chose",
@@ -1157,19 +1196,16 @@
                                                                         "mode": "chose",
                                                                         "label": "User"
                                                                     },
-                                                                    "imageDetail": {
-                                                                        "mode": "chose",
-                                                                        "label": "Auto"
-                                                                    },
                                                                     "imageInputType": {
                                                                         "mode": "chose",
                                                                         "label": "Empty"
+                                                                    },
+                                                                    "imageDetail": {
+                                                                        "mode": "chose",
+                                                                        "label": "Auto"
                                                                     }
                                                                 }
                                                             ]
-                                                        },
-                                                        "logit_bias": {
-                                                            "mode": "chose"
                                                         },
                                                         "response_format": {
                                                             "mode": "chose",
@@ -1177,18 +1213,6 @@
                                                         },
                                                         "parseJSONResponse": {
                                                             "mode": "chose"
-                                                        },
-                                                        "additionalParameters": {
-                                                            "mode": "chose"
-                                                        }
-                                                    },
-                                                    "parameters": {
-                                                        "__IMTCONN__": {
-                                                            "data": {
-                                                                "scoped": "true",
-                                                                "connection": "openai-gpt-3"
-                                                            },
-                                                            "label": "My OpenAI connection"
                                                         }
                                                     }
                                                 },
@@ -1256,8 +1280,9 @@
                                                     },
                                                     {
                                                         "name": "logit_bias",
+                                                        "type": "array",
+                                                        "label": "Token Probability",
                                                         "spec": {
-                                                            "name": "value",
                                                             "spec": [
                                                                 {
                                                                     "name": "token",
@@ -1277,10 +1302,9 @@
                                                                 }
                                                             ],
                                                             "type": "collection",
-                                                            "label": "Token Probability"
-                                                        },
-                                                        "type": "array",
-                                                        "label": "Token Probability"
+                                                            "label": "Token Probability",
+                                                            "name": "value"
+                                                        }
                                                     },
                                                     {
                                                         "name": "seed",
@@ -1289,21 +1313,22 @@
                                                     },
                                                     {
                                                         "name": "stop",
-                                                        "spec": {
-                                                            "name": "value",
-                                                            "type": "text",
-                                                            "label": "Stop Sequence"
-                                                        },
                                                         "type": "array",
                                                         "label": "Stop Sequences",
                                                         "validate": {
                                                             "maxItems": 4
+                                                        },
+                                                        "spec": {
+                                                            "type": "text",
+                                                            "label": "Stop Sequence",
+                                                            "name": "value"
                                                         }
                                                     },
                                                     {
                                                         "name": "additionalParameters",
+                                                        "type": "array",
+                                                        "label": "Other Input Parameters",
                                                         "spec": {
-                                                            "name": "value",
                                                             "spec": [
                                                                 {
                                                                     "name": "key",
@@ -1376,10 +1401,9 @@
                                                                 }
                                                             ],
                                                             "type": "collection",
-                                                            "label": "Input Parameter"
-                                                        },
-                                                        "type": "array",
-                                                        "label": "Other Input Parameters"
+                                                            "label": "Input Parameter",
+                                                            "name": "value"
+                                                        }
                                                     },
                                                     {
                                                         "name": "model",
@@ -1394,13 +1418,18 @@
                                                     },
                                                     {
                                                         "name": "messages",
+                                                        "type": "array",
+                                                        "label": "Messages",
+                                                        "required": true,
                                                         "spec": {
-                                                            "name": "value",
+                                                            "label": "Message",
+                                                            "type": "collection",
                                                             "spec": [
                                                                 {
                                                                     "name": "role",
                                                                     "type": "select",
                                                                     "label": "Role",
+                                                                    "required": true,
                                                                     "options": {
                                                                         "store": [
                                                                             {
@@ -1417,28 +1446,30 @@
                                                                                         "name": "imageInputType",
                                                                                         "type": "select",
                                                                                         "label": "Image Input Type",
+                                                                                        "mappable": false,
                                                                                         "options": [
                                                                                             {
-                                                                                                "label": "URL",
                                                                                                 "value": "url",
+                                                                                                "label": "URL",
                                                                                                 "nested": [
                                                                                                     {
-                                                                                                        "help": "Make sure to use a publicly accessible URL.\nYou can test if your image is publicly accessible by opening the link in an incognito tab.",
                                                                                                         "name": "imageUrl",
+                                                                                                        "label": "Image URL",
                                                                                                         "type": "url",
-                                                                                                        "label": "Image URL"
+                                                                                                        "help": "Make sure to use a publicly accessible URL.\nYou can test if your image is publicly accessible by opening the link in an incognito tab."
                                                                                                     }
                                                                                                 ]
                                                                                             },
                                                                                             {
-                                                                                                "label": "Image File",
                                                                                                 "value": "file",
+                                                                                                "label": "Image File",
                                                                                                 "nested": [
                                                                                                     {
                                                                                                         "name": "imageFile",
+                                                                                                        "label": "Image",
+                                                                                                        "type": "collection",
                                                                                                         "spec": [
                                                                                                             {
-                                                                                                                "help": "Accepted extensions: `.jpg`, `.jpeg`, `.png`, `.webp` and `.gif`.",
                                                                                                                 "name": "imageFilename",
                                                                                                                 "type": "filename",
                                                                                                                 "label": "Image Filename",
@@ -1449,7 +1480,8 @@
                                                                                                                     "png",
                                                                                                                     "webp",
                                                                                                                     "gif"
-                                                                                                                ]
+                                                                                                                ],
+                                                                                                                "help": "Accepted extensions: `.jpg`, `.jpeg`, `.png`, `.webp` and `.gif`."
                                                                                                             },
                                                                                                             {
                                                                                                                 "name": "imageData",
@@ -1457,35 +1489,32 @@
                                                                                                                 "label": "Image Data",
                                                                                                                 "semantic": "file:data"
                                                                                                             }
-                                                                                                        ],
-                                                                                                        "type": "collection",
-                                                                                                        "label": "Image"
+                                                                                                        ]
                                                                                                     }
                                                                                                 ]
                                                                                             }
-                                                                                        ],
-                                                                                        "mappable": false
+                                                                                        ]
                                                                                     },
                                                                                     {
                                                                                         "name": "imageDetail",
                                                                                         "type": "select",
                                                                                         "label": "Image Detail",
+                                                                                        "advanced": true,
                                                                                         "options": [
                                                                                             {
-                                                                                                "label": "Auto",
                                                                                                 "value": "auto",
-                                                                                                "default": true
+                                                                                                "default": true,
+                                                                                                "label": "Auto"
                                                                                             },
                                                                                             {
-                                                                                                "label": "High",
-                                                                                                "value": "high"
+                                                                                                "value": "high",
+                                                                                                "label": "High"
                                                                                             },
                                                                                             {
-                                                                                                "label": "Low",
-                                                                                                "value": "low"
+                                                                                                "value": "low",
+                                                                                                "label": "Low"
                                                                                             }
-                                                                                        ],
-                                                                                        "advanced": true
+                                                                                        ]
                                                                                     }
                                                                                 ]
                                                                             },
@@ -1514,16 +1543,11 @@
                                                                                 ]
                                                                             }
                                                                         ]
-                                                                    },
-                                                                    "required": true
+                                                                    }
                                                                 }
                                                             ],
-                                                            "type": "collection",
-                                                            "label": "Message"
-                                                        },
-                                                        "type": "array",
-                                                        "label": "Messages",
-                                                        "required": true
+                                                            "name": "value"
+                                                        }
                                                     },
                                                     {
                                                         "name": "response_format",
@@ -1891,11 +1915,11 @@
                                                                         "name": "duration",
                                                                         "type": "uinteger",
                                                                         "label": "Delay",
+                                                                        "required": true,
                                                                         "validate": {
-                                                                            "min": 1,
-                                                                            "max": 300
-                                                                        },
-                                                                        "required": true
+                                                                            "max": 300,
+                                                                            "min": 1
+                                                                        }
                                                                     }
                                                                 ]
                                                             }
@@ -2557,19 +2581,19 @@
                                                 ]
                                             },
                                             "mapper": {
-                                                "model": "gpt-4o",
-                                                "top_p": "1",
                                                 "select": "chat",
+                                                "temperature": "1",
+                                                "top_p": "1",
+                                                "n_completions": "1",
+                                                "model": "gpt-4o",
+                                                "max_tokens": "2048",
                                                 "messages": [
                                                     {
                                                         "role": "user",
-                                                        "content": "{{1.`1`}}",
+                                                        "content": "# PROMPT\n\n{{1.`1`}}\n\n## CURRENT DATE\n\n{{66.value}}",
                                                         "imageDetail": "auto"
                                                     }
                                                 ],
-                                                "max_tokens": "2048",
-                                                "temperature": "1",
-                                                "n_completions": "1",
                                                 "response_format": "json_object",
                                                 "parseJSONResponse": true
                                             },
@@ -2579,16 +2603,31 @@
                                                     "y": 2275
                                                 },
                                                 "restore": {
+                                                    "parameters": {
+                                                        "__IMTCONN__": {
+                                                            "label": "My OpenAI connection",
+                                                            "data": {
+                                                                "scoped": "true",
+                                                                "connection": "openai-gpt-3"
+                                                            }
+                                                        }
+                                                    },
                                                     "expect": {
+                                                        "select": {
+                                                            "label": "Create a Chat Completion (GPT and o1 models)"
+                                                        },
+                                                        "logit_bias": {
+                                                            "mode": "chose"
+                                                        },
                                                         "stop": {
+                                                            "mode": "chose"
+                                                        },
+                                                        "additionalParameters": {
                                                             "mode": "chose"
                                                         },
                                                         "model": {
                                                             "mode": "chose",
                                                             "label": "gpt-4o (system)"
-                                                        },
-                                                        "select": {
-                                                            "label": "Create a Chat Completion (GPT and o1 models)"
                                                         },
                                                         "messages": {
                                                             "mode": "chose",
@@ -2598,19 +2637,16 @@
                                                                         "mode": "chose",
                                                                         "label": "User"
                                                                     },
-                                                                    "imageDetail": {
-                                                                        "mode": "chose",
-                                                                        "label": "Auto"
-                                                                    },
                                                                     "imageInputType": {
                                                                         "mode": "chose",
                                                                         "label": "Empty"
+                                                                    },
+                                                                    "imageDetail": {
+                                                                        "mode": "chose",
+                                                                        "label": "Auto"
                                                                     }
                                                                 }
                                                             ]
-                                                        },
-                                                        "logit_bias": {
-                                                            "mode": "chose"
                                                         },
                                                         "response_format": {
                                                             "mode": "chose",
@@ -2618,18 +2654,6 @@
                                                         },
                                                         "parseJSONResponse": {
                                                             "mode": "chose"
-                                                        },
-                                                        "additionalParameters": {
-                                                            "mode": "chose"
-                                                        }
-                                                    },
-                                                    "parameters": {
-                                                        "__IMTCONN__": {
-                                                            "data": {
-                                                                "scoped": "true",
-                                                                "connection": "openai-gpt-3"
-                                                            },
-                                                            "label": "My OpenAI connection"
                                                         }
                                                     }
                                                 },
@@ -2697,8 +2721,9 @@
                                                     },
                                                     {
                                                         "name": "logit_bias",
+                                                        "type": "array",
+                                                        "label": "Token Probability",
                                                         "spec": {
-                                                            "name": "value",
                                                             "spec": [
                                                                 {
                                                                     "name": "token",
@@ -2718,10 +2743,9 @@
                                                                 }
                                                             ],
                                                             "type": "collection",
-                                                            "label": "Token Probability"
-                                                        },
-                                                        "type": "array",
-                                                        "label": "Token Probability"
+                                                            "label": "Token Probability",
+                                                            "name": "value"
+                                                        }
                                                     },
                                                     {
                                                         "name": "seed",
@@ -2730,21 +2754,22 @@
                                                     },
                                                     {
                                                         "name": "stop",
-                                                        "spec": {
-                                                            "name": "value",
-                                                            "type": "text",
-                                                            "label": "Stop Sequence"
-                                                        },
                                                         "type": "array",
                                                         "label": "Stop Sequences",
                                                         "validate": {
                                                             "maxItems": 4
+                                                        },
+                                                        "spec": {
+                                                            "type": "text",
+                                                            "label": "Stop Sequence",
+                                                            "name": "value"
                                                         }
                                                     },
                                                     {
                                                         "name": "additionalParameters",
+                                                        "type": "array",
+                                                        "label": "Other Input Parameters",
                                                         "spec": {
-                                                            "name": "value",
                                                             "spec": [
                                                                 {
                                                                     "name": "key",
@@ -2817,10 +2842,9 @@
                                                                 }
                                                             ],
                                                             "type": "collection",
-                                                            "label": "Input Parameter"
-                                                        },
-                                                        "type": "array",
-                                                        "label": "Other Input Parameters"
+                                                            "label": "Input Parameter",
+                                                            "name": "value"
+                                                        }
                                                     },
                                                     {
                                                         "name": "model",
@@ -2835,27 +2859,20 @@
                                                     },
                                                     {
                                                         "name": "messages",
+                                                        "type": "array",
+                                                        "label": "Messages",
+                                                        "required": true,
                                                         "spec": {
-                                                            "name": "value",
+                                                            "label": "Message",
+                                                            "type": "collection",
                                                             "spec": [
                                                                 {
                                                                     "name": "role",
                                                                     "type": "select",
                                                                     "label": "Role",
+                                                                    "required": true,
                                                                     "options": {
                                                                         "store": [
-                                                                            {
-                                                                                "label": "Developer / System",
-                                                                                "value": "system",
-                                                                                "nested": [
-                                                                                    {
-                                                                                        "help": "Text content of the message on behalf of the selected __Role__.",
-                                                                                        "name": "content",
-                                                                                        "type": "text",
-                                                                                        "label": "Text Content"
-                                                                                    }
-                                                                                ]
-                                                                            },
                                                                             {
                                                                                 "label": "User",
                                                                                 "value": "user",
@@ -2870,28 +2887,30 @@
                                                                                         "name": "imageInputType",
                                                                                         "type": "select",
                                                                                         "label": "Image Input Type",
+                                                                                        "mappable": false,
                                                                                         "options": [
                                                                                             {
-                                                                                                "label": "URL",
                                                                                                 "value": "url",
+                                                                                                "label": "URL",
                                                                                                 "nested": [
                                                                                                     {
-                                                                                                        "help": "Make sure to use a publicly accessible URL.\nYou can test if your image is publicly accessible by opening the link in an incognito tab.",
                                                                                                         "name": "imageUrl",
+                                                                                                        "label": "Image URL",
                                                                                                         "type": "url",
-                                                                                                        "label": "Image URL"
+                                                                                                        "help": "Make sure to use a publicly accessible URL.\nYou can test if your image is publicly accessible by opening the link in an incognito tab."
                                                                                                     }
                                                                                                 ]
                                                                                             },
                                                                                             {
-                                                                                                "label": "Image File",
                                                                                                 "value": "file",
+                                                                                                "label": "Image File",
                                                                                                 "nested": [
                                                                                                     {
                                                                                                         "name": "imageFile",
+                                                                                                        "label": "Image",
+                                                                                                        "type": "collection",
                                                                                                         "spec": [
                                                                                                             {
-                                                                                                                "help": "Accepted extensions: `.jpg`, `.jpeg`, `.png`, `.webp` and `.gif`.",
                                                                                                                 "name": "imageFilename",
                                                                                                                 "type": "filename",
                                                                                                                 "label": "Image Filename",
@@ -2902,7 +2921,8 @@
                                                                                                                     "png",
                                                                                                                     "webp",
                                                                                                                     "gif"
-                                                                                                                ]
+                                                                                                                ],
+                                                                                                                "help": "Accepted extensions: `.jpg`, `.jpeg`, `.png`, `.webp` and `.gif`."
                                                                                                             },
                                                                                                             {
                                                                                                                 "name": "imageData",
@@ -2910,35 +2930,32 @@
                                                                                                                 "label": "Image Data",
                                                                                                                 "semantic": "file:data"
                                                                                                             }
-                                                                                                        ],
-                                                                                                        "type": "collection",
-                                                                                                        "label": "Image"
+                                                                                                        ]
                                                                                                     }
                                                                                                 ]
                                                                                             }
-                                                                                        ],
-                                                                                        "mappable": false
+                                                                                        ]
                                                                                     },
                                                                                     {
                                                                                         "name": "imageDetail",
                                                                                         "type": "select",
                                                                                         "label": "Image Detail",
+                                                                                        "advanced": true,
                                                                                         "options": [
                                                                                             {
-                                                                                                "label": "Auto",
                                                                                                 "value": "auto",
-                                                                                                "default": true
+                                                                                                "default": true,
+                                                                                                "label": "Auto"
                                                                                             },
                                                                                             {
-                                                                                                "label": "High",
-                                                                                                "value": "high"
+                                                                                                "value": "high",
+                                                                                                "label": "High"
                                                                                             },
                                                                                             {
-                                                                                                "label": "Low",
-                                                                                                "value": "low"
+                                                                                                "value": "low",
+                                                                                                "label": "Low"
                                                                                             }
-                                                                                        ],
-                                                                                        "advanced": true
+                                                                                        ]
                                                                                     }
                                                                                 ]
                                                                             },
@@ -2953,18 +2970,25 @@
                                                                                         "label": "Text Content"
                                                                                     }
                                                                                 ]
+                                                                            },
+                                                                            {
+                                                                                "label": "Developer / System",
+                                                                                "value": "system",
+                                                                                "nested": [
+                                                                                    {
+                                                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                                                        "name": "content",
+                                                                                        "type": "text",
+                                                                                        "label": "Text Content"
+                                                                                    }
+                                                                                ]
                                                                             }
                                                                         ]
-                                                                    },
-                                                                    "required": true
+                                                                    }
                                                                 }
                                                             ],
-                                                            "type": "collection",
-                                                            "label": "Message"
-                                                        },
-                                                        "type": "array",
-                                                        "label": "Messages",
-                                                        "required": true
+                                                            "name": "value"
+                                                        }
                                                     },
                                                     {
                                                         "name": "response_format",
@@ -2980,7 +3004,7 @@
                                                     {
                                                         "name": "prediction",
                                                         "type": "text",
-                                                        "label": "Predicted outputs"
+                                                        "label": "Predicted Outputs"
                                                     },
                                                     {
                                                         "name": "parseJSONResponse",
@@ -3147,6 +3171,11 @@
                                                         ],
                                                         "type": "collection",
                                                         "label": "Usage"
+                                                    },
+                                                    {
+                                                        "name": "service_tier",
+                                                        "type": "text",
+                                                        "label": "Service Tier"
                                                     },
                                                     {
                                                         "name": "system_fingerprint",
@@ -3327,11 +3356,11 @@
                                                                         "name": "duration",
                                                                         "type": "uinteger",
                                                                         "label": "Delay",
+                                                                        "required": true,
                                                                         "validate": {
-                                                                            "min": 1,
-                                                                            "max": 300
-                                                                        },
-                                                                        "required": true
+                                                                            "max": 300,
+                                                                            "min": 1
+                                                                        }
                                                                     }
                                                                 ]
                                                             }
@@ -3777,19 +3806,19 @@
                                                 ]
                                             },
                                             "mapper": {
-                                                "model": "gpt-4o",
-                                                "top_p": "1",
                                                 "select": "chat",
+                                                "temperature": "1",
+                                                "top_p": "1",
+                                                "n_completions": "1",
+                                                "model": "gpt-4o",
+                                                "max_tokens": "2048",
                                                 "messages": [
                                                     {
                                                         "role": "user",
-                                                        "content": "{{1.`1`}}",
+                                                        "content": "# PROMPT\n\n{{1.`1`}}\n\n## CURRENT DATE\n\n{{66.value}}",
                                                         "imageDetail": "auto"
                                                     }
                                                 ],
-                                                "max_tokens": "2048",
-                                                "temperature": "1",
-                                                "n_completions": "1",
                                                 "response_format": "json_object",
                                                 "parseJSONResponse": true
                                             },
@@ -3799,16 +3828,31 @@
                                                     "y": 3750
                                                 },
                                                 "restore": {
+                                                    "parameters": {
+                                                        "__IMTCONN__": {
+                                                            "label": "My OpenAI connection",
+                                                            "data": {
+                                                                "scoped": "true",
+                                                                "connection": "openai-gpt-3"
+                                                            }
+                                                        }
+                                                    },
                                                     "expect": {
+                                                        "select": {
+                                                            "label": "Create a Chat Completion (GPT and o1 models)"
+                                                        },
+                                                        "logit_bias": {
+                                                            "mode": "chose"
+                                                        },
                                                         "stop": {
+                                                            "mode": "chose"
+                                                        },
+                                                        "additionalParameters": {
                                                             "mode": "chose"
                                                         },
                                                         "model": {
                                                             "mode": "chose",
                                                             "label": "gpt-4o (system)"
-                                                        },
-                                                        "select": {
-                                                            "label": "Create a Chat Completion (GPT and o1 models)"
                                                         },
                                                         "messages": {
                                                             "mode": "chose",
@@ -3818,19 +3862,16 @@
                                                                         "mode": "chose",
                                                                         "label": "User"
                                                                     },
-                                                                    "imageDetail": {
-                                                                        "mode": "chose",
-                                                                        "label": "Auto"
-                                                                    },
                                                                     "imageInputType": {
                                                                         "mode": "chose",
                                                                         "label": "Empty"
+                                                                    },
+                                                                    "imageDetail": {
+                                                                        "mode": "chose",
+                                                                        "label": "Auto"
                                                                     }
                                                                 }
                                                             ]
-                                                        },
-                                                        "logit_bias": {
-                                                            "mode": "chose"
                                                         },
                                                         "response_format": {
                                                             "mode": "chose",
@@ -3838,18 +3879,6 @@
                                                         },
                                                         "parseJSONResponse": {
                                                             "mode": "chose"
-                                                        },
-                                                        "additionalParameters": {
-                                                            "mode": "chose"
-                                                        }
-                                                    },
-                                                    "parameters": {
-                                                        "__IMTCONN__": {
-                                                            "data": {
-                                                                "scoped": "true",
-                                                                "connection": "openai-gpt-3"
-                                                            },
-                                                            "label": "My OpenAI connection"
                                                         }
                                                     }
                                                 },
@@ -3917,8 +3946,9 @@
                                                     },
                                                     {
                                                         "name": "logit_bias",
+                                                        "type": "array",
+                                                        "label": "Token Probability",
                                                         "spec": {
-                                                            "name": "value",
                                                             "spec": [
                                                                 {
                                                                     "name": "token",
@@ -3938,10 +3968,9 @@
                                                                 }
                                                             ],
                                                             "type": "collection",
-                                                            "label": "Token Probability"
-                                                        },
-                                                        "type": "array",
-                                                        "label": "Token Probability"
+                                                            "label": "Token Probability",
+                                                            "name": "value"
+                                                        }
                                                     },
                                                     {
                                                         "name": "seed",
@@ -3950,21 +3979,22 @@
                                                     },
                                                     {
                                                         "name": "stop",
-                                                        "spec": {
-                                                            "name": "value",
-                                                            "type": "text",
-                                                            "label": "Stop Sequence"
-                                                        },
                                                         "type": "array",
                                                         "label": "Stop Sequences",
                                                         "validate": {
                                                             "maxItems": 4
+                                                        },
+                                                        "spec": {
+                                                            "type": "text",
+                                                            "label": "Stop Sequence",
+                                                            "name": "value"
                                                         }
                                                     },
                                                     {
                                                         "name": "additionalParameters",
+                                                        "type": "array",
+                                                        "label": "Other Input Parameters",
                                                         "spec": {
-                                                            "name": "value",
                                                             "spec": [
                                                                 {
                                                                     "name": "key",
@@ -4037,10 +4067,9 @@
                                                                 }
                                                             ],
                                                             "type": "collection",
-                                                            "label": "Input Parameter"
-                                                        },
-                                                        "type": "array",
-                                                        "label": "Other Input Parameters"
+                                                            "label": "Input Parameter",
+                                                            "name": "value"
+                                                        }
                                                     },
                                                     {
                                                         "name": "model",
@@ -4055,13 +4084,18 @@
                                                     },
                                                     {
                                                         "name": "messages",
+                                                        "type": "array",
+                                                        "label": "Messages",
+                                                        "required": true,
                                                         "spec": {
-                                                            "name": "value",
+                                                            "label": "Message",
+                                                            "type": "collection",
                                                             "spec": [
                                                                 {
                                                                     "name": "role",
                                                                     "type": "select",
                                                                     "label": "Role",
+                                                                    "required": true,
                                                                     "options": {
                                                                         "store": [
                                                                             {
@@ -4078,28 +4112,30 @@
                                                                                         "name": "imageInputType",
                                                                                         "type": "select",
                                                                                         "label": "Image Input Type",
+                                                                                        "mappable": false,
                                                                                         "options": [
                                                                                             {
-                                                                                                "label": "URL",
                                                                                                 "value": "url",
+                                                                                                "label": "URL",
                                                                                                 "nested": [
                                                                                                     {
-                                                                                                        "help": "Make sure to use a publicly accessible URL.\nYou can test if your image is publicly accessible by opening the link in an incognito tab.",
                                                                                                         "name": "imageUrl",
+                                                                                                        "label": "Image URL",
                                                                                                         "type": "url",
-                                                                                                        "label": "Image URL"
+                                                                                                        "help": "Make sure to use a publicly accessible URL.\nYou can test if your image is publicly accessible by opening the link in an incognito tab."
                                                                                                     }
                                                                                                 ]
                                                                                             },
                                                                                             {
-                                                                                                "label": "Image File",
                                                                                                 "value": "file",
+                                                                                                "label": "Image File",
                                                                                                 "nested": [
                                                                                                     {
                                                                                                         "name": "imageFile",
+                                                                                                        "label": "Image",
+                                                                                                        "type": "collection",
                                                                                                         "spec": [
                                                                                                             {
-                                                                                                                "help": "Accepted extensions: `.jpg`, `.jpeg`, `.png`, `.webp` and `.gif`.",
                                                                                                                 "name": "imageFilename",
                                                                                                                 "type": "filename",
                                                                                                                 "label": "Image Filename",
@@ -4110,7 +4146,8 @@
                                                                                                                     "png",
                                                                                                                     "webp",
                                                                                                                     "gif"
-                                                                                                                ]
+                                                                                                                ],
+                                                                                                                "help": "Accepted extensions: `.jpg`, `.jpeg`, `.png`, `.webp` and `.gif`."
                                                                                                             },
                                                                                                             {
                                                                                                                 "name": "imageData",
@@ -4118,35 +4155,32 @@
                                                                                                                 "label": "Image Data",
                                                                                                                 "semantic": "file:data"
                                                                                                             }
-                                                                                                        ],
-                                                                                                        "type": "collection",
-                                                                                                        "label": "Image"
+                                                                                                        ]
                                                                                                     }
                                                                                                 ]
                                                                                             }
-                                                                                        ],
-                                                                                        "mappable": false
+                                                                                        ]
                                                                                     },
                                                                                     {
                                                                                         "name": "imageDetail",
                                                                                         "type": "select",
                                                                                         "label": "Image Detail",
+                                                                                        "advanced": true,
                                                                                         "options": [
                                                                                             {
-                                                                                                "label": "Auto",
                                                                                                 "value": "auto",
-                                                                                                "default": true
+                                                                                                "default": true,
+                                                                                                "label": "Auto"
                                                                                             },
                                                                                             {
-                                                                                                "label": "High",
-                                                                                                "value": "high"
+                                                                                                "value": "high",
+                                                                                                "label": "High"
                                                                                             },
                                                                                             {
-                                                                                                "label": "Low",
-                                                                                                "value": "low"
+                                                                                                "value": "low",
+                                                                                                "label": "Low"
                                                                                             }
-                                                                                        ],
-                                                                                        "advanced": true
+                                                                                        ]
                                                                                     }
                                                                                 ]
                                                                             },
@@ -4175,16 +4209,11 @@
                                                                                 ]
                                                                             }
                                                                         ]
-                                                                    },
-                                                                    "required": true
+                                                                    }
                                                                 }
                                                             ],
-                                                            "type": "collection",
-                                                            "label": "Message"
-                                                        },
-                                                        "type": "array",
-                                                        "label": "Messages",
-                                                        "required": true
+                                                            "name": "value"
+                                                        }
                                                     },
                                                     {
                                                         "name": "response_format",
@@ -4638,11 +4667,11 @@
                                                                         "name": "duration",
                                                                         "type": "uinteger",
                                                                         "label": "Delay",
+                                                                        "required": true,
                                                                         "validate": {
-                                                                            "min": 1,
-                                                                            "max": 300
-                                                                        },
-                                                                        "required": true
+                                                                            "max": 300,
+                                                                            "min": 1
+                                                                        }
                                                                     }
                                                                 ]
                                                             }
