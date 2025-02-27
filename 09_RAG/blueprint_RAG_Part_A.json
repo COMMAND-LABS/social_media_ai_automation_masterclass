@@ -1,5 +1,5 @@
 {
-    "name": "9a_RAG",
+    "name": "RAG_Part_A",
     "flow": [
         {
             "id": 1,
@@ -9,14 +9,14 @@
                 "__IMTCONN__": 1512727
             },
             "mapper": {
+                "range": "A2:C22",
                 "select": "map",
-                "range": "A2:C11",
+                "sheetId": "Knowledge",
+                "spreadsheetId": "1rvdUA5lUKbCCN2IWM0nrEj90J6jRSR4AdoUzPkzwFPA",
+                "tableFirstRow": "A1:C1",
                 "includesHeaders": true,
                 "valueRenderOption": "FORMATTED_VALUE",
-                "dateTimeRenderOption": "FORMATTED_STRING",
-                "spreadsheetId": "1rvdUA5lUKbCCN2IWM0nrEj90J6jRSR4AdoUzPkzwFPA",
-                "sheetId": "Knowledge",
-                "tableFirstRow": "A1:C1"
+                "dateTimeRenderOption": "FORMATTED_STRING"
             },
             "metadata": {
                 "designer": {
@@ -24,15 +24,6 @@
                     "y": 0
                 },
                 "restore": {
-                    "parameters": {
-                        "__IMTCONN__": {
-                            "label": "9_RAG connection (tad@cmdlabs.io)",
-                            "data": {
-                                "scoped": "true",
-                                "connection": "google"
-                            }
-                        }
-                    },
                     "expect": {
                         "select": {
                             "label": "Enter manually"
@@ -47,6 +38,15 @@
                         "dateTimeRenderOption": {
                             "mode": "chose",
                             "label": "Formatted string"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "9_RAG connection (tad@cmdlabs.io)"
                         }
                     }
                 },
@@ -128,43 +128,43 @@
                 "interface": [
                     {
                         "name": "__IMTLENGTH__",
-                        "label": "Total number of bundles",
-                        "type": "uinteger"
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
                     },
                     {
                         "name": "__IMTINDEX__",
-                        "label": "Bundle order position",
-                        "type": "uinteger"
+                        "type": "uinteger",
+                        "label": "Bundle order position"
                     },
                     {
                         "name": "__ROW_NUMBER__",
-                        "label": "Row number",
-                        "type": "number"
+                        "type": "number",
+                        "label": "Row number"
                     },
                     {
                         "name": "__SPREADSHEET_ID__",
-                        "label": "Spreadsheet ID",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Spreadsheet ID"
                     },
                     {
                         "name": "__SHEET__",
-                        "label": "Sheet",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Sheet"
                     },
                     {
                         "name": "0",
-                        "label": "Post (A)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Post (A)"
                     },
                     {
                         "name": "1",
-                        "label": "Platform (B)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Platform (B)"
                     },
                     {
                         "name": "2",
-                        "label": "Link to post (C)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Link to post (C)"
                     }
                 ]
             }
@@ -290,7 +290,7 @@
             },
             "mapper": {
                 "url": "/v1/embeddings",
-                "body": "{\"input\": \"{{3.json_safe_string}}\",\"model\": \"text-embedding-ada-002\",\"encoding_format\": \"float\"}",
+                "body": "{\"input\": \"{{3.json_safe_string}}\",\"model\": \"text-embedding-3-small\",\"encoding_format\": \"float\"}",
                 "method": "POST",
                 "headers": [
                     {
@@ -487,7 +487,7 @@
                 ]
             },
             "mapper": {
-                "id": "{{1.`2`}}",
+                "id": "{{1.`__ROW_NUMBER__`}}",
                 "values": "{{2.body.data[].embedding}}",
                 "metadata": [
                     {

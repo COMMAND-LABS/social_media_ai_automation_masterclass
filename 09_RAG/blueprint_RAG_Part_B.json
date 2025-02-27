@@ -1,5 +1,5 @@
 {
-    "name": "9b_RAG",
+    "name": "RAG_Part_B",
     "flow": [
         {
             "id": 1,
@@ -9,14 +9,14 @@
                 "__IMTCONN__": 1512727
             },
             "mapper": {
+                "range": "A2:B2",
                 "select": "map",
-                "range": "A2:B10",
+                "sheetId": "RAG",
+                "spreadsheetId": "1rvdUA5lUKbCCN2IWM0nrEj90J6jRSR4AdoUzPkzwFPA",
+                "tableFirstRow": "A1:B1",
                 "includesHeaders": true,
                 "valueRenderOption": "FORMATTED_VALUE",
-                "dateTimeRenderOption": "FORMATTED_STRING",
-                "spreadsheetId": "1rvdUA5lUKbCCN2IWM0nrEj90J6jRSR4AdoUzPkzwFPA",
-                "sheetId": "RAG",
-                "tableFirstRow": "A1:B1"
+                "dateTimeRenderOption": "FORMATTED_STRING"
             },
             "metadata": {
                 "designer": {
@@ -24,15 +24,6 @@
                     "y": 0
                 },
                 "restore": {
-                    "parameters": {
-                        "__IMTCONN__": {
-                            "label": "9_RAG connection (tad@cmdlabs.io)",
-                            "data": {
-                                "scoped": "true",
-                                "connection": "google"
-                            }
-                        }
-                    },
                     "expect": {
                         "select": {
                             "label": "Enter manually"
@@ -47,6 +38,15 @@
                         "dateTimeRenderOption": {
                             "mode": "chose",
                             "label": "Formatted string"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "9_RAG connection (tad@cmdlabs.io)"
                         }
                     }
                 },
@@ -128,38 +128,38 @@
                 "interface": [
                     {
                         "name": "__IMTLENGTH__",
-                        "label": "Total number of bundles",
-                        "type": "uinteger"
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
                     },
                     {
                         "name": "__IMTINDEX__",
-                        "label": "Bundle order position",
-                        "type": "uinteger"
+                        "type": "uinteger",
+                        "label": "Bundle order position"
                     },
                     {
                         "name": "__ROW_NUMBER__",
-                        "label": "Row number",
-                        "type": "number"
+                        "type": "number",
+                        "label": "Row number"
                     },
                     {
                         "name": "__SPREADSHEET_ID__",
-                        "label": "Spreadsheet ID",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Spreadsheet ID"
                     },
                     {
                         "name": "__SHEET__",
-                        "label": "Sheet",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Sheet"
                     },
                     {
                         "name": "0",
-                        "label": "Prompt (A)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Prompt (A)"
                     },
                     {
                         "name": "1",
-                        "label": "RAG (B)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "RAG (B)"
                     }
                 ]
             }
@@ -172,12 +172,9 @@
                 "__IMTCONN__": 977869
             },
             "mapper": {
-                "select": "chat",
-                "temperature": "1",
-                "top_p": "1",
-                "n_completions": "1",
                 "model": "gpt-4o",
-                "max_tokens": "2048",
+                "top_p": "1",
+                "select": "chat",
                 "messages": [
                     {
                         "role": "system",
@@ -189,6 +186,9 @@
                         "imageDetail": "auto"
                     }
                 ],
+                "max_tokens": "2048",
+                "temperature": "1",
+                "n_completions": "1",
                 "response_format": "json_object",
                 "parseJSONResponse": true
             },
@@ -198,31 +198,16 @@
                     "y": 0
                 },
                 "restore": {
-                    "parameters": {
-                        "__IMTCONN__": {
-                            "label": "My OpenAI connection",
-                            "data": {
-                                "scoped": "true",
-                                "connection": "openai-gpt-3"
-                            }
-                        }
-                    },
                     "expect": {
-                        "select": {
-                            "label": "Create a Chat Completion (GPT and o1 models)"
-                        },
-                        "logit_bias": {
-                            "mode": "chose"
-                        },
                         "stop": {
-                            "mode": "chose"
-                        },
-                        "additionalParameters": {
                             "mode": "chose"
                         },
                         "model": {
                             "mode": "chose",
                             "label": "gpt-4o (system)"
+                        },
+                        "select": {
+                            "label": "Create a Chat Completion (GPT and o1 models)"
                         },
                         "messages": {
                             "mode": "chose",
@@ -238,16 +223,19 @@
                                         "mode": "chose",
                                         "label": "User"
                                     },
-                                    "imageInputType": {
-                                        "mode": "chose",
-                                        "label": "Empty"
-                                    },
                                     "imageDetail": {
                                         "mode": "chose",
                                         "label": "Auto"
+                                    },
+                                    "imageInputType": {
+                                        "mode": "chose",
+                                        "label": "Empty"
                                     }
                                 }
                             ]
+                        },
+                        "logit_bias": {
+                            "mode": "chose"
                         },
                         "response_format": {
                             "mode": "chose",
@@ -255,6 +243,18 @@
                         },
                         "parseJSONResponse": {
                             "mode": "chose"
+                        },
+                        "additionalParameters": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "openai-gpt-3"
+                            },
+                            "label": "My OpenAI connection"
                         }
                     }
                 },
@@ -322,9 +322,8 @@
                     },
                     {
                         "name": "logit_bias",
-                        "type": "array",
-                        "label": "Token Probability",
                         "spec": {
+                            "name": "value",
                             "spec": [
                                 {
                                     "name": "token",
@@ -344,9 +343,10 @@
                                 }
                             ],
                             "type": "collection",
-                            "label": "Token Probability",
-                            "name": "value"
-                        }
+                            "label": "Token Probability"
+                        },
+                        "type": "array",
+                        "label": "Token Probability"
                     },
                     {
                         "name": "seed",
@@ -355,22 +355,21 @@
                     },
                     {
                         "name": "stop",
+                        "spec": {
+                            "name": "value",
+                            "type": "text",
+                            "label": "Stop Sequence"
+                        },
                         "type": "array",
                         "label": "Stop Sequences",
                         "validate": {
                             "maxItems": 4
-                        },
-                        "spec": {
-                            "type": "text",
-                            "label": "Stop Sequence",
-                            "name": "value"
                         }
                     },
                     {
                         "name": "additionalParameters",
-                        "type": "array",
-                        "label": "Other Input Parameters",
                         "spec": {
+                            "name": "value",
                             "spec": [
                                 {
                                     "name": "key",
@@ -443,9 +442,10 @@
                                 }
                             ],
                             "type": "collection",
-                            "label": "Input Parameter",
-                            "name": "value"
-                        }
+                            "label": "Input Parameter"
+                        },
+                        "type": "array",
+                        "label": "Other Input Parameters"
                     },
                     {
                         "name": "model",
@@ -460,18 +460,13 @@
                     },
                     {
                         "name": "messages",
-                        "type": "array",
-                        "label": "Messages",
-                        "required": true,
                         "spec": {
-                            "label": "Message",
-                            "type": "collection",
+                            "name": "value",
                             "spec": [
                                 {
                                     "name": "role",
                                     "type": "select",
                                     "label": "Role",
-                                    "required": true,
                                     "options": {
                                         "store": [
                                             {
@@ -488,30 +483,28 @@
                                                         "name": "imageInputType",
                                                         "type": "select",
                                                         "label": "Image Input Type",
-                                                        "mappable": false,
                                                         "options": [
                                                             {
-                                                                "value": "url",
                                                                 "label": "URL",
+                                                                "value": "url",
                                                                 "nested": [
                                                                     {
+                                                                        "help": "Make sure to use a publicly accessible URL.\nYou can test if your image is publicly accessible by opening the link in an incognito tab.",
                                                                         "name": "imageUrl",
-                                                                        "label": "Image URL",
                                                                         "type": "url",
-                                                                        "help": "Make sure to use a publicly accessible URL.\nYou can test if your image is publicly accessible by opening the link in an incognito tab."
+                                                                        "label": "Image URL"
                                                                     }
                                                                 ]
                                                             },
                                                             {
-                                                                "value": "file",
                                                                 "label": "Image File",
+                                                                "value": "file",
                                                                 "nested": [
                                                                     {
                                                                         "name": "imageFile",
-                                                                        "label": "Image",
-                                                                        "type": "collection",
                                                                         "spec": [
                                                                             {
+                                                                                "help": "Accepted extensions: `.jpg`, `.jpeg`, `.png`, `.webp` and `.gif`.",
                                                                                 "name": "imageFilename",
                                                                                 "type": "filename",
                                                                                 "label": "Image Filename",
@@ -522,8 +515,7 @@
                                                                                     "png",
                                                                                     "webp",
                                                                                     "gif"
-                                                                                ],
-                                                                                "help": "Accepted extensions: `.jpg`, `.jpeg`, `.png`, `.webp` and `.gif`."
+                                                                                ]
                                                                             },
                                                                             {
                                                                                 "name": "imageData",
@@ -531,32 +523,35 @@
                                                                                 "label": "Image Data",
                                                                                 "semantic": "file:data"
                                                                             }
-                                                                        ]
+                                                                        ],
+                                                                        "type": "collection",
+                                                                        "label": "Image"
                                                                     }
                                                                 ]
                                                             }
-                                                        ]
+                                                        ],
+                                                        "mappable": false
                                                     },
                                                     {
                                                         "name": "imageDetail",
                                                         "type": "select",
                                                         "label": "Image Detail",
-                                                        "advanced": true,
                                                         "options": [
                                                             {
+                                                                "label": "Auto",
                                                                 "value": "auto",
-                                                                "default": true,
-                                                                "label": "Auto"
+                                                                "default": true
                                                             },
                                                             {
-                                                                "value": "high",
-                                                                "label": "High"
+                                                                "label": "High",
+                                                                "value": "high"
                                                             },
                                                             {
-                                                                "value": "low",
-                                                                "label": "Low"
+                                                                "label": "Low",
+                                                                "value": "low"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "advanced": true
                                                     }
                                                 ]
                                             },
@@ -585,11 +580,16 @@
                                                 ]
                                             }
                                         ]
-                                    }
+                                    },
+                                    "required": true
                                 }
                             ],
-                            "name": "value"
-                        }
+                            "type": "collection",
+                            "label": "Message"
+                        },
+                        "type": "array",
+                        "label": "Messages",
+                        "required": true
                     },
                     {
                         "name": "response_format",
@@ -796,14 +796,14 @@
             },
             "mapper": {
                 "url": "/v1/embeddings",
+                "body": "{\"input\": \"{{3.result.search_term}}\",\"model\": \"text-embedding-3-small\",\"encoding_format\": \"float\"}",
                 "method": "POST",
                 "headers": [
                     {
                         "key": "Content-Type",
                         "value": "application/json"
                     }
-                ],
-                "body": "{\"input\": \"{{3.result.search_term}}\",\"model\": \"text-embedding-3-small\",\"encoding_format\": \"float\"}"
+                ]
             },
             "metadata": {
                 "designer": {
@@ -811,16 +811,10 @@
                     "y": 0
                 },
                 "restore": {
-                    "parameters": {
-                        "__IMTCONN__": {
-                            "label": "My OpenAI connection",
-                            "data": {
-                                "scoped": "true",
-                                "connection": "openai-gpt-3"
-                            }
-                        }
-                    },
                     "expect": {
+                        "qs": {
+                            "mode": "chose"
+                        },
                         "method": {
                             "mode": "chose",
                             "label": "POST"
@@ -830,9 +824,15 @@
                             "items": [
                                 null
                             ]
-                        },
-                        "qs": {
-                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "openai-gpt-3"
+                            },
+                            "label": "My OpenAI connection"
                         }
                     }
                 },
@@ -868,9 +868,8 @@
                     },
                     {
                         "name": "headers",
-                        "type": "array",
-                        "label": "Headers",
                         "spec": {
+                            "name": "value",
                             "spec": [
                                 {
                                     "name": "key",
@@ -884,15 +883,15 @@
                                 }
                             ],
                             "type": "collection",
-                            "label": "Header",
-                            "name": "value"
-                        }
+                            "label": "Header"
+                        },
+                        "type": "array",
+                        "label": "Headers"
                     },
                     {
                         "name": "qs",
-                        "type": "array",
-                        "label": "Query String",
                         "spec": {
+                            "name": "value",
                             "spec": [
                                 {
                                     "name": "key",
@@ -906,9 +905,10 @@
                                 }
                             ],
                             "type": "collection",
-                            "label": "Query String",
-                            "name": "value"
-                        }
+                            "label": "Query String"
+                        },
+                        "type": "array",
+                        "label": "Query String"
                     },
                     {
                         "name": "body",
@@ -1162,12 +1162,9 @@
                 "__IMTCONN__": 977869
             },
             "mapper": {
-                "select": "chat",
-                "temperature": "1",
-                "top_p": "1",
-                "n_completions": "1",
                 "model": "gpt-4o",
-                "max_tokens": "2048",
+                "top_p": "1",
+                "select": "chat",
                 "messages": [
                     {
                         "role": "user",
@@ -1175,6 +1172,9 @@
                         "imageDetail": "auto"
                     }
                 ],
+                "max_tokens": "2048",
+                "temperature": "1",
+                "n_completions": "1",
                 "response_format": "text"
             },
             "metadata": {
@@ -1183,31 +1183,16 @@
                     "y": 0
                 },
                 "restore": {
-                    "parameters": {
-                        "__IMTCONN__": {
-                            "label": "My OpenAI connection",
-                            "data": {
-                                "scoped": "true",
-                                "connection": "openai-gpt-3"
-                            }
-                        }
-                    },
                     "expect": {
-                        "select": {
-                            "label": "Create a Chat Completion (GPT and o1 models)"
-                        },
-                        "logit_bias": {
-                            "mode": "chose"
-                        },
                         "stop": {
-                            "mode": "chose"
-                        },
-                        "additionalParameters": {
                             "mode": "chose"
                         },
                         "model": {
                             "mode": "chose",
                             "label": "gpt-4o (system)"
+                        },
+                        "select": {
+                            "label": "Create a Chat Completion (GPT and o1 models)"
                         },
                         "messages": {
                             "mode": "chose",
@@ -1217,20 +1202,35 @@
                                         "mode": "chose",
                                         "label": "User"
                                     },
-                                    "imageInputType": {
-                                        "mode": "chose",
-                                        "label": "Empty"
-                                    },
                                     "imageDetail": {
                                         "mode": "chose",
                                         "label": "Auto"
+                                    },
+                                    "imageInputType": {
+                                        "mode": "chose",
+                                        "label": "Empty"
                                     }
                                 }
                             ]
                         },
+                        "logit_bias": {
+                            "mode": "chose"
+                        },
                         "response_format": {
                             "mode": "chose",
                             "label": "Text"
+                        },
+                        "additionalParameters": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "openai-gpt-3"
+                            },
+                            "label": "My OpenAI connection"
                         }
                     }
                 },
@@ -1298,9 +1298,8 @@
                     },
                     {
                         "name": "logit_bias",
-                        "type": "array",
-                        "label": "Token Probability",
                         "spec": {
+                            "name": "value",
                             "spec": [
                                 {
                                     "name": "token",
@@ -1320,9 +1319,10 @@
                                 }
                             ],
                             "type": "collection",
-                            "label": "Token Probability",
-                            "name": "value"
-                        }
+                            "label": "Token Probability"
+                        },
+                        "type": "array",
+                        "label": "Token Probability"
                     },
                     {
                         "name": "seed",
@@ -1331,22 +1331,21 @@
                     },
                     {
                         "name": "stop",
+                        "spec": {
+                            "name": "value",
+                            "type": "text",
+                            "label": "Stop Sequence"
+                        },
                         "type": "array",
                         "label": "Stop Sequences",
                         "validate": {
                             "maxItems": 4
-                        },
-                        "spec": {
-                            "type": "text",
-                            "label": "Stop Sequence",
-                            "name": "value"
                         }
                     },
                     {
                         "name": "additionalParameters",
-                        "type": "array",
-                        "label": "Other Input Parameters",
                         "spec": {
+                            "name": "value",
                             "spec": [
                                 {
                                     "name": "key",
@@ -1419,9 +1418,10 @@
                                 }
                             ],
                             "type": "collection",
-                            "label": "Input Parameter",
-                            "name": "value"
-                        }
+                            "label": "Input Parameter"
+                        },
+                        "type": "array",
+                        "label": "Other Input Parameters"
                     },
                     {
                         "name": "model",
@@ -1436,18 +1436,13 @@
                     },
                     {
                         "name": "messages",
-                        "type": "array",
-                        "label": "Messages",
-                        "required": true,
                         "spec": {
-                            "label": "Message",
-                            "type": "collection",
+                            "name": "value",
                             "spec": [
                                 {
                                     "name": "role",
                                     "type": "select",
                                     "label": "Role",
-                                    "required": true,
                                     "options": {
                                         "store": [
                                             {
@@ -1464,30 +1459,28 @@
                                                         "name": "imageInputType",
                                                         "type": "select",
                                                         "label": "Image Input Type",
-                                                        "mappable": false,
                                                         "options": [
                                                             {
-                                                                "value": "url",
                                                                 "label": "URL",
+                                                                "value": "url",
                                                                 "nested": [
                                                                     {
+                                                                        "help": "Make sure to use a publicly accessible URL.\nYou can test if your image is publicly accessible by opening the link in an incognito tab.",
                                                                         "name": "imageUrl",
-                                                                        "label": "Image URL",
                                                                         "type": "url",
-                                                                        "help": "Make sure to use a publicly accessible URL.\nYou can test if your image is publicly accessible by opening the link in an incognito tab."
+                                                                        "label": "Image URL"
                                                                     }
                                                                 ]
                                                             },
                                                             {
-                                                                "value": "file",
                                                                 "label": "Image File",
+                                                                "value": "file",
                                                                 "nested": [
                                                                     {
                                                                         "name": "imageFile",
-                                                                        "label": "Image",
-                                                                        "type": "collection",
                                                                         "spec": [
                                                                             {
+                                                                                "help": "Accepted extensions: `.jpg`, `.jpeg`, `.png`, `.webp` and `.gif`.",
                                                                                 "name": "imageFilename",
                                                                                 "type": "filename",
                                                                                 "label": "Image Filename",
@@ -1498,8 +1491,7 @@
                                                                                     "png",
                                                                                     "webp",
                                                                                     "gif"
-                                                                                ],
-                                                                                "help": "Accepted extensions: `.jpg`, `.jpeg`, `.png`, `.webp` and `.gif`."
+                                                                                ]
                                                                             },
                                                                             {
                                                                                 "name": "imageData",
@@ -1507,32 +1499,35 @@
                                                                                 "label": "Image Data",
                                                                                 "semantic": "file:data"
                                                                             }
-                                                                        ]
+                                                                        ],
+                                                                        "type": "collection",
+                                                                        "label": "Image"
                                                                     }
                                                                 ]
                                                             }
-                                                        ]
+                                                        ],
+                                                        "mappable": false
                                                     },
                                                     {
                                                         "name": "imageDetail",
                                                         "type": "select",
                                                         "label": "Image Detail",
-                                                        "advanced": true,
                                                         "options": [
                                                             {
+                                                                "label": "Auto",
                                                                 "value": "auto",
-                                                                "default": true,
-                                                                "label": "Auto"
+                                                                "default": true
                                                             },
                                                             {
-                                                                "value": "high",
-                                                                "label": "High"
+                                                                "label": "High",
+                                                                "value": "high"
                                                             },
                                                             {
-                                                                "value": "low",
-                                                                "label": "Low"
+                                                                "label": "Low",
+                                                                "value": "low"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "advanced": true
                                                     }
                                                 ]
                                             },
@@ -1561,11 +1556,16 @@
                                                 ]
                                             }
                                         ]
-                                    }
+                                    },
+                                    "required": true
                                 }
                             ],
-                            "name": "value"
-                        }
+                            "type": "collection",
+                            "label": "Message"
+                        },
+                        "type": "array",
+                        "label": "Messages",
+                        "required": true
                     },
                     {
                         "name": "response_format",
