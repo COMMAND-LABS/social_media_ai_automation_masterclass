@@ -12,4 +12,5 @@ fi
 # echo $response > avatar_response.json # For debugging
 
 # Use the following to find YOUR avatar in HeyGen's list of supported avatars
-echo "$response" | jq -r '.data.avatars[] | select(.avatar_name == "Tad Duval") | .avatar_id'
+# echo "$response" | jq -r '.data.avatars[] | select(.avatar_name == "Tad Duval") | .avatar_id'
+echo "$response" | jq -r '.data.avatars[] | select(.avatar_name == "Tad Duval")'

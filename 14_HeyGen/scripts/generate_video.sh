@@ -9,13 +9,13 @@ curl -X POST https://api.heygen.com/v2/video/generate \
     {
       "character": {
         "type": "avatar",
-        "avatar_id": "148aa78267f84bdb8c88035378334c6d",
+        "avatar_id": "7cda91fe529746008869e50c8eb913e9",
         "avatar_style": "normal"
       },
       "voice": {
         "type": "text",
-        "input_text": "Hello to everyone who is attending tonight's A.I. Social Media Masterclass at THE HUB presented in partnership with Supercharged Magazine! For those who couldn't make it we are sending many blessings. For those who are on their way be sure to connect with everyone who is present before heading home and know that what we will be exploring tonight is literally the tip of the iceberg. Be ready to get your hands dirty and know in advance that you will run into many technical issues but we have a great team here to support and guide you. Arrive early and bring your A plus game.",
-        "voice_id": "e7e6ad7c235748fe9147884f26c3af94",
+        "input_text": "Good morning Noelle and Elena! ACTION ITEM 1 FOR NOELLE: Let's connect (or perhaps just connect me with your team member?) for marketing the MASTERCLASS on March 27th, 2025 throughout the Office Logic network. BONUS ACTION ITEM FOR NOELLE: Send out an email asking for sponsors for the March 27th, 2025 MASTERCLASS - We need a Venue Sponsor at 500 dollars and an A.I. Sponsor at 700 dollars. ACTION ITEM 1 FOR ELENA: Collect testimonials from the past attendees of the A.I. Social Media MASTERCLASS. BONUS ACTION ITEM FOR ELENA: Send out a survey for fielding interest in a corporate level event. Some ideas to suggest to your audience are: A) n8n, B) Google Cloud, C) Azure AI Foundry, D) Pinecone, E) Databricks, F) Ask your audience for a suggestion. My survey has shown Google Cloud has the most interest so far but only 2 people voted.",
+        "voice_id": "cce692bffb474236ab42868496723b52",
         "speed": 1.0
       }
     }
