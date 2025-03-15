@@ -6,3 +6,5 @@
 # For ignoring debug files related to 14_HeyGen mini project
 voices_response.json
 avatar_response.json
+
+dataset_linkedin-profile-scraper_2025-03-15*.json
