@@ -7,4 +7,5 @@ pip install uv
 uv init
 uv run hello.py
 mv hello.py main.py
+uv run main.py
 ```
