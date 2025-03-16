@@ -22,9 +22,6 @@ def generate_script(profile):
       ## CONTEXT
 
       - The masterclass is about A.I. Video Automation and its impact on business.
-      - Louis was one of the attendees of the 1st A.I. Social Media MASTERCLASS
-      - Louis did NOT attend the 2nd A.I. Social Media Masterclass
-      - Mention how you would love feedback from Louis what material or improvements could be incorporated into the 3rd A.I. Social Media Masterclass given what he said at the 1st
       - There is still the $500 sponsorship opportunity available to cover the venue costs
       - There is still the $700 sponsorship opportunity to cover the A.I. costs
       - The goal is also to get the prospect to suggest businesses and business owners in their network to fill the remaining 2 sponsorship slots.
