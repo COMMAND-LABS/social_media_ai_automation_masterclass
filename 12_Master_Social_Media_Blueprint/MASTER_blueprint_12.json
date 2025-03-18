@@ -6,33 +6,33 @@
             "module": "google-sheets:watchRows",
             "version": 2,
             "parameters": {
-                "__IMTCONN__": 1522494,
                 "mode": "map",
-                "includesHeaders": true,
                 "limit": 1,
-                "valueRenderOption": "FORMATTED_VALUE",
-                "dateTimeRenderOption": "FORMATTED_STRING",
-                "spreadsheetId": "1507tqRvDSzMh5SL-0N4bodIEcSvIlAExlqY8iSHyRSk",
                 "sheetId": "Sheet1",
-                "tableFirstRow": "A1:J1"
+                "__IMTCONN__": 1522494,
+                "spreadsheetId": "1507tqRvDSzMh5SL-0N4bodIEcSvIlAExlqY8iSHyRSk",
+                "tableFirstRow": "A1:J1",
+                "includesHeaders": true,
+                "valueRenderOption": "FORMATTED_VALUE",
+                "dateTimeRenderOption": "FORMATTED_STRING"
             },
             "mapper": {},
             "metadata": {
                 "designer": {
                     "x": 0,
-                    "y": 2700
+                    "y": 2850
                 },
                 "restore": {
                     "parameters": {
+                        "mode": {
+                            "label": "Enter manually"
+                        },
                         "__IMTCONN__": {
-                            "label": "UGC_Image_Post (tad@cmdlabs.io)",
                             "data": {
                                 "scoped": "true",
                                 "connection": "google"
-                            }
-                        },
-                        "mode": {
-                            "label": "Enter manually"
+                            },
+                            "label": "UGC_Image_Post (tad@cmdlabs.io)"
                         },
                         "includesHeaders": {
                             "label": "Yes"
@@ -130,68 +130,68 @@
                 "interface": [
                     {
                         "name": "__ROW_NUMBER__",
-                        "label": "Row number",
-                        "type": "number"
+                        "type": "number",
+                        "label": "Row number"
                     },
                     {
                         "name": "__SPREADSHEET_ID__",
-                        "label": "Spreadsheet ID",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Spreadsheet ID"
                     },
                     {
                         "name": "__SHEET__",
-                        "label": "Sheet",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Sheet"
                     },
                     {
                         "name": "0",
-                        "label": "Post Type (A)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Post Type (A)"
                     },
                     {
                         "name": "1",
-                        "label": "Prompt (B)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Prompt (B)"
                     },
                     {
                         "name": "2",
-                        "label": "Image Type (C)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Image Type (C)"
                     },
                     {
                         "name": "3",
-                        "label": "Image Link (D)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Image Link (D)"
                     },
                     {
                         "name": "4",
-                        "label": "ImageLinkID                                                                                                                                                                 (E)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "ImageLinkID                                                                                                                                                                 (E)"
                     },
                     {
                         "name": "5",
-                        "label": "Video Type (F)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Video Type (F)"
                     },
                     {
                         "name": "6",
-                        "label": "Video Link (G)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Video Link (G)"
                     },
                     {
                         "name": "7",
-                        "label": "VideoLinkID (H)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "VideoLinkID (H)"
                     },
                     {
                         "name": "8",
-                        "label": "Timestamp (I)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Timestamp (I)"
                     },
                     {
                         "name": "9",
-                        "label": "Processed (J)",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Processed (J)"
                     }
                 ],
                 "advanced": true
@@ -208,7 +208,7 @@
             "metadata": {
                 "designer": {
                     "x": 300,
-                    "y": 2700,
+                    "y": 2850,
                     "name": "Current Date"
                 },
                 "restore": {},
@@ -229,7 +229,7 @@
             "metadata": {
                 "designer": {
                     "x": 600,
-                    "y": 2700
+                    "y": 2850
                 }
             },
             "routes": [
@@ -254,8 +254,8 @@
                             "mapper": null,
                             "metadata": {
                                 "designer": {
-                                    "x": 524,
-                                    "y": 311
+                                    "x": 900,
+                                    "y": 450
                                 }
                             },
                             "routes": [
@@ -287,8 +287,8 @@
                                             },
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 824,
-                                                    "y": 311
+                                                    "x": 1200,
+                                                    "y": 450
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -881,8 +881,8 @@
                                             "mapper": null,
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 1124,
-                                                    "y": 311
+                                                    "x": 1500,
+                                                    "y": 450
                                                 }
                                             },
                                             "routes": [
@@ -898,8 +898,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 1424,
-                                                                    "y": 11,
+                                                                    "x": 1966,
+                                                                    "y": 9,
                                                                     "name": "Random Pause"
                                                                 },
                                                                 "restore": {},
@@ -936,26 +936,17 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 1424,
-                                                                    "y": 311
+                                                                    "x": 1972,
+                                                                    "y": 313
                                                                 },
                                                                 "restore": {
-                                                                    "parameters": {
-                                                                        "__IMTCONN__": {
-                                                                            "label": "My LinkedIn connection (🌈 Tad Duval 🌈)",
-                                                                            "data": {
-                                                                                "scoped": "true",
-                                                                                "connection": "linkedin2"
-                                                                            }
-                                                                        }
-                                                                    },
                                                                     "expect": {
-                                                                        "mentions": {
-                                                                            "mode": "chose"
-                                                                        },
                                                                         "type": {
                                                                             "mode": "chose",
                                                                             "empty": true
+                                                                        },
+                                                                        "mentions": {
+                                                                            "mode": "chose"
                                                                         },
                                                                         "visibility": {
                                                                             "mode": "chose",
@@ -967,6 +958,15 @@
                                                                         },
                                                                         "isReshareDisabledByAuthor": {
                                                                             "mode": "chose"
+                                                                        }
+                                                                    },
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "linkedin2"
+                                                                            },
+                                                                            "label": "My LinkedIn connection (🌈 Tad Duval 🌈)"
                                                                         }
                                                                     }
                                                                 },
@@ -987,8 +987,6 @@
                                                                     },
                                                                     {
                                                                         "name": "mentions",
-                                                                        "type": "array",
-                                                                        "label": "Mentions",
                                                                         "spec": [
                                                                             {
                                                                                 "name": "entity",
@@ -1036,7 +1034,9 @@
                                                                                 "label": "Start",
                                                                                 "required": true
                                                                             }
-                                                                        ]
+                                                                        ],
+                                                                        "type": "array",
+                                                                        "label": "Mentions"
                                                                     },
                                                                     {
                                                                         "name": "type",
@@ -1098,29 +1098,29 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 1421,
-                                                                    "y": 607
+                                                                    "x": 1967,
+                                                                    "y": 619
                                                                 },
                                                                 "restore": {
-                                                                    "parameters": {
-                                                                        "__IMTCONN__": {
-                                                                            "label": "My X (formerly Twitter) OAuth 2.0 connection (CMD_LABS)",
-                                                                            "data": {
-                                                                                "scoped": "true",
-                                                                                "connection": "twitter2"
-                                                                            }
-                                                                        }
-                                                                    },
                                                                     "expect": {
                                                                         "media_ids": {
                                                                             "mode": "edit"
                                                                         },
-                                                                        "for_super_followers_only": {
-                                                                            "mode": "chose"
-                                                                        },
                                                                         "reply_settings": {
                                                                             "mode": "chose",
                                                                             "label": "Empty"
+                                                                        },
+                                                                        "for_super_followers_only": {
+                                                                            "mode": "chose"
+                                                                        }
+                                                                    },
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "twitter2"
+                                                                            },
+                                                                            "label": "My X (formerly Twitter) OAuth 2.0 connection (CMD_LABS)"
                                                                         }
                                                                     }
                                                                 },
@@ -1140,14 +1140,14 @@
                                                                         "required": true
                                                                     },
                                                                     {
-                                                                        "name": "media_ids",
-                                                                        "type": "array",
-                                                                        "label": "Media IDs",
                                                                         "mode": "edit",
+                                                                        "name": "media_ids",
                                                                         "spec": {
-                                                                            "type": "text",
-                                                                            "name": "value"
-                                                                        }
+                                                                            "name": "value",
+                                                                            "type": "text"
+                                                                        },
+                                                                        "type": "array",
+                                                                        "label": "Media IDs"
                                                                     },
                                                                     {
                                                                         "name": "place_id",
@@ -1173,6 +1173,87 @@
                                                                         "name": "reply_settings",
                                                                         "type": "select",
                                                                         "label": "Reply Settings"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "flow": [
+                                                        {
+                                                            "id": 68,
+                                                            "module": "facebook-pages:CreatePost",
+                                                            "version": 6,
+                                                            "parameters": {
+                                                                "__IMTCONN__": 1493671
+                                                            },
+                                                            "mapper": {
+                                                                "page_id": "509216045615795",
+                                                                "message": "{{44.result.facebook_post}}",
+                                                                "link": "https://lu.ma/supercharged"
+                                                            },
+                                                            "metadata": {
+                                                                "designer": {
+                                                                    "x": 1969,
+                                                                    "y": 916
+                                                                },
+                                                                "restore": {
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "label": "IG / Facebook Meta Business Suite (Tad Duval)",
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "facebook"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "expect": {
+                                                                        "page_id": {
+                                                                            "mode": "chose",
+                                                                            "label": "Command Labs"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "parameters": [
+                                                                    {
+                                                                        "name": "__IMTCONN__",
+                                                                        "type": "account:facebook",
+                                                                        "label": "Connection",
+                                                                        "required": true
+                                                                    }
+                                                                ],
+                                                                "expect": [
+                                                                    {
+                                                                        "name": "page_id",
+                                                                        "type": "select",
+                                                                        "label": "Page",
+                                                                        "required": true
+                                                                    },
+                                                                    {
+                                                                        "name": "message",
+                                                                        "type": "text",
+                                                                        "label": "Message"
+                                                                    },
+                                                                    {
+                                                                        "name": "link",
+                                                                        "type": "url",
+                                                                        "label": "Link"
+                                                                    },
+                                                                    {
+                                                                        "name": "name",
+                                                                        "type": "text",
+                                                                        "label": "Link name"
+                                                                    },
+                                                                    {
+                                                                        "name": "description",
+                                                                        "type": "text",
+                                                                        "label": "Link description"
+                                                                    },
+                                                                    {
+                                                                        "name": "date",
+                                                                        "type": "date",
+                                                                        "label": "Date"
                                                                     }
                                                                 ]
                                                             }
@@ -1209,7 +1290,7 @@
                             "metadata": {
                                 "designer": {
                                     "x": 900,
-                                    "y": 1500
+                                    "y": 1800
                                 }
                             },
                             "routes": [
@@ -1254,7 +1335,7 @@
                                             "metadata": {
                                                 "designer": {
                                                     "x": 1200,
-                                                    "y": 1500
+                                                    "y": 1800
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -1858,7 +1939,7 @@
                                             "metadata": {
                                                 "designer": {
                                                     "x": 1500,
-                                                    "y": 1500
+                                                    "y": 1800
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -1984,7 +2065,7 @@
                                             "metadata": {
                                                 "designer": {
                                                     "x": 1800,
-                                                    "y": 1500
+                                                    "y": 1800
                                                 }
                                             },
                                             "routes": [
@@ -2001,7 +2082,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2100,
-                                                                    "y": 900,
+                                                                    "y": 1200,
                                                                     "name": "Random Pause"
                                                                 },
                                                                 "restore": {},
@@ -2035,12 +2116,12 @@
                                                                 "accountId": "17841468332360742",
                                                                 "video_url": "https://drive.google.com/uc?id={{32.id}}",
                                                                 "location_id": "120712654673390",
-                                                                "share_to_feed": false
+                                                                "share_to_feed": true
                                                             },
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2100,
-                                                                    "y": 1200
+                                                                    "y": 1500
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -2118,7 +2199,7 @@
                                                                     "metadata": {
                                                                         "designer": {
                                                                             "x": 2400,
-                                                                            "y": 1200
+                                                                            "y": 1500
                                                                         }
                                                                     }
                                                                 }
@@ -2147,7 +2228,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2100,
-                                                                    "y": 1500
+                                                                    "y": 1800
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -2306,7 +2387,7 @@
                                                                     "metadata": {
                                                                         "designer": {
                                                                             "x": 2400,
-                                                                            "y": 1500
+                                                                            "y": 1800
                                                                         }
                                                                     }
                                                                 }
@@ -2335,7 +2416,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2100,
-                                                                    "y": 1800
+                                                                    "y": 2100
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -2438,7 +2519,7 @@
                                                                     "metadata": {
                                                                         "designer": {
                                                                             "x": 2400,
-                                                                            "y": 1800
+                                                                            "y": 2100
                                                                         }
                                                                     }
                                                                 }
@@ -2463,7 +2544,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2100,
-                                                                    "y": 2100
+                                                                    "y": 2400
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -2531,7 +2612,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2400,
-                                                                    "y": 2100
+                                                                    "y": 2400
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -2612,7 +2693,7 @@
                                                                     "metadata": {
                                                                         "designer": {
                                                                             "x": 2700,
-                                                                            "y": 2100
+                                                                            "y": 2400
                                                                         }
                                                                     }
                                                                 }
@@ -2650,7 +2731,7 @@
                             "metadata": {
                                 "designer": {
                                     "x": 900,
-                                    "y": 3450
+                                    "y": 3750
                                 }
                             },
                             "routes": [
@@ -2695,7 +2776,7 @@
                                             "metadata": {
                                                 "designer": {
                                                     "x": 1200,
-                                                    "y": 2850
+                                                    "y": 3150
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -3299,7 +3380,7 @@
                                             "metadata": {
                                                 "designer": {
                                                     "x": 1500,
-                                                    "y": 2850
+                                                    "y": 3150
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -3425,7 +3506,7 @@
                                             "metadata": {
                                                 "designer": {
                                                     "x": 1800,
-                                                    "y": 2850
+                                                    "y": 3150
                                                 }
                                             },
                                             "routes": [
@@ -3442,7 +3523,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2100,
-                                                                    "y": 2400,
+                                                                    "y": 2700,
                                                                     "name": "Random Pause"
                                                                 },
                                                                 "restore": {},
@@ -3484,7 +3565,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2100,
-                                                                    "y": 2700
+                                                                    "y": 3000
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -3601,7 +3682,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2100,
-                                                                    "y": 3000
+                                                                    "y": 3300
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -3716,7 +3797,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2100,
-                                                                    "y": 3300
+                                                                    "y": 3600
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -3803,7 +3884,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2400,
-                                                                    "y": 3300
+                                                                    "y": 3600
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -3920,7 +4001,7 @@
                                             "metadata": {
                                                 "designer": {
                                                     "x": 1200,
-                                                    "y": 4050
+                                                    "y": 4350
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -4524,7 +4605,7 @@
                                             "metadata": {
                                                 "designer": {
                                                     "x": 1500,
-                                                    "y": 4050
+                                                    "y": 4350
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -4690,7 +4771,7 @@
                                             "metadata": {
                                                 "designer": {
                                                     "x": 1800,
-                                                    "y": 4050
+                                                    "y": 4350
                                                 },
                                                 "restore": {},
                                                 "parameters": [
@@ -4736,7 +4817,7 @@
                                             "metadata": {
                                                 "designer": {
                                                     "x": 2100,
-                                                    "y": 4050
+                                                    "y": 4350
                                                 }
                                             },
                                             "routes": [
@@ -4753,7 +4834,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2400,
-                                                                    "y": 3600,
+                                                                    "y": 3900,
                                                                     "name": "Random Pause"
                                                                 },
                                                                 "restore": {},
@@ -4791,7 +4872,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2400,
-                                                                    "y": 3900
+                                                                    "y": 4200
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -4906,7 +4987,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2400,
-                                                                    "y": 4200
+                                                                    "y": 4500
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -4993,7 +5074,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2700,
-                                                                    "y": 4200
+                                                                    "y": 4500
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -5087,7 +5168,7 @@
                                                             "metadata": {
                                                                 "designer": {
                                                                     "x": 2400,
-                                                                    "y": 4500
+                                                                    "y": 4800
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -5214,7 +5295,7 @@
                             "metadata": {
                                 "designer": {
                                     "x": 900,
-                                    "y": 4800
+                                    "y": 5100
                                 }
                             }
                         }
@@ -5240,7 +5321,7 @@
                             "metadata": {
                                 "designer": {
                                     "x": 900,
-                                    "y": 5100
+                                    "y": 5400
                                 }
                             }
                         }
@@ -5269,7 +5350,7 @@
                             "metadata": {
                                 "designer": {
                                     "x": 900,
-                                    "y": 5400
+                                    "y": 5700
                                 },
                                 "restore": {
                                     "expect": {
