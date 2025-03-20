@@ -11,6 +11,3 @@
 
 ## Steps
 
-- Add `RSS - Watch RSS feed items` node
-- Go to https://rss.app/
--
