@@ -11,7 +11,8 @@ headers = {
 }
 data = {
     # "url": "https://hook.us2.make.com/k23gukiv5b5b9x2zfpdq1qww16pb3hn0", # copied from the webhook from Make.com
-    "url": "https://hook.us2.make.com/j1teehwbft5nzl568c978feo45iw4fif",
+    # "url": "https://hook.us2.make.com/j1teehwbft5nzl568c978feo45iw4fif",
+    "url": "https://hook.us2.make.com/d3lx51otzx4elyncw7zoh0a49h152h08",
     "events": ["avatar_video.success"]
 }
 

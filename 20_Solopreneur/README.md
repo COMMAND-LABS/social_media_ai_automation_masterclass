@@ -9,5 +9,3 @@
 - https://elevenlabs.io/
 - https://elevenlabs.io/voice-library
 
-## Steps
-
