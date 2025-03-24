@@ -2,39 +2,67 @@
     "name": "12_Master_Social_Media_Blueprint",
     "flow": [
         {
-            "id": 1,
-            "module": "google-sheets:watchRows",
+            "id": 71,
+            "module": "google-sheets:filterRows",
             "version": 2,
             "parameters": {
-                "mode": "map",
-                "limit": 1,
+                "__IMTCONN__": 1522494
+            },
+            "mapper": {
+                "from": "drive",
+                "limit": "1",
+                "filter": [
+                    [
+                        {
+                            "a": "L",
+                            "b": "Unprocessed",
+                            "o": "text:equal"
+                        },
+                        {
+                            "a": "A",
+                            "b": "{{formatDate(now; \"MM/DD/YYYY\")}}",
+                            "o": "date:equal"
+                        }
+                    ]
+                ],
                 "sheetId": "Sheet1",
-                "__IMTCONN__": 1522494,
+                "sortOrder": "asc",
                 "spreadsheetId": "1507tqRvDSzMh5SL-0N4bodIEcSvIlAExlqY8iSHyRSk",
-                "tableFirstRow": "A1:J1",
+                "tableFirstRow": "A1:Z1",
                 "includesHeaders": true,
                 "valueRenderOption": "FORMATTED_VALUE",
                 "dateTimeRenderOption": "FORMATTED_STRING"
             },
-            "mapper": {},
             "metadata": {
                 "designer": {
                     "x": 0,
-                    "y": 2850
+                    "y": 2700
                 },
                 "restore": {
-                    "parameters": {
-                        "mode": {
-                            "label": "Enter manually"
+                    "expect": {
+                        "from": {
+                            "label": "Select from My Drive"
                         },
-                        "__IMTCONN__": {
-                            "data": {
-                                "scoped": "true",
-                                "connection": "google"
-                            },
-                            "label": "UGC_Image_Post (tad@cmdlabs.io)"
+                        "orderBy": {
+                            "mode": "chose"
+                        },
+                        "sheetId": {
+                            "mode": "chose",
+                            "label": "Sheet1"
+                        },
+                        "sortOrder": {
+                            "mode": "chose",
+                            "label": "Ascending"
+                        },
+                        "spreadsheetId": {
+                            "mode": "chose",
+                            "label": "Make_Content_Calendar"
+                        },
+                        "tableFirstRow": {
+                            "label": "A-Z"
                         },
                         "includesHeaders": {
+                            "mode": "chose",
                             "label": "Yes"
                         },
                         "valueRenderOption": {
@@ -45,6 +73,15 @@
                             "mode": "chose",
                             "label": "Formatted string"
                         }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "UGC_Image_Post (tad@cmdlabs.io)"
+                        }
                     }
                 },
                 "parameters": [
@@ -53,37 +90,20 @@
                         "type": "account:google",
                         "label": "Connection",
                         "required": true
-                    },
+                    }
+                ],
+                "expect": [
                     {
-                        "name": "mode",
+                        "name": "from",
                         "type": "select",
                         "label": "Search Method",
                         "required": true,
                         "validate": {
                             "enum": [
-                                "select",
-                                "fromAll",
-                                "map"
+                                "drive",
+                                "share"
                             ]
                         }
-                    },
-                    {
-                        "name": "includesHeaders",
-                        "type": "select",
-                        "label": "Table contains headers",
-                        "required": true,
-                        "validate": {
-                            "enum": [
-                                true,
-                                false
-                            ]
-                        }
-                    },
-                    {
-                        "name": "limit",
-                        "type": "uinteger",
-                        "label": "Limit",
-                        "required": true
                     },
                     {
                         "name": "valueRenderOption",
@@ -109,25 +129,90 @@
                         }
                     },
                     {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
                         "name": "spreadsheetId",
-                        "type": "text",
+                        "type": "select",
                         "label": "Spreadsheet ID",
                         "required": true
                     },
                     {
                         "name": "sheetId",
-                        "type": "text",
+                        "type": "select",
                         "label": "Sheet Name",
                         "required": true
                     },
                     {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
                         "name": "tableFirstRow",
-                        "type": "text",
-                        "label": "Row with headers",
-                        "required": true
+                        "type": "select",
+                        "label": "Column range",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "A1:Z1",
+                                "A1:BZ1",
+                                "A1:CZ1",
+                                "A1:DZ1",
+                                "A1:MZ1",
+                                "A1:ZZ1",
+                                "A1:AZZ1",
+                                "A1:BZZ1",
+                                "A1:CZZ1",
+                                "A1:DZZ1",
+                                "A1:MZZ1",
+                                "A1:ZZZ1"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": "rpc://google-sheets/2/rpcGetFilterKeys?includesHeaders=true"
+                    },
+                    {
+                        "name": "orderBy",
+                        "type": "select",
+                        "label": "Order by"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "select",
+                        "label": "Sort order",
+                        "validate": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
                     }
                 ],
                 "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
                     {
                         "name": "__ROW_NUMBER__",
                         "type": "number",
@@ -146,55 +231,202 @@
                     {
                         "name": "0",
                         "type": "text",
-                        "label": "Post Type (A)"
+                        "label": "Scheduled Date (A)"
                     },
                     {
                         "name": "1",
                         "type": "text",
-                        "label": "Prompt (B)"
+                        "label": "Scheduled Time (B)"
                     },
                     {
                         "name": "2",
                         "type": "text",
-                        "label": "Image Type (C)"
+                        "label": "Post Type (C)"
                     },
                     {
                         "name": "3",
                         "type": "text",
-                        "label": "Image Link (D)"
+                        "label": "Prompt (D)"
                     },
                     {
                         "name": "4",
                         "type": "text",
-                        "label": "ImageLinkID                                                                                                                                                                 (E)"
+                        "label": "Image Type (E)"
                     },
                     {
                         "name": "5",
                         "type": "text",
-                        "label": "Video Type (F)"
+                        "label": "Image Link (F)"
                     },
                     {
                         "name": "6",
                         "type": "text",
-                        "label": "Video Link (G)"
+                        "label": "ImageLinkID                                                                                                                                                                 (G)"
                     },
                     {
                         "name": "7",
                         "type": "text",
-                        "label": "VideoLinkID (H)"
+                        "label": "Video Type (H)"
                     },
                     {
                         "name": "8",
                         "type": "text",
-                        "label": "Timestamp (I)"
+                        "label": "Video Link (I)"
                     },
                     {
                         "name": "9",
                         "type": "text",
-                        "label": "Processed (J)"
+                        "label": "VideoLinkID (J)"
+                    },
+                    {
+                        "name": "10",
+                        "type": "text",
+                        "label": "Timestamp (K)"
+                    },
+                    {
+                        "name": "11",
+                        "type": "text",
+                        "label": "Status (L)"
+                    },
+                    {
+                        "name": "12",
+                        "type": "text",
+                        "label": "(M)"
+                    },
+                    {
+                        "name": "13",
+                        "type": "text",
+                        "label": "(N)"
+                    },
+                    {
+                        "name": "14",
+                        "type": "text",
+                        "label": "(O)"
+                    },
+                    {
+                        "name": "15",
+                        "type": "text",
+                        "label": "(P)"
+                    },
+                    {
+                        "name": "16",
+                        "type": "text",
+                        "label": "(Q)"
+                    },
+                    {
+                        "name": "17",
+                        "type": "text",
+                        "label": "(R)"
+                    },
+                    {
+                        "name": "18",
+                        "type": "text",
+                        "label": "(S)"
+                    },
+                    {
+                        "name": "19",
+                        "type": "text",
+                        "label": "(T)"
+                    },
+                    {
+                        "name": "20",
+                        "type": "text",
+                        "label": "(U)"
+                    },
+                    {
+                        "name": "21",
+                        "type": "text",
+                        "label": "(V)"
+                    },
+                    {
+                        "name": "22",
+                        "type": "text",
+                        "label": "(W)"
+                    },
+                    {
+                        "name": "23",
+                        "type": "text",
+                        "label": "(X)"
+                    },
+                    {
+                        "name": "24",
+                        "type": "text",
+                        "label": "(Y)"
+                    },
+                    {
+                        "name": "25",
+                        "type": "text",
+                        "label": "(Z)"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 72,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "filter": {
+                "name": "Confirm we have scheduled content",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{71.`__IMTLENGTH__`}}",
+                            "b": "1",
+                            "o": "text:equal"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {
+                "name": "time_sheet",
+                "scope": "roundtrip",
+                "value": "{{71.`1`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 2700
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
                     }
                 ],
-                "advanced": true
+                "interface": [
+                    {
+                        "name": "time_sheet",
+                        "type": "any",
+                        "label": "time_sheet"
+                    }
+                ]
             }
         },
         {
@@ -202,13 +434,25 @@
             "module": "util:ComposeTransformer",
             "version": 1,
             "parameters": {},
+            "filter": {
+                "name": "Has time passed",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{72.time_sheet}}",
+                            "b": "{{now}}",
+                            "o": "time:less"
+                        }
+                    ]
+                ]
+            },
             "mapper": {
                 "value": "{{now}}"
             },
             "metadata": {
                 "designer": {
-                    "x": 300,
-                    "y": 2850,
+                    "x": 600,
+                    "y": 2700,
                     "name": "Current Date"
                 },
                 "restore": {},
@@ -225,11 +469,23 @@
             "id": 18,
             "module": "builtin:BasicRouter",
             "version": 1,
+            "filter": {
+                "name": "",
+                "conditions": [
+                    [
+                        {
+                            "a": "1",
+                            "b": "1",
+                            "o": "text:equal"
+                        }
+                    ]
+                ]
+            },
             "mapper": null,
             "metadata": {
                 "designer": {
-                    "x": 600,
-                    "y": 2850
+                    "x": 900,
+                    "y": 2700
                 }
             },
             "routes": [
@@ -244,7 +500,7 @@
                                 "conditions": [
                                     [
                                         {
-                                            "a": "{{1.`0`}}",
+                                            "a": "{{71.`2`}}",
                                             "b": "Text",
                                             "o": "text:equal"
                                         }
@@ -254,7 +510,7 @@
                             "mapper": null,
                             "metadata": {
                                 "designer": {
-                                    "x": 900,
+                                    "x": 1200,
                                     "y": 450
                                 }
                             },
@@ -275,7 +531,7 @@
                                                 "messages": [
                                                     {
                                                         "role": "user",
-                                                        "content": "# PROMPT\n\n{{1.`1`}}\n\n## CURRENT DATE\n\n{{66.value}}",
+                                                        "content": "# PROMPT\n\n{{71.`3`}}\n\n## CURRENT DATE\n\n{{66.value}}",
                                                         "imageDetail": "auto"
                                                     }
                                                 ],
@@ -287,7 +543,7 @@
                                             },
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 1200,
+                                                    "x": 1500,
                                                     "y": 450
                                                 },
                                                 "restore": {
@@ -620,6 +876,7 @@
                                                                                         "mappable": false
                                                                                     },
                                                                                     {
+                                                                                        "help": "Recommended value: `Auto`",
                                                                                         "name": "imageDetail",
                                                                                         "type": "select",
                                                                                         "label": "Image Detail",
@@ -637,8 +894,7 @@
                                                                                                 "label": "Low",
                                                                                                 "value": "low"
                                                                                             }
-                                                                                        ],
-                                                                                        "advanced": true
+                                                                                        ]
                                                                                     }
                                                                                 ]
                                                                             },
@@ -881,7 +1137,7 @@
                                             "mapper": null,
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 1500,
+                                                    "x": 1800,
                                                     "y": 450
                                                 }
                                             },
@@ -898,8 +1154,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 1966,
-                                                                    "y": 9,
+                                                                    "x": 2230,
+                                                                    "y": -155,
                                                                     "name": "Random Pause"
                                                                 },
                                                                 "restore": {},
@@ -936,8 +1192,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 1972,
-                                                                    "y": 313
+                                                                    "x": 2230,
+                                                                    "y": 145
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -1098,8 +1354,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 1967,
-                                                                    "y": 619
+                                                                    "x": 2230,
+                                                                    "y": 445
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -1189,29 +1445,29 @@
                                                                 "__IMTCONN__": 1493671
                                                             },
                                                             "mapper": {
-                                                                "page_id": "509216045615795",
+                                                                "link": "https://lu.ma/supercharged",
                                                                 "message": "{{44.result.facebook_post}}",
-                                                                "link": "https://lu.ma/supercharged"
+                                                                "page_id": "509216045615795"
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 1969,
-                                                                    "y": 916
+                                                                    "x": 2230,
+                                                                    "y": 745
                                                                 },
                                                                 "restore": {
-                                                                    "parameters": {
-                                                                        "__IMTCONN__": {
-                                                                            "label": "IG / Facebook Meta Business Suite (Tad Duval)",
-                                                                            "data": {
-                                                                                "scoped": "true",
-                                                                                "connection": "facebook"
-                                                                            }
-                                                                        }
-                                                                    },
                                                                     "expect": {
                                                                         "page_id": {
                                                                             "mode": "chose",
                                                                             "label": "Command Labs"
+                                                                        }
+                                                                    },
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "facebook"
+                                                                            },
+                                                                            "label": "IG / Facebook Meta Business Suite (Tad Duval)"
                                                                         }
                                                                     }
                                                                 },
@@ -1279,7 +1535,7 @@
                                 "conditions": [
                                     [
                                         {
-                                            "a": "{{1.`0`}}",
+                                            "a": "{{71.`2`}}",
                                             "b": "Video + Text",
                                             "o": "text:equal"
                                         }
@@ -1289,8 +1545,8 @@
                             "mapper": null,
                             "metadata": {
                                 "designer": {
-                                    "x": 900,
-                                    "y": 1800
+                                    "x": 1200,
+                                    "y": 1950
                                 }
                             },
                             "routes": [
@@ -1308,7 +1564,7 @@
                                                 "conditions": [
                                                     [
                                                         {
-                                                            "a": "{{1.`5`}}",
+                                                            "a": "{{71.`7`}}",
                                                             "b": "UGC",
                                                             "o": "text:equal"
                                                         }
@@ -1322,7 +1578,7 @@
                                                 "messages": [
                                                     {
                                                         "role": "user",
-                                                        "content": "# PROMPT\n\n{{1.`1`}}\n\n## CURRENT DATE\n\n{{66.value}}",
+                                                        "content": "# PROMPT\n\n{{71.`3`}}\n\n## CURRENT DATE\n\n{{66.value}}",
                                                         "imageDetail": "auto"
                                                     }
                                                 ],
@@ -1334,8 +1590,8 @@
                                             },
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 1200,
-                                                    "y": 1800
+                                                    "x": 1500,
+                                                    "y": 1950
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -1667,6 +1923,7 @@
                                                                                         "mappable": false
                                                                                     },
                                                                                     {
+                                                                                        "help": "Recommended value: `Auto`",
                                                                                         "name": "imageDetail",
                                                                                         "type": "select",
                                                                                         "label": "Image Detail",
@@ -1684,8 +1941,7 @@
                                                                                                 "label": "Low",
                                                                                                 "value": "low"
                                                                                             }
-                                                                                        ],
-                                                                                        "advanced": true
+                                                                                        ]
                                                                                     }
                                                                                 ]
                                                                             },
@@ -1929,7 +2185,7 @@
                                                 "__IMTCONN__": 1464137
                                             },
                                             "mapper": {
-                                                "file": "{{1.`7`}}",
+                                                "file": "{{71.`9`}}",
                                                 "select": "map",
                                                 "formatDrawings": "image/jpeg",
                                                 "formatDocuments": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
@@ -1938,8 +2194,8 @@
                                             },
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 1500,
-                                                    "y": 1800
+                                                    "x": 1800,
+                                                    "y": 1950
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -2064,8 +2320,8 @@
                                             "mapper": null,
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 1800,
-                                                    "y": 1800
+                                                    "x": 2100,
+                                                    "y": 1950
                                                 }
                                             },
                                             "routes": [
@@ -2081,7 +2337,7 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2100,
+                                                                    "x": 2400,
                                                                     "y": 1200,
                                                                     "name": "Random Pause"
                                                                 },
@@ -2105,6 +2361,114 @@
                                                 {
                                                     "flow": [
                                                         {
+                                                            "id": 69,
+                                                            "module": "facebook-pages:UploadVideo",
+                                                            "version": 6,
+                                                            "parameters": {
+                                                                "__IMTCONN__": 1493671
+                                                            },
+                                                            "mapper": {
+                                                                "data": "{{32.data}}",
+                                                                "type": "data",
+                                                                "page_id": "509216045615795",
+                                                                "fileName": "{{32.name}}",
+                                                                "description": "{{30.result.facebook_post}}"
+                                                            },
+                                                            "metadata": {
+                                                                "designer": {
+                                                                    "x": 2400,
+                                                                    "y": 1500
+                                                                },
+                                                                "restore": {
+                                                                    "expect": {
+                                                                        "type": {
+                                                                            "mode": "chose",
+                                                                            "label": "upload a video"
+                                                                        },
+                                                                        "page_id": {
+                                                                            "mode": "chose",
+                                                                            "label": "Command Labs"
+                                                                        }
+                                                                    },
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "facebook"
+                                                                            },
+                                                                            "label": "IG / Facebook Meta Business Suite (Tad Duval)"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "parameters": [
+                                                                    {
+                                                                        "name": "__IMTCONN__",
+                                                                        "type": "account:facebook",
+                                                                        "label": "Connection",
+                                                                        "required": true
+                                                                    }
+                                                                ],
+                                                                "expect": [
+                                                                    {
+                                                                        "name": "page_id",
+                                                                        "type": "select",
+                                                                        "label": "Page",
+                                                                        "required": true
+                                                                    },
+                                                                    {
+                                                                        "name": "type",
+                                                                        "type": "select",
+                                                                        "label": "Type",
+                                                                        "required": true,
+                                                                        "validate": {
+                                                                            "enum": [
+                                                                                "data",
+                                                                                "url"
+                                                                            ]
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "name": "description",
+                                                                        "type": "text",
+                                                                        "label": "Description"
+                                                                    },
+                                                                    {
+                                                                        "name": "fileName",
+                                                                        "type": "filename",
+                                                                        "label": "File name",
+                                                                        "required": true
+                                                                    },
+                                                                    {
+                                                                        "name": "data",
+                                                                        "type": "buffer",
+                                                                        "label": "Data",
+                                                                        "required": true
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "onerror": [
+                                                                {
+                                                                    "id": 70,
+                                                                    "module": "builtin:Ignore",
+                                                                    "version": 1,
+                                                                    "filter": {
+                                                                        "name": "Catch all",
+                                                                        "conditions": []
+                                                                    },
+                                                                    "metadata": {
+                                                                        "designer": {
+                                                                            "x": 2700,
+                                                                            "y": 1500
+                                                                        }
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "flow": [
+                                                        {
                                                             "id": 46,
                                                             "module": "instagram-business:CreateAReelPost",
                                                             "version": 1,
@@ -2120,8 +2484,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2100,
-                                                                    "y": 1500
+                                                                    "x": 2400,
+                                                                    "y": 1800
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -2198,8 +2562,8 @@
                                                                     },
                                                                     "metadata": {
                                                                         "designer": {
-                                                                            "x": 2400,
-                                                                            "y": 1500
+                                                                            "x": 2700,
+                                                                            "y": 1800
                                                                         }
                                                                     }
                                                                 }
@@ -2227,8 +2591,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2100,
-                                                                    "y": 1800
+                                                                    "x": 2400,
+                                                                    "y": 2100
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -2386,8 +2750,182 @@
                                                                     },
                                                                     "metadata": {
                                                                         "designer": {
-                                                                            "x": 2400,
-                                                                            "y": 1800
+                                                                            "x": 2700,
+                                                                            "y": 2100
+                                                                        }
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "flow": [
+                                                        {
+                                                            "id": 38,
+                                                            "module": "twitter:uploadAMedia",
+                                                            "version": 5,
+                                                            "parameters": {
+                                                                "__IMTCONN__": 1497097
+                                                            },
+                                                            "mapper": {
+                                                                "data": "{{32.data}}",
+                                                                "select": "video",
+                                                                "filename": "{{32.name}}"
+                                                            },
+                                                            "metadata": {
+                                                                "designer": {
+                                                                    "x": 2400,
+                                                                    "y": 2400
+                                                                },
+                                                                "restore": {
+                                                                    "expect": {
+                                                                        "select": {
+                                                                            "label": "Video or GIF (Size more than 5MB)"
+                                                                        }
+                                                                    },
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "twitter"
+                                                                            },
+                                                                            "label": "My X (formerly Twitter) connection (COMMAND)"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "parameters": [
+                                                                    {
+                                                                        "name": "__IMTCONN__",
+                                                                        "type": "account:twitter",
+                                                                        "label": "Connection",
+                                                                        "required": true
+                                                                    }
+                                                                ],
+                                                                "expect": [
+                                                                    {
+                                                                        "name": "select",
+                                                                        "type": "select",
+                                                                        "label": "Upload",
+                                                                        "required": true,
+                                                                        "validate": {
+                                                                            "enum": [
+                                                                                "image",
+                                                                                "video"
+                                                                            ]
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "name": "filename",
+                                                                        "type": "filename",
+                                                                        "label": "File Name",
+                                                                        "required": true
+                                                                    },
+                                                                    {
+                                                                        "name": "data",
+                                                                        "type": "buffer",
+                                                                        "label": "Data",
+                                                                        "required": true
+                                                                    }
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "id": 39,
+                                                            "module": "twitter:createATweet",
+                                                            "version": 6,
+                                                            "parameters": {
+                                                                "__IMTCONN__": 1497894
+                                                            },
+                                                            "mapper": {
+                                                                "text": "{{30.result.x_dot_com_post}}",
+                                                                "media_ids": "{{38.media_ids}}"
+                                                            },
+                                                            "metadata": {
+                                                                "designer": {
+                                                                    "x": 2700,
+                                                                    "y": 2400
+                                                                },
+                                                                "restore": {
+                                                                    "expect": {
+                                                                        "media_ids": {
+                                                                            "mode": "edit"
+                                                                        },
+                                                                        "for_super_followers_only": {
+                                                                            "mode": "chose"
+                                                                        }
+                                                                    },
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "twitter2"
+                                                                            },
+                                                                            "label": "My X (formerly Twitter) OAuth 2.0 connection (CMD_LABS)"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "parameters": [
+                                                                    {
+                                                                        "name": "__IMTCONN__",
+                                                                        "type": "account:twitter2",
+                                                                        "label": "Connection",
+                                                                        "required": true
+                                                                    }
+                                                                ],
+                                                                "expect": [
+                                                                    {
+                                                                        "name": "text",
+                                                                        "type": "text",
+                                                                        "label": "Text Content",
+                                                                        "required": true
+                                                                    },
+                                                                    {
+                                                                        "mode": "edit",
+                                                                        "name": "media_ids",
+                                                                        "spec": {
+                                                                            "name": "value",
+                                                                            "type": "text"
+                                                                        },
+                                                                        "type": "array",
+                                                                        "label": "Media IDs"
+                                                                    },
+                                                                    {
+                                                                        "name": "place_id",
+                                                                        "type": "text",
+                                                                        "label": "Place ID"
+                                                                    },
+                                                                    {
+                                                                        "name": "direct_message_deep_link",
+                                                                        "type": "url",
+                                                                        "label": "Direct Message Link"
+                                                                    },
+                                                                    {
+                                                                        "name": "for_super_followers_only",
+                                                                        "type": "boolean",
+                                                                        "label": "Allow to Post Exclusively for Super Followers Only"
+                                                                    },
+                                                                    {
+                                                                        "name": "quote_tweet_id",
+                                                                        "type": "text",
+                                                                        "label": "Quote Post ID"
+                                                                    }
+                                                                ],
+                                                                "advanced": true
+                                                            },
+                                                            "onerror": [
+                                                                {
+                                                                    "id": 40,
+                                                                    "module": "builtin:Ignore",
+                                                                    "version": 1,
+                                                                    "filter": {
+                                                                        "name": "Catch all",
+                                                                        "conditions": []
+                                                                    },
+                                                                    "metadata": {
+                                                                        "designer": {
+                                                                            "x": 3000,
+                                                                            "y": 2400
                                                                         }
                                                                     }
                                                                 }
@@ -2415,8 +2953,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2100,
-                                                                    "y": 2100
+                                                                    "x": 2400,
+                                                                    "y": 2700
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -2518,182 +3056,8 @@
                                                                     },
                                                                     "metadata": {
                                                                         "designer": {
-                                                                            "x": 2400,
-                                                                            "y": 2100
-                                                                        }
-                                                                    }
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "flow": [
-                                                        {
-                                                            "id": 38,
-                                                            "module": "twitter:uploadAMedia",
-                                                            "version": 5,
-                                                            "parameters": {
-                                                                "__IMTCONN__": 1497097
-                                                            },
-                                                            "mapper": {
-                                                                "data": "{{32.data}}",
-                                                                "select": "video",
-                                                                "filename": "{{32.name}}"
-                                                            },
-                                                            "metadata": {
-                                                                "designer": {
-                                                                    "x": 2100,
-                                                                    "y": 2400
-                                                                },
-                                                                "restore": {
-                                                                    "expect": {
-                                                                        "select": {
-                                                                            "label": "Video or GIF (Size more than 5MB)"
-                                                                        }
-                                                                    },
-                                                                    "parameters": {
-                                                                        "__IMTCONN__": {
-                                                                            "data": {
-                                                                                "scoped": "true",
-                                                                                "connection": "twitter"
-                                                                            },
-                                                                            "label": "My X (formerly Twitter) connection (COMMAND)"
-                                                                        }
-                                                                    }
-                                                                },
-                                                                "parameters": [
-                                                                    {
-                                                                        "name": "__IMTCONN__",
-                                                                        "type": "account:twitter",
-                                                                        "label": "Connection",
-                                                                        "required": true
-                                                                    }
-                                                                ],
-                                                                "expect": [
-                                                                    {
-                                                                        "name": "select",
-                                                                        "type": "select",
-                                                                        "label": "Upload",
-                                                                        "required": true,
-                                                                        "validate": {
-                                                                            "enum": [
-                                                                                "image",
-                                                                                "video"
-                                                                            ]
-                                                                        }
-                                                                    },
-                                                                    {
-                                                                        "name": "filename",
-                                                                        "type": "filename",
-                                                                        "label": "File Name",
-                                                                        "required": true
-                                                                    },
-                                                                    {
-                                                                        "name": "data",
-                                                                        "type": "buffer",
-                                                                        "label": "Data",
-                                                                        "required": true
-                                                                    }
-                                                                ]
-                                                            }
-                                                        },
-                                                        {
-                                                            "id": 39,
-                                                            "module": "twitter:createATweet",
-                                                            "version": 6,
-                                                            "parameters": {
-                                                                "__IMTCONN__": 1497894
-                                                            },
-                                                            "mapper": {
-                                                                "text": "{{30.result.x_dot_com_post}}",
-                                                                "media_ids": "{{38.media_ids}}"
-                                                            },
-                                                            "metadata": {
-                                                                "designer": {
-                                                                    "x": 2400,
-                                                                    "y": 2400
-                                                                },
-                                                                "restore": {
-                                                                    "expect": {
-                                                                        "media_ids": {
-                                                                            "mode": "edit"
-                                                                        },
-                                                                        "for_super_followers_only": {
-                                                                            "mode": "chose"
-                                                                        }
-                                                                    },
-                                                                    "parameters": {
-                                                                        "__IMTCONN__": {
-                                                                            "data": {
-                                                                                "scoped": "true",
-                                                                                "connection": "twitter2"
-                                                                            },
-                                                                            "label": "My X (formerly Twitter) OAuth 2.0 connection (CMD_LABS)"
-                                                                        }
-                                                                    }
-                                                                },
-                                                                "parameters": [
-                                                                    {
-                                                                        "name": "__IMTCONN__",
-                                                                        "type": "account:twitter2",
-                                                                        "label": "Connection",
-                                                                        "required": true
-                                                                    }
-                                                                ],
-                                                                "expect": [
-                                                                    {
-                                                                        "name": "text",
-                                                                        "type": "text",
-                                                                        "label": "Text Content",
-                                                                        "required": true
-                                                                    },
-                                                                    {
-                                                                        "mode": "edit",
-                                                                        "name": "media_ids",
-                                                                        "spec": {
-                                                                            "name": "value",
-                                                                            "type": "text"
-                                                                        },
-                                                                        "type": "array",
-                                                                        "label": "Media IDs"
-                                                                    },
-                                                                    {
-                                                                        "name": "place_id",
-                                                                        "type": "text",
-                                                                        "label": "Place ID"
-                                                                    },
-                                                                    {
-                                                                        "name": "direct_message_deep_link",
-                                                                        "type": "url",
-                                                                        "label": "Direct Message Link"
-                                                                    },
-                                                                    {
-                                                                        "name": "for_super_followers_only",
-                                                                        "type": "boolean",
-                                                                        "label": "Allow to Post Exclusively for Super Followers Only"
-                                                                    },
-                                                                    {
-                                                                        "name": "quote_tweet_id",
-                                                                        "type": "text",
-                                                                        "label": "Quote Post ID"
-                                                                    }
-                                                                ],
-                                                                "advanced": true
-                                                            },
-                                                            "onerror": [
-                                                                {
-                                                                    "id": 40,
-                                                                    "module": "builtin:Ignore",
-                                                                    "version": 1,
-                                                                    "filter": {
-                                                                        "name": "Catch all",
-                                                                        "conditions": []
-                                                                    },
-                                                                    "metadata": {
-                                                                        "designer": {
                                                                             "x": 2700,
-                                                                            "y": 2400
+                                                                            "y": 2700
                                                                         }
                                                                     }
                                                                 }
@@ -2720,7 +3084,7 @@
                                 "conditions": [
                                     [
                                         {
-                                            "a": "{{1.`0`}}",
+                                            "a": "{{71.`2`}}{{71.`12`}}",
                                             "b": "Image + Text",
                                             "o": "text:equal"
                                         }
@@ -2730,8 +3094,8 @@
                             "mapper": null,
                             "metadata": {
                                 "designer": {
-                                    "x": 900,
-                                    "y": 3750
+                                    "x": 1200,
+                                    "y": 4050
                                 }
                             },
                             "routes": [
@@ -2749,7 +3113,7 @@
                                                 "conditions": [
                                                     [
                                                         {
-                                                            "a": "{{1.`2`}}",
+                                                            "a": "{{71.`4`}}",
                                                             "b": "UGC",
                                                             "o": "text:equal"
                                                         }
@@ -2763,7 +3127,7 @@
                                                 "messages": [
                                                     {
                                                         "role": "user",
-                                                        "content": "# PROMPT\n\n{{1.`1`}}\n\n## CURRENT DATE\n\n{{66.value}}",
+                                                        "content": "# PROMPT\n\n{{71.`3`}}\n\n## CURRENT DATE\n\n{{66.value}}",
                                                         "imageDetail": "auto"
                                                     }
                                                 ],
@@ -2775,8 +3139,8 @@
                                             },
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 1200,
-                                                    "y": 3150
+                                                    "x": 1500,
+                                                    "y": 3450
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -3108,6 +3472,7 @@
                                                                                         "mappable": false
                                                                                     },
                                                                                     {
+                                                                                        "help": "Recommended value: `Auto`",
                                                                                         "name": "imageDetail",
                                                                                         "type": "select",
                                                                                         "label": "Image Detail",
@@ -3125,8 +3490,7 @@
                                                                                                 "label": "Low",
                                                                                                 "value": "low"
                                                                                             }
-                                                                                        ],
-                                                                                        "advanced": true
+                                                                                        ]
                                                                                     }
                                                                                 ]
                                                                             },
@@ -3370,7 +3734,7 @@
                                                 "__IMTCONN__": 1522534
                                             },
                                             "mapper": {
-                                                "file": "{{1.`4`}}",
+                                                "file": "{{71.`6`}}",
                                                 "select": "map",
                                                 "formatDrawings": "image/jpeg",
                                                 "formatDocuments": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
@@ -3379,8 +3743,8 @@
                                             },
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 1500,
-                                                    "y": 3150
+                                                    "x": 1800,
+                                                    "y": 3450
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -3505,8 +3869,8 @@
                                             "mapper": null,
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 1800,
-                                                    "y": 3150
+                                                    "x": 2100,
+                                                    "y": 3450
                                                 }
                                             },
                                             "routes": [
@@ -3522,8 +3886,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2100,
-                                                                    "y": 2700,
+                                                                    "x": 2400,
+                                                                    "y": 3000,
                                                                     "name": "Random Pause"
                                                                 },
                                                                 "restore": {},
@@ -3564,8 +3928,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2100,
-                                                                    "y": 3000
+                                                                    "x": 2400,
+                                                                    "y": 3300
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -3681,8 +4045,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2100,
-                                                                    "y": 3300
+                                                                    "x": 2400,
+                                                                    "y": 3600
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -3796,8 +4160,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2100,
-                                                                    "y": 3600
+                                                                    "x": 2400,
+                                                                    "y": 3900
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -3883,8 +4247,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2400,
-                                                                    "y": 3600
+                                                                    "x": 2700,
+                                                                    "y": 3900
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -3974,7 +4338,7 @@
                                                 "conditions": [
                                                     [
                                                         {
-                                                            "a": "{{1.`2`}}",
+                                                            "a": "{{71.`4`}}",
                                                             "b": "AI",
                                                             "o": "text:equal"
                                                         }
@@ -3988,7 +4352,7 @@
                                                 "messages": [
                                                     {
                                                         "role": "user",
-                                                        "content": "# PROMPT\n\n{{1.`1`}}\n\n## CURRENT DATE\n\n{{66.value}}",
+                                                        "content": "# PROMPT\n\n{{71.`3`}}\n\n## CURRENT DATE\n\n{{66.value}}",
                                                         "imageDetail": "auto"
                                                     }
                                                 ],
@@ -4000,8 +4364,8 @@
                                             },
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 1200,
-                                                    "y": 4350
+                                                    "x": 1500,
+                                                    "y": 4650
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -4333,6 +4697,7 @@
                                                                                         "mappable": false
                                                                                     },
                                                                                     {
+                                                                                        "help": "Recommended value: `Auto`",
                                                                                         "name": "imageDetail",
                                                                                         "type": "select",
                                                                                         "label": "Image Detail",
@@ -4350,8 +4715,7 @@
                                                                                                 "label": "Low",
                                                                                                 "value": "low"
                                                                                             }
-                                                                                        ],
-                                                                                        "advanced": true
+                                                                                        ]
                                                                                     }
                                                                                 ]
                                                                             },
@@ -4604,8 +4968,8 @@
                                             },
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 1500,
-                                                    "y": 4350
+                                                    "x": 1800,
+                                                    "y": 4650
                                                 },
                                                 "restore": {
                                                     "expect": {
@@ -4770,8 +5134,8 @@
                                             },
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 1800,
-                                                    "y": 4350
+                                                    "x": 2100,
+                                                    "y": 4650
                                                 },
                                                 "restore": {},
                                                 "parameters": [
@@ -4816,8 +5180,8 @@
                                             "mapper": null,
                                             "metadata": {
                                                 "designer": {
-                                                    "x": 2100,
-                                                    "y": 4350
+                                                    "x": 2400,
+                                                    "y": 4650
                                                 }
                                             },
                                             "routes": [
@@ -4833,8 +5197,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2400,
-                                                                    "y": 3900,
+                                                                    "x": 2700,
+                                                                    "y": 4200,
                                                                     "name": "Random Pause"
                                                                 },
                                                                 "restore": {},
@@ -4871,8 +5235,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2400,
-                                                                    "y": 4200
+                                                                    "x": 2700,
+                                                                    "y": 4500
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -4986,8 +5350,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2400,
-                                                                    "y": 4500
+                                                                    "x": 2700,
+                                                                    "y": 4800
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -5073,8 +5437,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2700,
-                                                                    "y": 4500
+                                                                    "x": 3000,
+                                                                    "y": 4800
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -5167,8 +5531,8 @@
                                                             },
                                                             "metadata": {
                                                                 "designer": {
-                                                                    "x": 2400,
-                                                                    "y": 4800
+                                                                    "x": 2700,
+                                                                    "y": 5100
                                                                 },
                                                                 "restore": {
                                                                     "expect": {
@@ -5278,58 +5642,6 @@
                 {
                     "flow": [
                         {
-                            "id": null,
-                            "module": "placeholder:Placeholder",
-                            "filter": {
-                                "name": "AI Image Avatar",
-                                "conditions": [
-                                    [
-                                        {
-                                            "a": "{{1.`0`}}",
-                                            "b": "AI Image Avatar",
-                                            "o": "text:equal"
-                                        }
-                                    ]
-                                ]
-                            },
-                            "metadata": {
-                                "designer": {
-                                    "x": 900,
-                                    "y": 5100
-                                }
-                            }
-                        }
-                    ]
-                },
-                {
-                    "flow": [
-                        {
-                            "id": null,
-                            "module": "placeholder:Placeholder",
-                            "filter": {
-                                "name": "AI Video Avatar",
-                                "conditions": [
-                                    [
-                                        {
-                                            "a": "{{1.`0`}}",
-                                            "b": "AI Video Avatar",
-                                            "o": "text:equal"
-                                        }
-                                    ]
-                                ]
-                            },
-                            "metadata": {
-                                "designer": {
-                                    "x": 900,
-                                    "y": 5400
-                                }
-                            }
-                        }
-                    ]
-                },
-                {
-                    "flow": [
-                        {
                             "id": 41,
                             "module": "google-sheets:updateRow",
                             "version": 2,
@@ -5339,18 +5651,18 @@
                             "mapper": {
                                 "mode": "fromAll",
                                 "values": {
-                                    "9": "TRUE"
+                                    "11": "Processed"
                                 },
                                 "sheetId": "Sheet1",
-                                "rowNumber": "{{1.`__ROW_NUMBER__`}}",
+                                "rowNumber": "{{71.`__ROW_NUMBER__`}}",
                                 "spreadsheetId": "1507tqRvDSzMh5SL-0N4bodIEcSvIlAExlqY8iSHyRSk",
                                 "includesHeaders": true,
                                 "valueInputOption": "USER_ENTERED"
                             },
                             "metadata": {
                                 "designer": {
-                                    "x": 900,
-                                    "y": 5700
+                                    "x": 1200,
+                                    "y": 5400
                                 },
                                 "restore": {
                                     "expect": {
@@ -5369,62 +5681,62 @@
                                                         {
                                                             "name": "0",
                                                             "type": "text",
-                                                            "label": "Post Type (A)"
+                                                            "label": "Scheduled Date (A)"
                                                         },
                                                         {
                                                             "name": "1",
                                                             "type": "text",
-                                                            "label": "Prompt (B)"
+                                                            "label": "Scheduled Time (B)"
                                                         },
                                                         {
                                                             "name": "2",
                                                             "type": "text",
-                                                            "label": "Image Type (C)"
+                                                            "label": "Post Type (C)"
                                                         },
                                                         {
                                                             "name": "3",
                                                             "type": "text",
-                                                            "label": "Image Link (D)"
+                                                            "label": "Prompt (D)"
                                                         },
                                                         {
                                                             "name": "4",
                                                             "type": "text",
-                                                            "label": "ImageLinkID                                                                                                                                                                 (E)"
+                                                            "label": "Image Type (E)"
                                                         },
                                                         {
                                                             "name": "5",
                                                             "type": "text",
-                                                            "label": "Video Type (F)"
+                                                            "label": "Image Link (F)"
                                                         },
                                                         {
                                                             "name": "6",
                                                             "type": "text",
-                                                            "label": "Video Link (G)"
+                                                            "label": "ImageLinkID                                                                                                                                                                 (G)"
                                                         },
                                                         {
                                                             "name": "7",
                                                             "type": "text",
-                                                            "label": "VideoLinkID (H)"
+                                                            "label": "Video Type (H)"
                                                         },
                                                         {
                                                             "name": "8",
                                                             "type": "text",
-                                                            "label": "Timestamp (I)"
+                                                            "label": "Video Link (I)"
                                                         },
                                                         {
                                                             "name": "9",
                                                             "type": "text",
-                                                            "label": "Processed (J)"
+                                                            "label": "VideoLinkID (J)"
                                                         },
                                                         {
                                                             "name": "10",
                                                             "type": "text",
-                                                            "label": "(K)"
+                                                            "label": "Timestamp (K)"
                                                         },
                                                         {
                                                             "name": "11",
                                                             "type": "text",
-                                                            "label": "(L)"
+                                                            "label": "Status (L)"
                                                         },
                                                         {
                                                             "name": "12",
@@ -5515,6 +5827,16 @@
                                                             "name": "29",
                                                             "type": "text",
                                                             "label": "(AD)"
+                                                        },
+                                                        {
+                                                            "name": "30",
+                                                            "type": "text",
+                                                            "label": "(AE)"
+                                                        },
+                                                        {
+                                                            "name": "31",
+                                                            "type": "text",
+                                                            "label": "(AF)"
                                                         }
                                                     ],
                                                     "type": "collection",
@@ -5607,62 +5929,62 @@
                                             {
                                                 "name": "0",
                                                 "type": "text",
-                                                "label": "Post Type (A)"
+                                                "label": "Scheduled Date (A)"
                                             },
                                             {
                                                 "name": "1",
                                                 "type": "text",
-                                                "label": "Prompt (B)"
+                                                "label": "Scheduled Time (B)"
                                             },
                                             {
                                                 "name": "2",
                                                 "type": "text",
-                                                "label": "Image Type (C)"
+                                                "label": "Post Type (C)"
                                             },
                                             {
                                                 "name": "3",
                                                 "type": "text",
-                                                "label": "Image Link (D)"
+                                                "label": "Prompt (D)"
                                             },
                                             {
                                                 "name": "4",
                                                 "type": "text",
-                                                "label": "ImageLinkID                                                                                                                                                                 (E)"
+                                                "label": "Image Type (E)"
                                             },
                                             {
                                                 "name": "5",
                                                 "type": "text",
-                                                "label": "Video Type (F)"
+                                                "label": "Image Link (F)"
                                             },
                                             {
                                                 "name": "6",
                                                 "type": "text",
-                                                "label": "Video Link (G)"
+                                                "label": "ImageLinkID                                                                                                                                                                 (G)"
                                             },
                                             {
                                                 "name": "7",
                                                 "type": "text",
-                                                "label": "VideoLinkID (H)"
+                                                "label": "Video Type (H)"
                                             },
                                             {
                                                 "name": "8",
                                                 "type": "text",
-                                                "label": "Timestamp (I)"
+                                                "label": "Video Link (I)"
                                             },
                                             {
                                                 "name": "9",
                                                 "type": "text",
-                                                "label": "Processed (J)"
+                                                "label": "VideoLinkID (J)"
                                             },
                                             {
                                                 "name": "10",
                                                 "type": "text",
-                                                "label": "(K)"
+                                                "label": "Timestamp (K)"
                                             },
                                             {
                                                 "name": "11",
                                                 "type": "text",
-                                                "label": "(L)"
+                                                "label": "Status (L)"
                                             },
                                             {
                                                 "name": "12",
@@ -5753,6 +6075,16 @@
                                                 "name": "29",
                                                 "type": "text",
                                                 "label": "(AD)"
+                                            },
+                                            {
+                                                "name": "30",
+                                                "type": "text",
+                                                "label": "(AE)"
+                                            },
+                                            {
+                                                "name": "31",
+                                                "type": "text",
+                                                "label": "(AF)"
                                             }
                                         ],
                                         "type": "collection",
