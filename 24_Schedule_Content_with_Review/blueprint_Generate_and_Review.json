@@ -25,7 +25,7 @@
                         }
                     ]
                 ],
-                "sheetId": "Sheet1",
+                "sheetId": "HITL Campaign 1",
                 "sortOrder": "asc",
                 "spreadsheetId": "1507tqRvDSzMh5SL-0N4bodIEcSvIlAExlqY8iSHyRSk",
                 "tableFirstRow": "A1:Z1",
@@ -36,7 +36,7 @@
             "metadata": {
                 "designer": {
                     "x": 0,
-                    "y": 750
+                    "y": 600
                 },
                 "restore": {
                     "expect": {
@@ -48,15 +48,14 @@
                         },
                         "sheetId": {
                             "mode": "chose",
-                            "label": "Sheet1"
+                            "label": "HITL Campaign 1"
                         },
                         "sortOrder": {
                             "mode": "chose",
                             "label": "Ascending"
                         },
                         "spreadsheetId": {
-                            "mode": "chose",
-                            "label": "Master_Blueprint_Content_Calendar"
+                            "mode": "edit"
                         },
                         "tableFirstRow": {
                             "label": "A-Z"
@@ -386,7 +385,7 @@
             "metadata": {
                 "designer": {
                     "x": 300,
-                    "y": 750
+                    "y": 600
                 },
                 "restore": {
                     "expect": {
@@ -452,7 +451,7 @@
             "metadata": {
                 "designer": {
                     "x": 600,
-                    "y": 750,
+                    "y": 600,
                     "name": "Current Date"
                 },
                 "restore": {},
@@ -485,7 +484,7 @@
             "metadata": {
                 "designer": {
                     "x": 900,
-                    "y": 750
+                    "y": 600
                 }
             },
             "routes": [
@@ -1124,6 +1123,12 @@
                                 "__IMTCONN__": 981833
                             },
                             "mapper": {
+                                "meta": [
+                                    {
+                                        "key": "Row number",
+                                        "value": "{{71.`__ROW_NUMBER__`}}"
+                                    }
+                                ],
                                 "fields": {
                                     "facebook_post": "{{44.result.facebook_post}}",
                                     "linkedin_post": "{{44.result.linkedin_post}}",
@@ -1141,7 +1146,10 @@
                                 "restore": {
                                     "expect": {
                                         "meta": {
-                                            "mode": "chose"
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
                                         },
                                         "formId": {
                                             "label": "Master_Scenario_Text_Post (1Sf8bM7A02F9D3n8KXpj)",
@@ -2194,6 +2202,12 @@
                                 "__IMTCONN__": 981833
                             },
                             "mapper": {
+                                "meta": [
+                                    {
+                                        "key": "Row number",
+                                        "value": "{{71.`__ROW_NUMBER__`}}"
+                                    }
+                                ],
                                 "fields": {
                                     "facebook_post": "{{30.result.facebook_post}}",
                                     "link_to_video": [
@@ -2221,7 +2235,10 @@
                                 "restore": {
                                     "expect": {
                                         "meta": {
-                                            "mode": "chose"
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
                                         },
                                         "fields": {
                                             "nested": {
@@ -3367,7 +3384,19 @@
                                 "__IMTCONN__": 981833
                             },
                             "mapper": {
+                                "meta": [
+                                    {
+                                        "key": "Row number",
+                                        "value": "{{71.`__ROW_NUMBER__`}}"
+                                    }
+                                ],
                                 "fields": {
+                                    "ugc_image": [
+                                        {
+                                            "url": "{{71.`4`}}",
+                                            "label": "UGC Image"
+                                        }
+                                    ],
                                     "link_to_image": [
                                         {
                                             "url": "{{71.`4`}}",
@@ -3390,10 +3419,19 @@
                                 "restore": {
                                     "expect": {
                                         "meta": {
-                                            "mode": "chose"
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
                                         },
                                         "fields": {
                                             "nested": {
+                                                "ugc_image": {
+                                                    "mode": "chose",
+                                                    "items": [
+                                                        null
+                                                    ]
+                                                },
                                                 "link_to_image": {
                                                     "mode": "chose",
                                                     "items": [
@@ -3403,7 +3441,7 @@
                                             }
                                         },
                                         "formId": {
-                                            "label": "Social Media UGC Image + Text Post (5OhxR2Ix7mIqbieEthT6)",
+                                            "label": "SOCIAL MEDIA - UGC Image + Text Review (5OhxR2Ix7mIqbieEthT6)",
                                             "nested": [
                                                 {
                                                     "name": "fields",
@@ -3443,6 +3481,27 @@
                                                             },
                                                             "type": "array",
                                                             "label": "link_to_image (urlLinks)"
+                                                        },
+                                                        {
+                                                            "name": "ugc_image",
+                                                            "spec": {
+                                                                "spec": [
+                                                                    {
+                                                                        "name": "url",
+                                                                        "type": "url",
+                                                                        "label": "Link to Image",
+                                                                        "required": true
+                                                                    },
+                                                                    {
+                                                                        "name": "label",
+                                                                        "type": "text",
+                                                                        "label": "Label"
+                                                                    }
+                                                                ],
+                                                                "type": "collection"
+                                                            },
+                                                            "type": "array",
+                                                            "label": "ugc_image (imageGrid)"
                                                         }
                                                     ],
                                                     "type": "collection",
@@ -3578,6 +3637,28 @@
                                                 },
                                                 "type": "array",
                                                 "label": "link_to_image (urlLinks)"
+                                            },
+                                            {
+                                                "name": "ugc_image",
+                                                "spec": {
+                                                    "name": "value",
+                                                    "spec": [
+                                                        {
+                                                            "name": "url",
+                                                            "type": "url",
+                                                            "label": "Link to Image",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "name": "label",
+                                                            "type": "text",
+                                                            "label": "Label"
+                                                        }
+                                                    ],
+                                                    "type": "collection"
+                                                },
+                                                "type": "array",
+                                                "label": "ugc_image (imageGrid)"
                                             }
                                         ],
                                         "type": "collection",
@@ -4664,7 +4745,19 @@
                                 "__IMTCONN__": 981833
                             },
                             "mapper": {
+                                "meta": [
+                                    {
+                                        "key": "Row number",
+                                        "value": "{{71.`__ROW_NUMBER__`}}"
+                                    }
+                                ],
                                 "fields": {
+                                    "ai_image": [
+                                        {
+                                            "url": "{{45.data[].url}}",
+                                            "label": "AI Image"
+                                        }
+                                    ],
                                     "link_to_image": [
                                         {
                                             "url": "{{45.data[].url}}",
@@ -4687,10 +4780,19 @@
                                 "restore": {
                                     "expect": {
                                         "meta": {
-                                            "mode": "chose"
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
                                         },
                                         "fields": {
                                             "nested": {
+                                                "ai_image": {
+                                                    "mode": "chose",
+                                                    "items": [
+                                                        null
+                                                    ]
+                                                },
                                                 "link_to_image": {
                                                     "mode": "chose",
                                                     "items": [
@@ -4705,21 +4807,6 @@
                                                 {
                                                     "name": "fields",
                                                     "spec": [
-                                                        {
-                                                            "name": "instagram_caption",
-                                                            "type": "text",
-                                                            "label": "instagram_caption (text)"
-                                                        },
-                                                        {
-                                                            "name": "x_dot_com_post",
-                                                            "type": "text",
-                                                            "label": "x_dot_com_post (text)"
-                                                        },
-                                                        {
-                                                            "name": "linkedin_post",
-                                                            "type": "text",
-                                                            "label": "linkedin_post (text)"
-                                                        },
                                                         {
                                                             "name": "link_to_image",
                                                             "spec": {
@@ -4740,6 +4827,42 @@
                                                             },
                                                             "type": "array",
                                                             "label": "link_to_image (urlLinks)"
+                                                        },
+                                                        {
+                                                            "name": "instagram_caption",
+                                                            "type": "text",
+                                                            "label": "instagram_caption (text)"
+                                                        },
+                                                        {
+                                                            "name": "linkedin_post",
+                                                            "type": "text",
+                                                            "label": "linkedin_post (text)"
+                                                        },
+                                                        {
+                                                            "name": "x_dot_com_post",
+                                                            "type": "text",
+                                                            "label": "x_dot_com_post (text)"
+                                                        },
+                                                        {
+                                                            "name": "ai_image",
+                                                            "spec": {
+                                                                "spec": [
+                                                                    {
+                                                                        "name": "url",
+                                                                        "type": "url",
+                                                                        "label": "Link to Image",
+                                                                        "required": true
+                                                                    },
+                                                                    {
+                                                                        "name": "label",
+                                                                        "type": "text",
+                                                                        "label": "Label"
+                                                                    }
+                                                                ],
+                                                                "type": "collection"
+                                                            },
+                                                            "type": "array",
+                                                            "label": "ai_image (imageGrid)"
                                                         }
                                                     ],
                                                     "type": "collection",
@@ -4840,21 +4963,6 @@
                                         "name": "fields",
                                         "spec": [
                                             {
-                                                "name": "instagram_caption",
-                                                "type": "text",
-                                                "label": "instagram_caption (text)"
-                                            },
-                                            {
-                                                "name": "x_dot_com_post",
-                                                "type": "text",
-                                                "label": "x_dot_com_post (text)"
-                                            },
-                                            {
-                                                "name": "linkedin_post",
-                                                "type": "text",
-                                                "label": "linkedin_post (text)"
-                                            },
-                                            {
                                                 "name": "link_to_image",
                                                 "spec": {
                                                     "name": "value",
@@ -4875,6 +4983,43 @@
                                                 },
                                                 "type": "array",
                                                 "label": "link_to_image (urlLinks)"
+                                            },
+                                            {
+                                                "name": "instagram_caption",
+                                                "type": "text",
+                                                "label": "instagram_caption (text)"
+                                            },
+                                            {
+                                                "name": "linkedin_post",
+                                                "type": "text",
+                                                "label": "linkedin_post (text)"
+                                            },
+                                            {
+                                                "name": "x_dot_com_post",
+                                                "type": "text",
+                                                "label": "x_dot_com_post (text)"
+                                            },
+                                            {
+                                                "name": "ai_image",
+                                                "spec": {
+                                                    "name": "value",
+                                                    "spec": [
+                                                        {
+                                                            "name": "url",
+                                                            "type": "url",
+                                                            "label": "Link to Image",
+                                                            "required": true
+                                                        },
+                                                        {
+                                                            "name": "label",
+                                                            "type": "text",
+                                                            "label": "Label"
+                                                        }
+                                                    ],
+                                                    "type": "collection"
+                                                },
+                                                "type": "array",
+                                                "label": "ai_image (imageGrid)"
                                             }
                                         ],
                                         "type": "collection",
@@ -5866,6 +6011,12 @@
                                 "__IMTCONN__": 981833
                             },
                             "mapper": {
+                                "meta": [
+                                    {
+                                        "key": "Row number",
+                                        "value": "{{71.`__ROW_NUMBER__`}}"
+                                    }
+                                ],
                                 "fields": {
                                     "images": "{{100.array}}",
                                     "x_dot_com_post": "{{90.result.x_dot_com_post}}",
@@ -5883,7 +6034,10 @@
                                 "restore": {
                                     "expect": {
                                         "meta": {
-                                            "mode": "chose"
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
                                         },
                                         "fields": {
                                             "nested": {
@@ -6337,446 +6491,6 @@
                                         "label": "Content"
                                     }
                                 ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    "flow": [
-                        {
-                            "id": 41,
-                            "module": "google-sheets:updateRow",
-                            "version": 2,
-                            "parameters": {
-                                "__IMTCONN__": 1522494
-                            },
-                            "filter": {
-                                "name": "GATE",
-                                "conditions": [
-                                    [
-                                        {
-                                            "a": "1",
-                                            "b": "1",
-                                            "o": "text:equal"
-                                        }
-                                    ]
-                                ]
-                            },
-                            "mapper": {
-                                "mode": "fromAll",
-                                "values": {
-                                    "7": "Processed",
-                                    "8": "{{now}}"
-                                },
-                                "sheetId": "Sheet1",
-                                "rowNumber": "{{71.`__ROW_NUMBER__`}}",
-                                "spreadsheetId": "1507tqRvDSzMh5SL-0N4bodIEcSvIlAExlqY8iSHyRSk",
-                                "includesHeaders": true,
-                                "valueInputOption": "USER_ENTERED"
-                            },
-                            "metadata": {
-                                "designer": {
-                                    "x": 1200,
-                                    "y": 1500
-                                },
-                                "restore": {
-                                    "expect": {
-                                        "mode": {
-                                            "label": "Select from all"
-                                        },
-                                        "sheetId": {
-                                            "mode": "edit"
-                                        },
-                                        "includesHeaders": {
-                                            "label": "Yes",
-                                            "nested": [
-                                                {
-                                                    "name": "values",
-                                                    "spec": [
-                                                        {
-                                                            "name": "0",
-                                                            "type": "text",
-                                                            "label": "Scheduled Date (A)"
-                                                        },
-                                                        {
-                                                            "name": "1",
-                                                            "type": "text",
-                                                            "label": "Scheduled Time (B)"
-                                                        },
-                                                        {
-                                                            "name": "2",
-                                                            "type": "text",
-                                                            "label": "Content Type (C)"
-                                                        },
-                                                        {
-                                                            "name": "3",
-                                                            "type": "text",
-                                                            "label": "Prompt (D)"
-                                                        },
-                                                        {
-                                                            "name": "4",
-                                                            "type": "text",
-                                                            "label": "Image Link (E)"
-                                                        },
-                                                        {
-                                                            "name": "5",
-                                                            "type": "text",
-                                                            "label": "Video Link (F)"
-                                                        },
-                                                        {
-                                                            "name": "6",
-                                                            "type": "text",
-                                                            "label": "Carousel Links (G)"
-                                                        },
-                                                        {
-                                                            "name": "7",
-                                                            "type": "text",
-                                                            "label": "Status (H)"
-                                                        },
-                                                        {
-                                                            "name": "8",
-                                                            "type": "text",
-                                                            "label": "Last Updated (I)"
-                                                        },
-                                                        {
-                                                            "name": "9",
-                                                            "type": "text",
-                                                            "label": "(J)"
-                                                        },
-                                                        {
-                                                            "name": "10",
-                                                            "type": "text",
-                                                            "label": "(K)"
-                                                        },
-                                                        {
-                                                            "name": "11",
-                                                            "type": "text",
-                                                            "label": "(L)"
-                                                        },
-                                                        {
-                                                            "name": "12",
-                                                            "type": "text",
-                                                            "label": "(M)"
-                                                        },
-                                                        {
-                                                            "name": "13",
-                                                            "type": "text",
-                                                            "label": "(N)"
-                                                        },
-                                                        {
-                                                            "name": "14",
-                                                            "type": "text",
-                                                            "label": "(O)"
-                                                        },
-                                                        {
-                                                            "name": "15",
-                                                            "type": "text",
-                                                            "label": "(P)"
-                                                        },
-                                                        {
-                                                            "name": "16",
-                                                            "type": "text",
-                                                            "label": "(Q)"
-                                                        },
-                                                        {
-                                                            "name": "17",
-                                                            "type": "text",
-                                                            "label": "(R)"
-                                                        },
-                                                        {
-                                                            "name": "18",
-                                                            "type": "text",
-                                                            "label": "(S)"
-                                                        },
-                                                        {
-                                                            "name": "19",
-                                                            "type": "text",
-                                                            "label": "(T)"
-                                                        },
-                                                        {
-                                                            "name": "20",
-                                                            "type": "text",
-                                                            "label": "(U)"
-                                                        },
-                                                        {
-                                                            "name": "21",
-                                                            "type": "text",
-                                                            "label": "(V)"
-                                                        },
-                                                        {
-                                                            "name": "22",
-                                                            "type": "text",
-                                                            "label": "(W)"
-                                                        },
-                                                        {
-                                                            "name": "23",
-                                                            "type": "text",
-                                                            "label": "(X)"
-                                                        },
-                                                        {
-                                                            "name": "24",
-                                                            "type": "text",
-                                                            "label": "(Y)"
-                                                        },
-                                                        {
-                                                            "name": "25",
-                                                            "type": "text",
-                                                            "label": "(Z)"
-                                                        },
-                                                        {
-                                                            "name": "26",
-                                                            "type": "text",
-                                                            "label": "(AA)"
-                                                        },
-                                                        {
-                                                            "name": "27",
-                                                            "type": "text",
-                                                            "label": "(AB)"
-                                                        },
-                                                        {
-                                                            "name": "28",
-                                                            "type": "text",
-                                                            "label": "(AC)"
-                                                        }
-                                                    ],
-                                                    "type": "collection",
-                                                    "label": "Values"
-                                                }
-                                            ]
-                                        },
-                                        "valueInputOption": {
-                                            "mode": "chose",
-                                            "label": "User entered"
-                                        }
-                                    },
-                                    "parameters": {
-                                        "__IMTCONN__": {
-                                            "data": {
-                                                "scoped": "true",
-                                                "connection": "google"
-                                            },
-                                            "label": "UGC_Image_Post (tad@cmdlabs.io)"
-                                        }
-                                    }
-                                },
-                                "parameters": [
-                                    {
-                                        "name": "__IMTCONN__",
-                                        "type": "account:google",
-                                        "label": "Connection",
-                                        "required": true
-                                    }
-                                ],
-                                "expect": [
-                                    {
-                                        "name": "mode",
-                                        "type": "select",
-                                        "label": "Search Method",
-                                        "required": true,
-                                        "validate": {
-                                            "enum": [
-                                                "select",
-                                                "fromAll",
-                                                "map"
-                                            ]
-                                        }
-                                    },
-                                    {
-                                        "name": "valueInputOption",
-                                        "type": "select",
-                                        "label": "Value input option",
-                                        "validate": {
-                                            "enum": [
-                                                "USER_ENTERED",
-                                                "RAW"
-                                            ]
-                                        }
-                                    },
-                                    {
-                                        "name": "spreadsheetId",
-                                        "type": "text",
-                                        "label": "Spreadsheet ID",
-                                        "required": true
-                                    },
-                                    {
-                                        "mode": "edit",
-                                        "name": "sheetId",
-                                        "type": "select",
-                                        "label": "Sheet Name",
-                                        "required": true
-                                    },
-                                    {
-                                        "name": "rowNumber",
-                                        "type": "uinteger",
-                                        "label": "Row number",
-                                        "required": true
-                                    },
-                                    {
-                                        "name": "includesHeaders",
-                                        "type": "select",
-                                        "label": "Table contains headers",
-                                        "required": true,
-                                        "validate": {
-                                            "enum": [
-                                                true,
-                                                false
-                                            ]
-                                        }
-                                    },
-                                    {
-                                        "name": "values",
-                                        "spec": [
-                                            {
-                                                "name": "0",
-                                                "type": "text",
-                                                "label": "Scheduled Date (A)"
-                                            },
-                                            {
-                                                "name": "1",
-                                                "type": "text",
-                                                "label": "Scheduled Time (B)"
-                                            },
-                                            {
-                                                "name": "2",
-                                                "type": "text",
-                                                "label": "Content Type (C)"
-                                            },
-                                            {
-                                                "name": "3",
-                                                "type": "text",
-                                                "label": "Prompt (D)"
-                                            },
-                                            {
-                                                "name": "4",
-                                                "type": "text",
-                                                "label": "Image Link (E)"
-                                            },
-                                            {
-                                                "name": "5",
-                                                "type": "text",
-                                                "label": "Video Link (F)"
-                                            },
-                                            {
-                                                "name": "6",
-                                                "type": "text",
-                                                "label": "Carousel Links (G)"
-                                            },
-                                            {
-                                                "name": "7",
-                                                "type": "text",
-                                                "label": "Status (H)"
-                                            },
-                                            {
-                                                "name": "8",
-                                                "type": "text",
-                                                "label": "Last Updated (I)"
-                                            },
-                                            {
-                                                "name": "9",
-                                                "type": "text",
-                                                "label": "(J)"
-                                            },
-                                            {
-                                                "name": "10",
-                                                "type": "text",
-                                                "label": "(K)"
-                                            },
-                                            {
-                                                "name": "11",
-                                                "type": "text",
-                                                "label": "(L)"
-                                            },
-                                            {
-                                                "name": "12",
-                                                "type": "text",
-                                                "label": "(M)"
-                                            },
-                                            {
-                                                "name": "13",
-                                                "type": "text",
-                                                "label": "(N)"
-                                            },
-                                            {
-                                                "name": "14",
-                                                "type": "text",
-                                                "label": "(O)"
-                                            },
-                                            {
-                                                "name": "15",
-                                                "type": "text",
-                                                "label": "(P)"
-                                            },
-                                            {
-                                                "name": "16",
-                                                "type": "text",
-                                                "label": "(Q)"
-                                            },
-                                            {
-                                                "name": "17",
-                                                "type": "text",
-                                                "label": "(R)"
-                                            },
-                                            {
-                                                "name": "18",
-                                                "type": "text",
-                                                "label": "(S)"
-                                            },
-                                            {
-                                                "name": "19",
-                                                "type": "text",
-                                                "label": "(T)"
-                                            },
-                                            {
-                                                "name": "20",
-                                                "type": "text",
-                                                "label": "(U)"
-                                            },
-                                            {
-                                                "name": "21",
-                                                "type": "text",
-                                                "label": "(V)"
-                                            },
-                                            {
-                                                "name": "22",
-                                                "type": "text",
-                                                "label": "(W)"
-                                            },
-                                            {
-                                                "name": "23",
-                                                "type": "text",
-                                                "label": "(X)"
-                                            },
-                                            {
-                                                "name": "24",
-                                                "type": "text",
-                                                "label": "(Y)"
-                                            },
-                                            {
-                                                "name": "25",
-                                                "type": "text",
-                                                "label": "(Z)"
-                                            },
-                                            {
-                                                "name": "26",
-                                                "type": "text",
-                                                "label": "(AA)"
-                                            },
-                                            {
-                                                "name": "27",
-                                                "type": "text",
-                                                "label": "(AB)"
-                                            },
-                                            {
-                                                "name": "28",
-                                                "type": "text",
-                                                "label": "(AC)"
-                                            }
-                                        ],
-                                        "type": "collection",
-                                        "label": "Values"
-                                    }
-                                ],
-                                "advanced": true
                             }
                         }
                     ]
